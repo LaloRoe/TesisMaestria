@@ -1,0 +1,322 @@
+
+\chapter{Generalización}
+%%%%%%%%%%%%%%%%%% Lema Propiedades del conjunto w-límite %%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{lemma}
+	\textbf{Propiedades del conjunto $\omega$-límite.}\\
+	Sea $\vec{x}\in\mathbb{R}^n$ tal que $\varGamma_{\vec{x}}^{+}$ esta acotada. Entonces:
+	\begin{enumerate}
+		\item $\omega(\vec{x})\neq\emptyset$
+		\item $\omega(\vec{x})$ es acotado.
+		\item $\omega(\vec{x})$ es cerrado.
+		\item $\omega(\vec{x})$ es conexo.
+	\end{enumerate}
+\end{lemma}
+
+%%%%%%%%%%%%%%%%% Convergencia %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{lemma}
+	\textbf{Convergencia.}\\
+	Sea $\vec{x}\in\mathbb{R}^n$ con $\varGamma_{\vec{x}}^{+}$ acotada. Entonces $\varphi(\varphi(t,\vec{x}),\omega(\vec{x}))\to_{t\to\infty}0$
+\end{lemma}
+
+%%%%%%%%%%%%%%%%% Invarianza %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{lemma}
+	\textbf{Invarianza.}\\
+	Sea $\varGamma_{\vec{x}}^{+}$ acotada. Entonces $\omega(\vec{x})$ es invariante bajo el flujo $\varphi^+$, es decir, para cada $\vec{y}\in\omega(\vec{y})$
+	entonces $\vec{z}=\varphi^+(\vec{x})\in\omega(\vec{x})$ \\ ($\varphi^t(\omega(\vec{x}))\subset\omega(\vec{x})$).
+\end{lemma}
+
+%%%%%%%%%%%%%%%% Transitividad %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{lemma}
+	Transitividad.\\
+	Sean $\vec{x},\vec{y},\vec{z}\in\mathbb{R}^n$. Si $\vec{z}\in\omega(\vec{y})$ y $\vec{y}\in\omega(\vec{x})$.
+	\\ Entonces: $\vec{z}\in\omega(\vec{x})$.
+\end{lemma}
+
+Ahora consideremos sólo sistemas planares:
+\begin{eqnarray}
+	x'=f(x,y) \\
+	y'=g(x,y)
+\end{eqnarray}
+Esperamos que los conjuntos $\omega$ y $\alpha$-límites son equilibrios de la EDO o cíclos(órbitas periódicas).
+
+%%%%%%%%%%%%%%%%%%%%%%% Segmento Transverso %%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{definition}\\
+	Decimos que el segmento cerrado $L\subset\mathbb{R}^2$ es \textbf{transverso} al campo
+	$$\vec{F}(x,y)=(f(x,y),g(x,y))$$
+	definido por \eqref{eq1}, si $\vec{F}$ ni se anula ni es tangente en $L$.
+\end{definition}
+
+%%%%%%%%%%%%%%%%%%%%%% Curva de Jordan %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{definition}
+	La imagen continua de un circulo define a una curva de Jordan, es decir, una curva simple rectificable.
+\end{definition}
+
+%%%%%%%%%%%%%%%%%%%%%% Teorema  Curva de Jordan %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{theorem} \textbf{Curva de Jordan}\\
+	Sea $\varGamma\subseteq\mathbb{R}^2$ curva de Jordan. Entonces $\varGamma^C=Ext(\varGamma)\cup Int(\varGamma)$ con
+	$Ext(\varGamma)\cap Int(\varGamma)=\emptyset$.
+	\\ $Ext(\varGamma)$, $Int(\varGamma)\equiv$ Conexos, abiertos y $Ext(\varGamma)\equiv$ No acotado y
+	$Int(\varGamma)\equiv$ Acotado.
+\end{theorem}
+
+%%%%%%%%%%%%%%%%%%%%%% Monotonicidad %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{lemma}
+	\textbf{Monotonicidad}\\
+	Si $\varGamma$ órbita solución de interseca a un segundo transverso $L$ para $t_i\to\infty$.\\
+	Entonces, la sucesión de intersecciones $\{\vec{p_i}\}_{i=1}^\infty$ o es constante o en monótona
+\end{lemma}
+
+%%%%%%%%%%%%% Lema %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{lemma}
+	\\ Sean $\vec{p}\omega(\vec{x})$ y $L$ transverso por $\vec{p}$. Entonces existe $\{t_i\_{i=1}^\infty}$ sucesión creciente, $t_i\to\infty$ tal que
+	$$\vec{q_i}=\varphi(t_i,\vec{x})\to\vec{p}$$
+	con $\vec{q_i}\in L$.
+\end{lemma}
+
+%%%%%%%%%%%%%%%%%%%%%%% Nota %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{Nota}\\
+Resta probar que $ $
+
+%%%%%%%%%%%%%%%%%%%% Lema %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{lemma}\\
+	El conjunto $\omega(\vec{x})$ puede intersectar al segmento transverso $L$ en a lo más un punto
+\end{lemma}
+
+%%%%%%%%%%%%%%%%%%% Lema %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{lemma}\\
+	Si $\omega(x)\neq\emptyset$ y no contiene puntos de equilibrio. Entonces contiene a una órbita periódica $\varGamma_0$.
+\end{lemma}
+
+%%%%%%%%%%%%%%%%%%%% Lema %%%%%%%%%%%%%%%%%%%%%%%%
+\begin{lemma}\\
+	Si $\omega(\vec{x})$ contiene una órbita periódica $\varGamma_0$. Entonces $\omega(\vec{x})=\varGamma_0$.
+\end{lemma}
+
+%%%%%%%%%%%%%%%%%%%% Teorema Poincaré - Bendixson %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{theorem}[Poincaré - Bendixson]
+	Sea $\vec{x}\in\mathbb{R}^2$ tal que $\varGamma_{\vec{x}}^+\subseteqD\subseteq\mathbb{R}^2$ con $D\equiv$ Cerrado y
+	acotado y conteniendo un número finito de equilibrios de la EDO:\\
+	\begin{eqnarray}4
+		x'=f(x,y) \\
+		y'=g(x,y).
+	\end{eqnarray}
+	Entonces se cumple algunas de las siguientes
+	\begin{enumerate}
+		\item $\omega(\vec{x})=\omega(\varGamma_{\vec{x}}^+)$ esta formado por un equilibrio.
+		\item $\omega(\vec{x})$ es UNA órbita periódica.
+		\item $\omega(\vec{x})$ está formada por equilibrios y órbitas que tienen a dichos equilibrios
+		      y órbitas que tienen a dichos equilibrios como puntos $\alpha$ o $\omega$-límite.
+	\end{enumerate}
+\end{theorem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Nota %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{Nota}\\
+\begin{enumerate}
+	\item Si $\vec{F}(x,y)=(f(x,y),g(x,y))$ es analítico en $(x,y)$ donde $x'=f(x,y)$ , $y'=g(x,y)$.
+	      Entonces $\vec{F}$ tiene un número finito de equilibrios en todo compacto de $\mathbb{R}^2$.
+	      Por ejemplo, $f,g\equiv$ poinomiales en $x$ y $y$.
+	\item Por el lema de Convergencia
+	      $$\rho(\varphi(t,\vec{x}),\omega(\vec{x}))\to_{t\to\infty}0$$
+	      y iii) se implica que $\omega(\vec{x})\equiv$ Consistente de un contorno formado por equilibrios y sus órbitas conectoras llamadas
+	      \textbf{heteroclínicas}/\textbf{homoclínicas}.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%% Definición %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{definition}
+	\textbf{Curva homoclínica}\\
+	La órbita que conecta a un punto silla consigo mismo (es decir, la intersección de la variedad estable con la inestable)
+	se le llama curva homoclínica.
+\end{definition}
+
+%%%%%%%%%%%%%%%%%%%%%%%%% Definición %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{definition}
+	La órbita que conecta dos diferentes puntos de equilibrio se le llama curva heteroclinica.
+\end{definition}
+
+%%%%%%%%%%%%%%%%%%%%%%%% Teorema %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{theorem}
+	Sean $C_1,C_2\subseteqD\subseteq\mathbb{R}^2$ compacto y $C_1,C_2\equiv$ Curvas simples cerradas tales que
+	$\vec{F}(x,y)=(f(x,y),g(x,y))|_{C_1,C_2}$ entra/sale de $C_1/C_2$. Entonces existe ciclo límite entre $C_1$ y $C_2$.
+\end{theorem}
+
+%%%%%%%%%%%%%%%%%%%% Nota $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+\textbf{Nota}\\
+$C_1,C_2$. No necesariamente son órbitas solución.
+
+%%%%%%%%%%%%%%%%%% Definición %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{theorem}[Criterio de Bendixson]
+	Sea $\vec{x'}=f(x,y)$, $\vec{y'}=g(x,y)$ con $\vec{F}=(f,g):\Omega\subseteq\mathbb{R}^2\to\mathbb{R}^2$, $\vec{F}\in C'(\Omega)$,
+	$\Omega\equiv$ Simple conectado tales que
+	$$div\vec{F}=\vec{\nabla}\vec{F}=\frac{\partial f}{\partial x}+\frac{\partial g}{\partial y}.$$
+	No es identicamente cero en cada abierto de $\Omega$ y no cambia de signo.\\
+	Entonces no existe órbita periódica contenida en $\Omega$.
+\end{theorem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%% Teorema %%%%%%%%%%%%%%%%%%%%%%%
+\begin{theorem}[Criterio de Dulac]
+	Lo mismo que Bendixson, pero
+	$$\vec{F}\equiv(\mu(x,y)\vec{F}(x,y))$$
+	con:
+	$$\mu(x,y)\equiv\text{Campo Escalar positivo}.$$
+\end{theorem}
+
+%%%%%%%%%%%%%%%%%%%%%%% Teorema %%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{theorem}
+	El sistema gradiente:
+	$$\vec{x'}=-\nabla V(\vec{x})$$
+	No tiene órbitas periódicas.
+\end{theorem}
+
+\chapter{Aplicaciones: Modelos lotka-Volterra}
+
+\begin{enumerate}
+	\item Competición de Especies.\\
+	      Sea
+	      $$v\equiv\text{densidad de presas}$$
+	      $$p\equiv\text{densidad de depredadores}$$
+	      En ausencia de depredador $v\equiv$ crece exponencialmente, es decir:
+	      $$v'=av\text{, }\text{ }a\equiv\text{Tasa de crecimiento}.$$
+	      En ausencia de presas $p\equiv$ decrece esponencialmente, es decir:
+	      $$p'=-cp\text{, }\text{ }c\equiv\text{Tasa de decrecimiento}$$
+	      En la interacción, por la ley de acción de masas (es decir, variación es proporcional al número de contactos).
+	      $\approx b\vee p$, $b\equiv$constante de proporcionalidad para presas y $d\equiv$constante de proporcionalidad
+	      para depredadores, por lo tanto el sistema es:
+	      $$v'=av-b\vee p=f(v,p)$$
+	      $$p'=-cp+d\vee p=g(v,p)$$
+	      $$:\mathbb{R}^2\to\mathbb{R}^2$$
+	      $$(v,p)\to(f(v,p),g(v,p))$$
+	      Nullclinas:
+	      $$v'=0\text{, es decir }v(a-bp)=0$$
+	      $$p'=0\text{, es decir }p(-c+dv)=0.$$
+	      Entonces:
+	      $$v=0\text{ o }p=\frac{a}{b}$$
+	      $$p=0\text{ o }v=\frac{c}{d}$$
+	      Linearización:\\
+	      En $\vec{x^*}=(0,0)$, para $v\ll 1$, $p\ll 1$\\
+	      \[
+		      \begin{matrix}
+			      v'\approx av \\
+			      p'\approx -cp
+		      \end{matrix}
+		      \Longrightarrow
+		      \begin{pmatrix}
+			      a & 0  \\
+			      0 & -c
+		      \end{pmatrix}
+		      \begin{pmatrix}
+			      v \\
+			      p
+		      \end{pmatrix}
+		      =
+		      \begin{pmatrix}
+			      v' \\
+			      p'
+		      \end{pmatrix}
+	      \]
+	      Así, $\lambda_1=a>0$ y $\lambda_2=-c<0$
+	      $$\therefore\vec{x^*}=(0,0)\text{: Silla}$$
+	      Luego
+	      \[
+		      \begin{matrix}
+			      (v,p) \\
+			      (v,0) \\
+			      (0,p)
+		      \end{matrix}
+		      \Longrightarrow
+		      \begin{matrix}
+			      (f(v,p),g(v,p)) \\
+			      (av,0)          \\
+			      (0, -cp).
+		      \end{matrix}
+	      \]
+	      En $\vec{x^*}=(\frac{c}{d},\frac{a}{b})$
+	      \[
+		      J=
+		      \begin{pmatrix}
+			      0            & -\frac{bc}{d} \\
+			      \frac{ad}{b} & 0
+		      \end{pmatrix}
+		      ;
+		      \begin{matrix}
+			      p(\lambda)=\lambda^2+ac=0 \\
+			      \lambda_{1,2}=\pm i\sqrt{ac}
+		      \end{matrix}
+	      \]
+	      por lo tanto \vec{x*} centro.\\
+	      \\ Por otro lado, notemos que:
+	      $$\frac{dv}{dp}=\frac{v(a-bp)}{p(-c+dv)}$$
+	      Es decir:
+	      $$\displaystyle\int\frac{-c+dv}{v}dv=\int\frac{a-bp}{p}dp$$
+	      Luego:
+	      $$-c\ln(v)+dv=a\ln(p)-bp+\text{cte}.$$
+	      Es decir:
+	      $$L=L(v,p)=-c\ln(v)-a\ln(p)+dv+bp=\text{cte}.$$
+	      Luego:
+	      $$\frac{dL}{dt}=0$$
+	      $L$ cantidad conservada.\\
+	      \\ Se puede ver que si $V=\frac{c}{d}+\tilde{V}$, $\tilde{V}\ll 1$ y $p=\frac{a}{b}+\tilde{p}$, $\tilde{p}\ll 1$.
+	      Taylor:
+	      $$\ln(V)=\ln(\frac{c}{d}+\tilde{V})=\ln{\frac{c}{d}}+\tilde{V}\frac{d}{c}+O(\tilde{V})$$
+	      $$\ln(p)=\ln(\frac{a}{b}+\tilde{p})=\ln(\frac{a}{b})+\tilde{p}\frac{b}{a}-\frac{\tilde{p}^2}{2}\frac{b^2}{a^2}+O(\tilde{p}^2)$$
+	      Así, en la vecindad de $(\frac{c}{d},\frac{a}{b})$.
+	      $$\text{cte}=L(v,p)=-c\ln(\frac{c}{d})-d\tilde{v}+\frac{d^2}{2c}\tilde{v}^2$$
+	      $$=-a\ln(\frac{a}{b})-b\tilde{p}+\frac{b^2}{2a}\tilde{p}^2+dv+bp.$$
+	      Por lo tanto:
+	      $$\frac{d^2}{2c}\tilde{v}^2+\frac{b^2}{2a}\tilde{p}^2=\text{cte'}>0.$$
+
+	\item Modelo de la Glucósis.
+
+	      $$u'=-u+av+u^2v=f(u,v)$$
+	      $$v'=b-av-u^2v=g(u,v)$$
+	      $a,b>0$, $u\equiv ADP$ y $v\equiv ATP$.
+
+	      Nullclinas:
+	      $$0=f(u,v)=-u+v(a+u^2)$$
+	      $$0=g(u,v)=b-av-u^2v.$$
+	      Es decir:
+	      \[
+		      v=\frac{u}{a+u^2} \text{ y }
+		      v=\frac{b}{a+u^2}
+	      \]
+	      Único equilibrio:
+	      $$\frac{u}{a+u^2}=\frac{b}{a+u^2}$$
+	      es decir, $u=b$ y entonces:
+	      $$v=\frac{b}{a+b^2}$$
+	      Linearización en el equilibrio:
+	      \[
+		      J=
+		      \begin{pmatrix}
+			      -1+2uv & a+u^2  \\
+			      -2uv   & -a-u^2
+		      \end{pmatrix}_{\vec{x^*}}
+		      =
+		      \begin{pmatrix}
+			      -1+\frac{2b^2}{a+b^2} & a+b^2  \\
+			      -\frac{2b^2}{a+b^2}   & -a-b^2
+		      \end{pmatrix}
+		      = A.
+	      \]
+	      Por lo tanto:
+	      $$0=p(\lambda)=\lambda^2-tr(A)\lambda+|A|$$
+	      con:
+	      $$tr(A)=\frac{-a+b^2}{a+b^2}-a-b^2$$
+	      y
+	      $$|A|=a-b^2+2b^2=a+b^2>0.$$
+	      $$\therefore \lambda_{1,2}=\frac{tr(A)\pm\sqrt{(tr(A))^2-4|A|}}{2}.$$
+	      Tenemos equilibrio
+	      \[
+		      \text{Inestable}
+		      \left\{ \begin{array}{lcc}
+			      \text{Espiral} \\
+			      \text{Nodo}
+		      \end{array}
+		      \right.
+		      \text{ si }
+		      \text{ }
+		      tr(A)>0
+	      \]
+	      En $tr(A)=0$, entonces:
+	      $$-a+b^2=(a+b^2)^2$$
+	      $$-a+b^2=a^2+b^4+2ab^2$$
+	      $$\therefore b^2=\frac{1-2a\pm\sqrt{(2a-1)^2-4(a^2+a)}}{2}$$
+\end{enumerate}

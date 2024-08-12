@@ -1,0 +1,202 @@
+\documentclass[10pt]{beamer}
+\usepackage{color}
+\usepackage{graphics}
+\usepackage{hyperref}
+\usepackage{multimedia}
+\usepackage{beamerthemeshadow}
+\usepackage{epsfig}
+
+\definecolor{tun}{rgb}{0.8,0.2,0.07}
+
+\setbeamertemplate{background canvas}[vertical
+shading][bottom=yellow!30,top=green!20]
+
+\setbeamercovered{dynamic}
+
+\newtheorem{teorema}{Teorema}[section]
+\newtheorem{observacion}{Observaci\'on}[section]
+\newtheorem{dem}{Demostraci\'on}[section]
+\newtheorem{lema}{Lema}[section]
+\newtheorem{proposicion}{Proposici\'on}[section]
+\newtheorem{hipotesis}{Hip\'otesis}[section]
+\newtheorem{definicion}{Definici\'on}[section]
+\newtheorem{observation}{observation}[section]
+\newtheorem{remark}{remark}[section]
+\newtheorem{conclusiones}{Conclusiones}[section]
+\newtheorem{final remarks}{final remarks}[section]
+\newtheorem{future work collaboration}{future work collaboration}[section]
+\usetheme{Darmstadt}
+\usecolortheme[named=tun]{structure}
+\usefonttheme{professionalfonts}
+\usepackage[latin1]{inputenc}
+\usefonttheme[onlylarge]{structuresmallcapsserif}
+\DeclareMathOperator{\sech}{sech}
+
+\begin{document}
+\title{Teor\'ia de perturbaciones para existencia de ciclos l\'imites}
+
+\author {\textcolor[rgb]{0.20,0.50,0.20}{ {Eduardo Ortiz Romero}}}
+%\textcolor[rgb]{0.00,0.00,0.00}{}
+\institute[Instituto Polit\'ecnico Nacional]{%
+Comit\'e Tutorial,\\
+Escuela Superior de F\'{i}sica y Matem\'{a}ticas,\\
+Instituto Polit\'{e}cnico Nacional.}
+\date{Posgrado. Maestr\'a en Ciencias F\'isico Matem\'aticas}
+
+\colorlet{redshaded}{red!25!bg} \colorlet{shaded}{black!25!bg}
+\colorlet{shadedshaded}{black!10!bg}
+\colorlet{blackshaded}{black!40!bg}
+
+\colorlet{darkred}{red!80!black}
+\colorlet{darkblue}{blue!80!black}
+\colorlet{darkgreen}{green!80!black}
+
+\definecolor{lila}{rgb}{0.72,0.00,0.72}
+
+\definecolor{rojo}{rgb}{0.98,0.00,0.00}
+
+\def\radius{1.2cm}
+\def\innerradius{0.85cm}
+
+\def\softness{0.4}
+\definecolor{softred}{rgb}{1,\softness,\softness}
+\definecolor{softgreen}{rgb}{\softness,1,\softness}
+\definecolor{softblue}{rgb}{\softness,\softness,1}
+
+\definecolor{softrg}{rgb}{1,1,\softness}
+\definecolor{softrb}{rgb}{1,\softness,1}
+\definecolor{softgb}{rgb}{\softness,1,1}
+
+\begin{frame}
+\includegraphics[scale=0.08]{Img/ipn4.png}
+\hfill
+\includegraphics[scale=0.3]{Img/esfm4.png}
+\titlepage
+\end{frame}
+
+%Slide Trayectoria académica
+\section{Trayectoria acad\'emica}
+\begin{frame}
+    \begin{center}
+        \textbf{Trayectoria acad\'emica}
+    \end{center}
+    \begin{scriptsize}
+    \begin{table}[t]
+        \begin{center}
+            \begin{tabular}{|c|c|c|}
+                \hline
+                \multicolumn{3}{|c|}{\textbf{Cursos aprobados.}} \\ \hline
+                Unidad de aprendizaje & Periodo & Calificaci\'on \\ \hline
+                An\'alisis de series de tiempo	 & Agosto-Diciembre 2022 & 8 \\
+                Seminario departamental I & Agosto-Diciembre 2022 & 8 \\
+                Trabajo de tesis & Enero-Junio 2023 & 8 \\
+                Seminario departamental II & Enero-Junio 2023 & 10 \\ 
+                Ecuaciones diferenciales parciales & Enero-Junio 2023 & 8 \\
+                Soluci\'on num\'erica de ecuaciones diferenciales parciales & Enero-Junio 2023 & 8 \\
+                \hline
+            \end{tabular}
+        \end{center}    
+    \end{table}
+    \end{scriptsize}
+    \begin{scriptsize}
+        \begin{table}[t]
+            \begin{center}
+                \begin{tabular}{|c|c|c|}
+                    \hline
+                    \textbf{Cursos que estoy cursando.} \\ \hline
+                    Unidad de aprendizaje \\ \hline
+                    Trabajo de tesis \\
+                    Ecuaciones diferenciales ordinarias \\
+                    Temas selectos de ecuaciones diferenciales ordinarias \\
+                    Seminario departamental II \\
+                    \hline
+                \end{tabular}
+            \end{center}    
+        \end{table}
+    \end{scriptsize}
+\end{frame}
+
+%Slide 1
+\section{Tesis de posgrado}
+\subsection{Problema 16° de Hilbert.}
+\begin{frame}
+
+
+
+Estructura coherente electr\'on-solit\'on:
+\begin{figure}
+\includegraphics[scale=0.45]{electrontrans.jpg}
+\caption{Transferencia electr\'onica desde un Donador (D)  a un receptor (A) a lo largo de una cadena cristalina 1D. Los resortes imitan interacciones electr\'on-fon\'on.}
+\end{figure}
+
+\end{frame}
+
+
+%Slide
+\begin{frame}
+Hamiltoniano (aproximaci\'on de Holstein) $H=H_e+H_{ph}+H_{e-ph}$:
+\begin{equation}
+H_{e}=\sum_{n=-\infty}^{\infty}\varepsilon_{0}\psi_{n}^{*}\psi_{n}-J\left(\psi_{n}^{*}\psi_{n+1}+\psi_{n+1}^{*}\psi_{n}\right), \notag
+\end{equation}
+
+$\varepsilon_{0}$: Energ\'ia del electr\'on, $J$: T\'ermino de transferencia para movimiento entre sitios.
+%y $q$: dipole-dipole amplitude correction factor.
+
+\begin{equation}
+H_{ph}=\sum_{n=-\infty}^{\infty}\frac{1}{2M} p_{n}^{2}\textcolor{red}{+\frac{W}{2}\left(u_{n+1}-u_{n}\right)^{2}}+V\left(u_n\right), \notag
+\end{equation}
+
+$u_n$: Desplazamiento. $p_n$: Momento. \textcolor{red}{Fon\'on longitudinal} (Fonones dispersivos de Debye o ac\'usticos). 
+
+\begin{equation}
+H_{e-ph}=\sum_{n=-\infty}^{\infty}-\chi |\psi_{n}|^2u_n.  \notag
+\end{equation}
+
+$\chi$: constante de acoplo electr\'on-fon\'on.
+
+%\textcolor{red}{Debye's Modes}.
+
+%\begin{observacion}
+ %$\alpha=0$: Modelo de Davydov.
+%\end{observacion}
+
+\end{frame}
+
+%Slide
+\subsection{Ecuaciones de movimiento}
+\begin{frame}
+Ecuaciones de movimiento:
+\begin{eqnarray}
+i\hbar \frac{d\psi_{n}}{dt}&=&-J\left(\psi_{n-1}+\psi_{n+1}\right)-\chi u_n\psi_{n}, \notag \\
+M \frac{d^2{u}_{n}}{dt^2}&=&\textcolor{red}{W\left(u_{n-1}-2u_{n}+u_{n+1}\right)}-V'\left(u_n\right)+\chi \left|\psi_{n}\right|^{2}.  \notag
+\end{eqnarray}
+
+\begin{figure}
+\includegraphics[width=2.5 in,height=2 in]{MorsePot.eps}
+\caption{Potenciales $V(r)=D\left(e^{-\alpha r}-1\right)^2$ y $V_{ap}=D\alpha^2r^2\left(1-\alpha r\right)$}
+\end{figure}
+
+\end{frame}
+
+%Slide
+\section{L\'imite continuo}
+
+\begin{frame}
+
+
+
+\end{frame}
+
+\section{Conclusiones}
+\begin{frame}
+
+\begin{conclusiones}
+\begin{enumerate}
+\item Propagaci\'on 
+\end{enumerate}
+\end{conclusiones}
+
+\end{frame}
+
+
+\end{document}
