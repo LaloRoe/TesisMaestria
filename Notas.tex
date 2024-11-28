@@ -7,33 +7,7 @@
 \usepackage{graphicx}
 \usepackage{amssymb,amsmath,amsthm,amstext,amsfonts}
 \usepackage{color}
-%\usepackage{empheq}
-%\usepackage{mdframed}
-%\usepackage{booktabs}
-%\usepackage{lipsum}
-%\usepackage{psfrag}
-%\usepackage{pgfplots}
-%\usepackage{bm}
-%\usepackage{multicol}
-%\usepackage[T1]{fontenc}
-%\usepackage[center, small]{caption2}
-%\usepackage{array}
-%\usepackage{textcomp}
-%\usepackage{latexsym}
-%\usepackage{titlesec}
-%\usepackage[breakable]{tcolorbox}
-%\usepackage{caption}
-%\usepackage{float}
-%\floatplacement{figure}{H} % forces figures to be placed at the correct location
-%\usepackage{enumerate} % Needed for markdown enumerations to work
-%\usepackage{fancyvrb} % verbatim replacement that allows latex
-%\usepackage{grffile} % extends the file name processing of package graphics
-%\usepackage[Export]{adjustbox} % Used to constrain images to a maximum size
-%\adjustboxset{max size={0.9\linewidth}{0.9\paperheight}}
-%\usepackage{titling}
-%\usepackage{longtable} % longtable support required by pandoc >1.10
-%\usepackage{calc}	   % table minipage width calculation for pandoc >= 2.11.1
-%\usepackage{url}
+
 
 \setlength{\parindent}{0pt}
 
@@ -55,7 +29,7 @@
 \newtheorem{example}{Ejemplo}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\title{Notas - Tesis de posgrado.}
+\title{Tesis de posgrado.}
 \author{Eduardo Ortiz Romero}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -64,36 +38,82 @@
 \maketitle
 \tableofcontents
 
-\chapter*{Introcucción}
-
-El teorema de Poincaré-Bendixson es un resultado 
-fundamental en la teoría de sistemas dinámicos,
-que establece condiciones bajo las cuales una trayectoria en 
-un espacio de fase no diverge ni se
-acerca indefinidamente a ninguna otra trayectoria, sino que 
-se limita a un conjunto cerrado y
-acotado. En este texto exploraremos este importante teorema.
-Además, analizaremos algunos ejemplos concretos de sistemas 
-dinámicos en los que se cumple
-el teorema de Poincaré-Bendixson, así como situaciones en 
-las que no se cumple.\\
+\chapter{Introducción}
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=8.5cm]{portada.png}
-	\caption{Plano fase.}
+	\includegraphics[width=8cm]{portada.png}
 \end{figure}
 
+\section{Problema 16 de Hilbert}
+En 1900, el matemático alemán David Hilbert presentó una lista de 23 problemas abiertos en el Congreso Internacional de Matemáticos en París. Estos problemas de diversas áreas de las matemáticas, se convirtieron en una guía fundamental para la investigación matemática del siglo XX y, en muchos casos, aún siguen desafiando a la comunidad científica.\\
+
+El \textbf{problema 16 de Hilbert}  forma parte de esta lista y está dividido en dos partes principales. Ambas se centran en el análisis geométrico y topológico de curvas algebraicas y sistemas dinámicos polinomiales en el plano:
+
+\begin{enumerate}
+	\item \textbf{Primera parte:} Clasificar las disposiciones topológicas posibles de las curvas algebraicas planas reales de grado $n$. Este problema está relacionado con la geometría algebraica real y la topología.
+	\item \textbf{Segunda parte:} Estudiar los sistemas dinámicos definidos por campos vectoriales polinomiales en el plano, y en particular, determinar el número máximo y la disposición de los ciclos límite que estos sistemas pueden tener.
+\end{enumerate}
+
+La segunda parte del problema 16 de Hilbert aborda una cuestión fundamental en la teoría de sistemas dinámicos: la existencia, finitud y disposición de ciclos límite en sistemas de ecuaciones diferenciales polinomiales. Un ciclo límite es una órbita cerrada aislada en el espacio de fases, alrededor de la cual las trayectorias vecinas convergen o divergen en espiral hacia adentro o hacia afuera.\\
+
+Consideremos el sistema de ecuaciones  en el plano polinomial de grado $n$:
+
+\begin{equation}
+	x'=P\left(x,y\right)\text{, }\text{  }y'=Q\left(x,y\right)
+\end{equation}
+donde $P\left(x,y\right)$ y $Q\left(x,y\right)$ son polinomios de grado a lo más $n$. El problema consiste en responder las siguientes preguntas:
+\begin{enumerate}
+	\item ¿Cuántos ciclos límite puede tener un sistema polinómico de grado $n$?
+	\item ¿Cómo están distribuidos estos ciclos límite en el plano?
+\end{enumerate}
+
+¿Sencillo? pues no, la respuesta sigue siendo desconocida para $n>1$, sin embargo tenemos algunos resultados significativos como la conjetura de Dulac, que establece que para cualquier n, el número de ciclos límite de un sistema polinómico de grado $n$ es finito, sin embargo esto es una conjetura y aún no se ha probado. El teorema de Poincaré- Bendixón por otro lado establece las condiciones suficientes para la existencia de ciclos límite en sistemas planares. Este teorema será central en el análisis de esta tésis.
+
+\section{Importancia de los ciclos límite}
+
+Los sistemas dinámicos ofrecen la posibilidad de explorar comportamientos oscilatorios que son inherentes a muchos procesos biológicos, químicos y físicos. A continuación, se presentan varios ejemplos donde los ciclos límite desempeñan un papel central.
+
+\begin{itemize}
+	\item \textbf{Oscilador de Van der Pol}\\
+	
+	El oscilador de Van der Pol es un ejemplo clásico de un sistema no lineal que exhibe ciclos límite. Originalmente desarrollado para modelar circuitos eléctricos con tubos de vacío, este sistema también describe fenómenos auto-oscilatorios en ingeniería y biología.
+	\begin{equation}
+		x''-\mu \left(1-x^2\right)x'+x=0
+	\end{equation}
+	donde $\mu$ es el coeficiente de amortiguamiento.  A medida que $\mu$ aumenta, el sistema muestra un ciclo límite estable que corresponde a una oscilación sostenida. Este comportamiento es crucial para entender dispositivos electrónicos oscilatorios y ciertos ritmos biológicos.
+	\item \textbf{Ecuación de Rayleigh}\\
+	
+	La ecuación de Rayleigh modela el comportamiento de ciertos sistemas mecánicos y fluidos sometidos a fuerzas periódicas. Es similar al oscilador de Van der Pol.
+	\begin{equation}
+		x''+x=\epsilon\left(1-x'^2\right)x'
+	\end{equation}
+	donde $\epsilon$ controla la intensidad de la fuerza. Los ciclos límite en este modelo describen el fenómeno de resonancia mecánica y son fundamentales para el diseño de sistemas que requieren estabilidad en las oscilaciones, como los amortiguadores en vehículos.
+	\item \textbf{Modelo de FitzHugh-Nagumo}\\
+	
+	Este modelo es una simplificación del modelo de Hodgkin-Huxley y se utiliza para describir la activación y desactivación de las neuronas. 
+	\begin{equation}
+		\begin{matrix}
+			v'=v-\frac{v^3}{3}-w+I\\
+			w'=\epsilon\left(v+a-bw\right)
+		\end{matrix}
+	\end{equation}
+	donde $v$ representa el potencial de membrana, $w$ es una variable de recuperación, e $I$ es un término de corriente externa. Los ciclos límite en este sistema modelan los potenciales de acción neuronal, esenciales para entender el procesamiento de la información en el cerebro.\\
+\newpage
+
+	\item \textbf{Reacciones Químicas Oscilatorias}\\
+	
+	Un ejemplo destacado es la reacción de Belousov-Zhabotinsky, que es un tipo de reacción química que muestra oscilaciones temporales en la concentración de sus reactivos. Aunque su modelado exacto requiere ecuaciones más complejas, sistemas simplificados que muestran ciclos límite pueden ayudar a comprender la dinámica subyacente de estas reacciones oscilatorias.
+\end{itemize}
+Más adelante vamos desarrollar estos modelos a profundidad.
 \newpage
 
 \chapter{Preliminares}
 
 \section{Coordenadas polares}
 
-Dada la variable $(x,y)\in\mathbb{R}^2$ en el plano, 
-definimos el cambio de coordenadas cartecianas $(x,y)$ 
-a coordenadas polares $(r,\theta)$  con la relación:
-
+Consideremos las variables $(x,y)\in\mathbb{R}^2$, las cuales están parametrizadas en términos del tiempo $t$, es decir, $x=x(t)$ & $y=y(t)$ con parámetro $t\geq0$. Definimos el cambio de coordenadas cartesianas $(x,y)$
+a coordenadas polares $(r,\theta)$  mediante las relaciones:
 \begin{equation}\label{eq: xpolar}
 	x=r\cos(\theta)
 \end{equation}
@@ -102,7 +122,9 @@ a coordenadas polares $(r,\theta)$  con la relación:
 	y=r\sin(\theta)
 \end{equation}
 
-Estas ecuaciones cumplen las siguientes identidades:
+donde $r=r(t)$ & $\theta=\theta(t)$ también están parametrizadas en términos de $t$.\\
+
+Estas ecuaciones nos llevan a las siguientes identidades:
 
 \begin{equation}\label{eq: r2}
 	r^2=x^2+y^2\\
@@ -112,26 +134,389 @@ Estas ecuaciones cumplen las siguientes identidades:
 	\theta=\arctan{(\frac{y}{x})}
 \end{equation}
 
-Tenemos que $x=x(t)$ y $y=y(t)$, derivando a $\eqref{eq: r2}$ respecto de $t$
-	      $$	2r\frac{dr}{dt}=2x\frac{dx}{dt}+2y\frac{dy}{dt} $$
+en este caso restringimos $\theta\in\left[-\frac{\pi}{2},\frac{\pi}{2}\right]$.\\
 
-se obtiene la ecuación equivalente:
+Derivamos las ecuaciones \eqref{eq: r2} y \eqref{eq: theta} respecto a $t$, obtenemos las relaciones dinámicas en coordenadas polares:
 
 \begin{equation}\label{eq: drcart}
-		      rr'=xx'+yy'
+	rr'=xx'+yy'
 \end{equation}
 
-Derivando a $\eqref{eq: theta}$ respecto de $t$
-	      $$\frac{d\theta}{dt}=\frac{1}{1+(\frac{y}{x})^2}(\frac{x\frac{dy}{dt}-y\frac{dx}{dt}}{x^2})=\frac{x\frac{dy}{dt}-y\frac{dx}{dt}}{x^2+y^2}$$
-
-se obtiene la ecuación equivalente:
-	      
 \begin{equation}\label{eq: dthetacart}
-		      r^2\theta'=xy'-yx'
+	r^2\theta'=xy'-yx'
 \end{equation}
 
+\newpage
 
-\chapter{Ciclos límite.}
+\section{Teoría de perturbaciones}
+
+Definimos un \textbf{problema perturbado} como una ecuación 
+
+\begin{equation}\label{eq: problemaPerturbado}
+	P^\epsilon\left(x\right)=0
+\end{equation}
+
+que incluye un parámetro pequeño $\epsilon$ con $0<\epsilon<1$, el cual que representa la perturbación.\\
+
+El objetivo es encontrar soluciones aproximadas $x=x\left(\epsilon\right)$ en función de este parámetro y estudiar su comportamiento cuando $\epsilon\to0$\\
+
+Para estudiar el comportamiento asintótico de las soluciones vamos a introducir el concepto de función de orden.
+
+\begin{definition}[Función de orden]
+	Se dice que una función $\delta=\delta\left(\epsilon\right)$ es de orden si cumple las siguientes condiciones:
+	\begin{enumerate}
+		\item Es continua en una vecindad de $\epsilon=0$.
+		\item Tiene signo definido en esa vecindad (es decir, $\delta(\epsilon)>0$ o $\delta(\epsilon)<0$ para $0<\epsilon<\epsilon_0$ con $\epsilon_0>0$).
+		\item Esiste el límite:
+		$$\large\lim_{\epsilon\to0}\delta\left(\epsilon\right)$$
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}
+	Sean $\delta_1\left(\epsilon\right)$ y $\delta_2\left(\epsilon\right)$ funciones de orden. Decimos que: 
+	\begin{enumerate}
+		\item $\delta_1\left(\epsilon\right)=O\left(\delta_2\left(\epsilon\right)\right)$ si existe $k\in\mathbb{R}^+$ y un $\epsilon_0>0$ tales que:
+		\begin{equation}\label{eq: Big-O}
+			|\delta_1\left(\epsilon\right)|\leq k|\delta_2\left(\epsilon\right)|
+		\end{equation}
+		para todo $0<\epsilon<\epsilon_0$.\\
+
+		Esta definición describe una cota superior en el crecimiento de la función $\delta_1\left(\epsilon\right)$ en términos de $\delta_2\left(\epsilon\right)$ cuando $\epsilon\to0$. Es decir, $\delta_2(\epsilon)$ actúa como una cota superior para $\delta_1(\epsilon)$.\\
+		\item $\delta_1\left(\epsilon\right)=o(\delta_2\left(\epsilon\right))$ si:
+		\begin{equation}\label{eq: small-o}
+			\large\lim_{\epsilon\to0}\frac{\delta_1\left(\epsilon\right)}{\delta_2\left(\epsilon\right)}=0
+		\end{equation}
+		Esta definición indica que $\delta_1\left(\epsilon\right)$ es asintóticamente insignificante en comparación con $\delta_2\left(\epsilon\right)$ cuando $\epsilon\to0$; es decir, $\delta_2(\epsilon)$ crece (o decrece) más rápido que $\delta_1(\epsilon)$\\
+	\end{enumerate}
+\end{definition} 
+
+Consideremos las funciones $\delta_1\left(\epsilon\right)=\ln\left(1+\epsilon\right)$ y $\delta_2\left(\epsilon\right)=\epsilon$.\\
+
+La serie de Taylor de $\ln\left(1+\epsilon\right)$ alrededor de $\epsilon=0$ es:
+
+$$\ln\left(1+\epsilon\right)=\epsilon-\frac{\epsilon^2}{2}+\frac{\epsilon^3}{3}-\dots$$
+
+evaluamos el límite:
+
+$$\large\lim_{\epsilon\to0}\frac{\delta_1\left(\epsilon\right)}{\delta_2\leftp|(\epsilon\right)}=\lim_{\epsilon\to0}\frac{\epsilon-\frac{\epsilon^2}{2}+\frac{\epsilon^3}{3}-\dots}{\epsilon}=\lim_{\epsilon\to0}\left(1-\frac{\epsilon}{2}+\frac{\epsilon^2}{3}-\dots\right)=1.$$
+
+El límite es distinto de cero, por lo que $\ln\left(1+\epsilon\right)$ no es $o\left(\epsilon\right)$. Sin embargo, dado que el límite es finito y positivo, concluimos que $\ln\left(1+\epsilon\right)=O\left(\epsilon\right)$.\\
+
+Veamos algunos ejemplos más para comprender mejor estas definiciones.
+
+\subsection*{Ejemplos para \( O\left( \delta_2(\epsilon) \right) \)}
+
+\subsubsection*{Ejemplo 1}
+
+Sea \(\delta_1(\epsilon) = \sin(\epsilon)\) y \(\delta_2(\epsilon) = \epsilon\).
+
+Sabemos que para \(\epsilon \to 0\):
+
+\[
+\sin(\epsilon) = \epsilon - \frac{\epsilon^3}{6} + \frac{\epsilon^5}{120} - \dots
+\]
+
+Calculamos el límite:
+
+\[
+\lim_{\epsilon \to 0} \frac{\sin(\epsilon)}{\epsilon} = \lim_{\epsilon \to 0} \left(1 - \frac{\epsilon^2}{6} + \frac{\epsilon^4}{120} - \dots \right) = 1.
+\]
+
+El límite es finito y positivo, por lo que \(\sin(\epsilon) = O\left( \epsilon \right)\).
+
+\subsubsection*{Ejemplo 2}
+
+Sea \(\delta_1(\epsilon) = e^\epsilon - 1\) y \(\delta_2(\epsilon) = \epsilon\).
+
+La serie de Taylor de \(e^\epsilon\) es:
+
+\[
+e^\epsilon = 1 + \epsilon + \frac{\epsilon^2}{2} + \frac{\epsilon^3}{6} + \dots
+\]
+
+Entonces:
+
+\[
+e^\epsilon - 1 = \epsilon + \frac{\epsilon^2}{2} + \frac{\epsilon^3}{6} + \dots
+\]
+
+Calculamos el límite:
+
+\[
+\lim_{\epsilon \to 0} \frac{e^\epsilon - 1}{\epsilon} = \lim_{\epsilon \to 0} \left(1 + \frac{\epsilon}{2} + \frac{\epsilon^2}{6} + \dots \right) = 1.
+\]
+
+Por lo tanto, \(e^\epsilon - 1 = O\left( \epsilon \right)\).
+
+\subsection*{Ejemplos para \( o\left( \delta_2(\epsilon) \right) \)}
+
+\subsubsection*{Ejemplo 3}
+
+Sea \(\delta_1(\epsilon) = \epsilon^2\) y \(\delta_2(\epsilon) = \epsilon\).
+
+Calculamos el límite:
+
+\[
+\lim_{\epsilon \to 0} \frac{\epsilon^2}{\epsilon} = \lim_{\epsilon \to 0} \epsilon = 0.
+\]
+
+Entonces, \(\epsilon^2 = o\left( \epsilon \right)\), lo que significa que \(\epsilon^2\) es insignificante en comparación con \(\epsilon\) cuando \(\epsilon \to 0\).
+
+\subsubsection*{Ejemplo 4}
+
+Sea \(\delta_1(\epsilon) = \epsilon \ln(\epsilon)\) y \(\delta_2(\epsilon) = \epsilon\).
+
+Para \(\epsilon \to 0^+\), \(\ln(\epsilon) \to -\infty\), por lo que \(\epsilon \ln(\epsilon) \to 0^-\).
+
+Calculamos el límite:
+
+\[
+\lim_{\epsilon \to 0^+} \frac{\epsilon \ln(\epsilon)}{\epsilon} = \lim_{\epsilon \to 0^+} \ln(\epsilon) = -\infty.
+\]
+
+Aunque el límite es infinito negativo, observamos que \(\epsilon \ln(\epsilon)\) tiende a cero más lentamente que \(\epsilon\). Por lo tanto, \(\epsilon \ln(\epsilon) = o(1)\), pero no es \(o\left( \epsilon \right)\) ni \(O\left( \epsilon \right)\).
+
+\subsubsection*{Ejemplo 5}
+
+Sea \(\delta_1(\epsilon) = e^{-1/\epsilon}\) y \(\delta_2(\epsilon) = \epsilon^n\) para cualquier \(n > 0\).
+
+Cuando \(\epsilon \to 0^+\):
+
+\[
+e^{-1/\epsilon} \to e^{-\infty} = 0,
+\]
+
+y
+
+\[
+\lim_{\epsilon \to 0^+} \frac{e^{-1/\epsilon}}{\epsilon^n} = 0,
+\]
+
+ya que \(e^{-1/\epsilon}\) decrece más rápidamente que cualquier potencia de \(\epsilon\). Por lo tanto, \(e^{-1/\epsilon} = o\left( \epsilon^n \right)\).
+
+\subsubsection*{Ejemplo 6}
+
+Sea \(\delta_1(\epsilon) = \epsilon^n\) y \(\delta_2(\epsilon) = e^{-1/\epsilon}\) para cualquier \(n > 0\).
+
+Calculamos:
+
+\[
+\lim_{\epsilon \to 0^+} \frac{\epsilon^n}{e^{-1/\epsilon}} = \lim_{\epsilon \to 0^+} \epsilon^n e^{1/\epsilon} = \infty,
+\]
+
+ya que \(e^{1/\epsilon}\) crece más rápido que cualquier potencia negativa de \(\epsilon\). Por lo tanto, \(\delta_2(\epsilon) = o\left( \delta_1(\epsilon) \right)\).
+
+
+\section{Teoría de la Linealización de Sistemas de Ecuaciones Diferenciales}
+
+El análisis de sistemas de ecuaciones diferenciales no lineales puede ser complejo debido a su naturaleza intrínseca. Sin embargo, bajo ciertas condiciones, es posible aproximar el comportamiento del sistema cerca de puntos de equilibrio mediante su linealización. Este método simplifica el estudio de la estabilidad local y la dinámica del sistema.
+
+\subsection{Conceptos Fundamentales}
+
+\subsubsection{Sistemas de Ecuaciones Diferenciales No Lineales}
+
+Consideremos un sistema autónomo de ecuaciones diferenciales ordinarias (EDO) en \(\mathbb{R}^n\):
+
+\begin{equation}\label{eq:sistema_no_lineal}
+    \dot{\mathbf{x}} = \mathbf{f}(\mathbf{x}),
+\end{equation}
+
+donde \(\mathbf{x} \in \mathbb{R}^n\) es el vector de estado y \(\mathbf{f}: \mathbb{R}^n \to \mathbb{R}^n\) es una función vectorial continua y al menos diferenciable una vez en un entorno del punto de equilibrio.
+
+\subsubsection{Puntos de Equilibrio}
+
+Un punto \(\mathbf{x}_0 \in \mathbb{R}^n\) es un \textbf{punto de equilibrio} del sistema \eqref{eq:sistema_no_lineal} si satisface:
+
+\begin{equation}
+    \mathbf{f}(\mathbf{x}_0) = \mathbf{0}.
+\end{equation}
+
+En otras palabras, si el sistema se encuentra en \(\mathbf{x}_0\), permanecerá allí para todo tiempo \( t \).
+
+\subsection{Linealización del Sistema}
+
+La idea principal de la linealización es aproximar el sistema no lineal \eqref{eq:sistema_no_lineal} cerca de un punto de equilibrio \(\mathbf{x}_0\) mediante su sistema lineal asociado. Esto se logra utilizando la \textbf{expansión en serie de Taylor} de \(\mathbf{f}(\mathbf{x})\) alrededor de \(\mathbf{x}_0\).
+
+\subsubsection{Expansión en Serie de Taylor}
+
+La expansión de \(\mathbf{f}(\mathbf{x})\) en torno a \(\mathbf{x}_0\) es:
+
+\begin{equation}
+    \mathbf{f}(\mathbf{x}) = \mathbf{f}(\mathbf{x}_0) + D\mathbf{f}(\mathbf{x}_0)(\mathbf{x} - \mathbf{x}_0) + \mathbf{R}(\mathbf{x}),
+\end{equation}
+
+donde:
+
+\begin{itemize}
+    \item \( D\mathbf{f}(\mathbf{x}_0) \) es la \textbf{matriz Jacobiana} evaluada en \(\mathbf{x}_0\), cuyos elementos son \( \left[ D\mathbf{f}(\mathbf{x}_0) \right]_{ij} = \dfrac{\partial f_i}{\partial x_j} \bigg|_{\mathbf{x}_0} \).
+    \item \( \mathbf{R}(\mathbf{x}) \) es el término de residuo que contiene las partes de orden superior.
+\end{itemize}
+
+Dado que \(\mathbf{f}(\mathbf{x}_0) = \mathbf{0}\), la aproximación lineal del sistema cerca de \(\mathbf{x}_0\) es:
+
+\begin{equation}\label{eq:sistema_linealizado}
+    \dot{\mathbf{x}} = D\mathbf{f}(\mathbf{x}_0)(\mathbf{x} - \mathbf{x}_0).
+\end{equation}
+
+\subsection{Análisis de Estabilidad mediante Linealización}
+
+La linealización permite estudiar la estabilidad local del punto de equilibrio \(\mathbf{x}_0\) analizando el sistema linealizado \eqref{eq:sistema_linealizado}. La solución general de este sistema lineal se puede expresar en términos de exponentes y vectores propios de la matriz Jacobiana \( D\mathbf{f}(\mathbf{x}_0) \).
+
+\subsubsection{Solución del Sistema Linealizado}
+
+Sea \( \mathbf{A} = D\mathbf{f}(\mathbf{x}_0) \). El sistema linealizado es:
+
+\begin{equation}
+    \dot{\mathbf{z}} = \mathbf{A} \mathbf{z},
+\end{equation}
+
+donde \( \mathbf{z} = \mathbf{x} - \mathbf{x}_0 \).
+
+La solución general es:
+
+\begin{equation}
+    \mathbf{z}(t) = e^{\mathbf{A} t} \mathbf{z}_0,
+\end{equation}
+
+donde \( \mathbf{z}_0 = \mathbf{z}(0) \) es la condición inicial.
+
+\subsubsection{Análisis de los Autovalores}
+
+La estabilidad del punto de equilibrio está determinada por los autovalores \( \lambda_i \) de la matriz \( \mathbf{A} \):
+
+\begin{itemize}
+    \item Si todos los autovalores tienen parte real negativa (\( \text{Re}(\lambda_i) < 0 \)), el punto de equilibrio es \textbf{asintóticamente estable}.
+    \item Si alguno de los autovalores tiene parte real positiva (\( \text{Re}(\lambda_i) > 0 \)), el punto de equilibrio es \textbf{inestable}.
+    \item Si todos los autovalores tienen parte real no positiva y al menos uno con parte real cero, se requiere un análisis más detallado (no se puede concluir estabilidad sólo con la linealización).
+\end{itemize}
+
+\subsection{Teoremas que Justifican el Método}
+
+\subsubsection{Teorema de Hartman-Grobman}
+
+El \textbf{teorema de Hartman-Grobman} establece que, cerca de un punto de equilibrio hiperbólico, el sistema no lineal es topológicamente equivalente a su sistema linealizado.
+
+\begin{theorem}[Hartman-Grobman]
+Sea \(\mathbf{x}_0\) un punto de equilibrio hiperbólico del sistema \eqref{eq:sistema_no_lineal}, es decir, la matriz Jacobiana \( \mathbf{A} = D\mathbf{f}(\mathbf{x}_0) \) no tiene autovalores con parte real cero. Entonces, existe un entorno \( U \) de \(\mathbf{x}_0\) tal que el flujo del sistema no lineal en \( U \) es topológicamente equivalente al flujo del sistema linealizado en \( U \).
+\end{theorem}
+
+Este teorema justifica el uso de la linealización para analizar la estabilidad local alrededor de puntos de equilibrio hiperbólicos.
+
+\subsubsection{Puntos de Equilibrio Hiperbólicos}
+
+Un punto de equilibrio \(\mathbf{x}_0\) es \textbf{hiperbólico} si ninguno de los autovalores de \( \mathbf{A} = D\mathbf{f}(\mathbf{x}_0) \) tiene parte real cero.
+
+\subsubsection{Limitaciones del Método}
+
+La linealización no es concluyente en los siguientes casos:
+
+\begin{itemize}
+    \item Si la matriz Jacobiana tiene autovalores con parte real cero (punto de equilibrio no hiperbólico).
+    \item Si se desea conocer el comportamiento global del sistema (la linealización sólo proporciona información local).
+\end{itemize}
+
+En tales casos, es necesario utilizar métodos más avanzados, como la teoría de sistemas dinámicos no lineales, funciones de Lyapunov o métodos numéricos.
+
+\subsection{Ejemplo de Aplicación}
+
+Consideremos el sistema:
+
+\begin{equation}\label{eq:ejemplo_sistema}
+    \begin{cases}
+        \dot{x} = x (1 - x) - xy, \\
+        \dot{y} = y (-\alpha + x),
+    \end{cases}
+\end{equation}
+
+donde \( \alpha > 0 \) es un parámetro.
+
+\subsubsection{Puntos de Equilibrio}
+
+Encontramos los puntos de equilibrio resolviendo:
+
+\begin{equation}
+    \begin{cases}
+        x (1 - x) - x y = 0, \\
+        y (-\alpha + x) = 0.
+    \end{cases}
+\end{equation}
+
+Las soluciones son:
+
+\begin{itemize}
+    \item \( E_1 = (0, 0) \).
+    \item \( E_2 = (1, 0) \).
+    \item \( E_3 = (\alpha, 0) \) si \( 0 < \alpha < 1 \).
+\end{itemize}
+
+\subsubsection{Linealización en \( E_2 = (1, 0) \)}
+
+Calculamos la matriz Jacobiana:
+
+\begin{equation}
+    \mathbf{A} = D\mathbf{f}(x, y) =
+    \begin{pmatrix}
+        \dfrac{\partial \dot{x}}{\partial x} & \dfrac{\partial \dot{x}}{\partial y} \\
+        \dfrac{\partial \dot{y}}{\partial x} & \dfrac{\partial \dot{y}}{\partial y}
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        1 - 2x - y & -x \\
+        y & -\alpha + x
+    \end{pmatrix}.
+\end{equation}
+
+Evaluamos en \( E_2 = (1, 0) \):
+
+\begin{equation}
+    \mathbf{A}|_{(1,0)} =
+    \begin{pmatrix}
+        -1 & -1 \\
+        0 & 1 - \alpha
+    \end{pmatrix}.
+\end{equation}
+
+Los autovalores son las soluciones de:
+
+\begin{equation}
+    \det(\mathbf{A} - \lambda \mathbf{I}) = 0.
+\end{equation}
+
+Calculamos:
+
+\begin{equation}
+    \left| \begin{array}{cc}
+        -1 - \lambda & -1 \\
+        0 & 1 - \alpha - \lambda
+    \end{array} \right| = (-1 - \lambda)(1 - \alpha - \lambda) - (0)(-1) = 0.
+\end{equation}
+
+Resolviendo para \( \lambda \):
+
+\begin{equation}
+    (-1 - \lambda)(1 - \alpha - \lambda) = 0.
+\end{equation}
+
+Obtenemos los autovalores:
+
+\begin{equation}
+    \lambda_1 = -1, \quad \lambda_2 = 1 - \alpha.
+\end{equation}
+
+La estabilidad del punto de equilibrio \( E_2 \) depende del valor de \( \alpha \):
+
+\begin{itemize}
+    \item Si \( \alpha < 1 \), entonces \( \lambda_2 > 0 \) y el punto es un \textbf{silla de montar} (inestable).
+    \item Si \( \alpha > 1 \), entonces \( \lambda_2 < 0 \) y el punto es un \textbf{nodo estable}.
+\end{itemize}
+
+\subsection{Conclusión}
+
+La linealización es una herramienta poderosa para analizar la estabilidad local de sistemas de ecuaciones diferenciales no lineales cerca de puntos de equilibrio hiperbólicos. El teorema de Hartman-Grobman proporciona el fundamento teórico para este método, asegurando que, bajo las condiciones adecuadas, el comportamiento cualitativo del sistema no lineal es capturado por su linealización.
+
+
+
+\chapter{Teoría de ciclos límite}
 \section{Motivación}
 
 Consideremos el sistema no lineal
@@ -169,7 +554,7 @@ $$r^2\theta'=x^2+y^2=r^2$$
 	\theta'=1
 \end{equation}
 
-Las ecuaciones $\eqref{eq: drsis1}$ y $\eqref{eq: dthetasis1}$ 
+Las ecuaciones $\eqref{eq: drsis1}$ y $\eqref{eq: dthetasis1}$
 forman un sistema de ecuaciones no lineal desacoplado.\\
 
 Comenzamos el análisis cualitativo de la ecuación diferencial $\eqref{eq: drsis1}$.\\
@@ -277,8 +662,8 @@ quiere decir que para cada punto de la circunferencia podemos encontrar
 una sucesión de tiempos $\{t_n\}_{n\in \mathbb{N}}$ con $t_n\to\infty$ tal que la
 trayectoria converge a ese punto de la circunferencia, es decir cualquier punto que se encuentra en la
 circunferencia centrada en el origen y de radio $1$ es un punto $\omega$ límite de $(x_0,y_0)$,
-entonces diremos que esta circunferencia es un conjunto $\omega$ límite de $(x_0,y_0)$, donde 
-el conjunto $\omega$ límite se define como 
+entonces diremos que esta circunferencia es un conjunto $\omega$ límite de $(x_0,y_0)$, donde
+el conjunto $\omega$ límite se define como
 
 $$\omega(\vec{X}_0)=\{\vec{z}\in\mathbb{R}^2\mid\vec{z} \text{  es  } \omega\text{-límite de  } \vec{X}_0\}.$$
 
@@ -345,7 +730,7 @@ curva cerrada de este tipo es lo que conocemos como ciclo límite.
 Notemos que esta sección del plano donde $r_{min}<r<r_{max}$ es positivamente invariante.
 \newpage
 
-\section{Propiedades de $\omega$ y $\alpha$ límite.}
+\section{Conjuntos $\omega$ y $\alpha$ límite.}
 
 Veamos más propiedades de los puntos y el conjunto $\omega$ límite. Comenzamos definiendo su análogo,
 que estudia su comportmiento asintótico para $t\to-\infty$.\\
@@ -410,8 +795,10 @@ Algunas propiedades
 	Si $\omega(x)$ contiene una órbita periódica $\varGamma_0$. Entonces $\omega(x)=\varGamma_0$.
 \end{lemma}
 
+\section{Teorema de Poincaré-Bendixson}
+
 \begin{theorem}[Poincaré-Bendixson]\label{TPB}
-	Sea $\vec{x}\in\mathbb{R}^2$ tal que $\varGamma_{\vec{x}}^2\subseteq D\subseteq\mathbb{R}^2$ con $D\equiv$ Cerrado y acotado, 
+	Sea $\vec{x}\in\mathbb{R}^2$ tal que $\varGamma_{\vec{x}}^2\subseteq D\subseteq\mathbb{R}^2$ con $D\equiv$ Cerrado y acotado,
 	y conteniendo un número finito de equilirios de la EDO:
 	\begin{equation}
 		\begin{matrix}
@@ -423,18 +810,18 @@ Algunas propiedades
 	\begin{enumerate}
 		\item $\omega(\vec{x})=\omega(\varGamma_{\vec{x}}^+)$ esta formado por un equilibrio.
 		\item $\omega(\vec{x})$ es una órbita periódica.
-		\item $\omega(\vec{x})$ está formada por equilibrios y órbitas que tienen a dichos equilibrios como puntos 
-		$\alpha$ u $\omega$ límite.
+		\item $\omega(\vec{x})$ está formada por equilibrios y órbitas que tienen a dichos equilibrios como puntos
+		      $\alpha$ u $\omega$ límite.
 	\end{enumerate}
 \end{theorem}
 
 \begin{definition}[Ciclo límite.]
-	Decimos que la órbita periódica $\varGamma_0=\omega(\vec{x})$ 
+	Decimos que la órbita periódica $\varGamma_0=\omega(\vec{x})$
 	del caso $2$ del teorema $\ref{TPB}$ se llama
-	\textbf{cliclo límite} si hay un anillo abierto que lo 
-	ontenga y no hay otra órbita periódica en él, es decir 
-	un ciclo límite es una órbita periódica aislada. 
-	
+	\textbf{cliclo límite} si hay un anillo abierto que lo
+	ontenga y no hay otra órbita periódica en él, es decir
+	un ciclo límite es una órbita periódica aislada.
+
 \end{definition}
 
 \begin{definition}
@@ -443,127 +830,12 @@ Algunas propiedades
 
 \begin{definition}
 	La órbita que conecta dos diferentes puntos de equilibrio se le llama curva heteroclínica.
-	
+
 \end{definition}
 \newpage
-
-\section{Teoría de promediación}
-
-Como vimos determinar la existencia y propiedades cualitativas y cuantitativas 
-de los ciclos límite en sistemas no lineales no es tarea fácil. En muchos 
-casos los métodos analíticos fallan o se vuelve sumamente complejo y los 
-métodos numéricos pueden ser ineficientes o inexactos. \\
-
-El Método de Promediación es una herramienta poderosa y efectiva, 
-parte de la teoría de perturbaciones y nos ayuda a simplificar el análisis 
-de sistemas no lineales  transformando las ecuaciones originales en un sistema 
-más manejable. La premisa fundamental es que, bajo ciertas condiciones, el 
-comportamiento promedio del sistema a lo largo del tiempo puede revelar 
-la existencia y la estructura de los ciclos límite.\\
-
-La aplicación del Método de Premediación para verificar la existencia de 
-ciclos límite en sistemas no lineales no solo proporciona una técnica 
-analítica robusta sino que también ofrece una perspectiva más profunda 
-del comportamiento oscilatorio inherente en dichos sistemas. Este enfoque 
-no solo permite simplificar las ecuaciones diferenciales originales, sino 
-también captar la esencia del comportamiento dinámico del sistema, 
-facilitando así la identificación y caracterización de ciclos límite.\\
-
-Definiendo el promedio local de una función y algunas de sus propiedades. 
-
-\begin{definition}
-	Sea $f:\mathbb{R}\times\mathbb{R}^p\to\mathbb{R}^n$ continua y $T>0$.
-	Definimos:
-	$$
-		f_T(t,x)=\frac{1}{T}\int_{0}^{T}f(t+\tau,x)d\tau
-	$$
-	como el promedio local de $f$.
-\end{definition}
-\\
-La función $f_T(t,x)$ calcula el valor promedio de la 
-función $f(t,x)$ respecto a la variable $t$ en el intervalo $[t,t+T]$. 
-Visto de otro modo, calcula del comportamiento promedio futuro, de $t$ a $t+T$. 
-Es claro que si la función es $T$ periódica entonces $f_T(t,x)$ es constante $\forall t$.
-
-\begin{proposition}
-	Sea $f:\mathbb{R}\times\mathbb{R}^p\to\mathbb{R}^n$ continua y de periodo $T$ en $t$, entonces
-	$$
-		f_T(t,x)=f_0(x)
-	$$
-\end{proposition}
-\\
-Si la función a promediar es de Lipschitz entonces la diferencia entre ambas 
-funciones está acotada, esto nos dice que el mapeo del promedio no se aleja demasiado 
-de la función original, solo lo simplifica y guarda el comportamiento promedio
- de la función. 
-\begin{proposition}
-	Si $\phi:\mathbb{R}\to\mathbb{R}$ es de Lipschitz en $\mathbb{R}$, entonces
-	$$
-		\abs{\phi(x)-\phi_T(x)}\leq\frac{\lambda T}{2}
-	$$
-	i.e. $\phi(t)$ es $o(T)$ con respecto a $\phi_T(x)$.
-\end{proposition}
-\\
-\begin{example}
-	Consideremos la función $\phi(t)=\sqrt{t^2+1}$, esta función es de Lipschitz
-	con constante $\lambda=1$, calculamos su promedio local con $T=0.5$
-
-	$$\phi_T(t)=\frac{1}{2T}(((T + t)\sqrt{1 + (T + t)^2} + \sinh^{-1}(T + t)) - (t\sqrt{1 + t^2} + \sinh^{-1}(t)))$$
-
-	graficamos ambas funciones. 
-
-	\begin{figure}[h]
-		\centering
-		\includegraphics[width=10cm]{fl.png}
-		\caption{Función vs  función promediada.}
-	\end{figure}
-
-la diferencia esta acotada por $M=\frac{\lambda T}{2}=\frac{0.5}{2}=0.25$. En este caso en la 
-gráfica se puede observar que la diferencia converge a la cota $M$. 
-
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=13cm]{d.png}
-	\caption{Diferencia de la Función con la función promediada.}
-\end{figure}
-
-\end{example}
-
-\newpage
-
-
-\begin{lemma}
-	Consideremos la EDO
-	$$
-		x'=\epsilon f(t,x)
-	$$
-	con $x(0)=x_0$, donde $f$ es de Lipschitz en $x\in D\subseteq\mathbb{R}^n$
-	y $f$ continua en $t\in[0,t]$.\\
-	Sea $M=\sup_{x\in D} \sup_{0\leq\epsilon t\leqL} \abs{f(t,x)}<+\infty$
-	\\Si $\phi(t)=\int_{0}^{t}f(\tau,x(\tau))d\tau$ con $x$ solución de la EDO.
-	\\Entonces:
-	$$
-		\abs{\phi_T(t)-\int_{0}^{t}f_T(\tau,x(\tau))d\tau}\leq\frac{1}{2}(1+\lambda L)MT
-	$$
-	para $o(\frac{1}{\epsilon})=t$, donde $\lambda\equiv cte$ de Lipschitz.
-	\\i.e. $\phi_T(t)=\int_{0}^{t}f_T(\tau,x(\tau))d\tau+o(T)$
-\end{lemma}
-
-\begin{lemma}
-	Consideremos el problema de valor inicial
-	$$
-		x'=\epsilon f(t,x)
-	$$
-	$x(0)=x_0$, con $f$ Lipschitz en $x\in D\subseteq\mathbb{R}^n$ y continua
-	en $t\in[0,t]$. \\
-	Si $y$ es solución de $y'=\epsilon f_T(t,y)$, $y(0)=x_0$, entonces
-	$$
-		x(t)-y(t)=o(\epsilon T)
-	$$
-	p.t. $t=o(\frac{1}{\epsilon})$
-\end{lemma}
 
 \section{Oscilador de Van der Pol}
+
 La ecuación del oscilador de Van der Pol describe el comportamiento de ciertos sistemas oscilantes no lineales.
 Su fundamento físico se basa en el concepto de amortiguamiento no lineal y autodemostración de oscilaciones.
 \begin{equation}\label{eq: VP}
@@ -582,56 +854,123 @@ disminuye la velocidad del oscilador.\\
 		x'=y
 	\end{matrix}
 \end{equation}
-Haremos el cambio de coordenadas a polares.
-Sustituimos en $\eqref{eq: dxpolar}$ y $\eqref{eq: dypolar}$ en $\eqref{eq: VPsis}$
-$$r\cos(\theta)\theta'+r'\sin(\theta)=-r\cos(\theta)-\epsilon r\sin(\theta)(r^2\cos^2(\theta)-1)$$
-$$-r\sin(\theta)\theta'+r'\cos(\theta)=r\sin(theta)$$
-entonces
-\begin{equation}\label{eq: VPdr}
-	r'=-\epsilon r\sin^2(\theta)(r^2\cos^2(\theta)-1)
+
+Los puntos de equilibrio del sistema se obtienen resolviendo \(x' = 0\) y \(y' = 0\):
+
+\begin{equation}
+    \begin{cases}
+        y = 0, \\
+        \epsilon (1 - x^2) y - x = 0.
+    \end{cases}
 \end{equation}
-\begin{equation}\label{eq: VPdtheta}
-	\theta'=-1-\epsilon r\sin(\theta)\cos(\theta)(r^2\cos(\theta^2)-1)
+
+Sustituyendo \( y = 0 \) en la segunda ecuación, obtenemos:
+
+\begin{equation}
+    -x = 0 \implies x = 0.
 \end{equation}
-Definimos para $\eqref{eq: VPdr}$ el promedio
-\begin{equation}\label{eq: drbar}
-	\bar{r}'=\bar{f}(\bar{r},\epsilon)
+
+Por lo tanto, el único punto de equilibrio es el origen \((0, 0)\).
+
+\subsubsection*{Matriz Jacobiana y Valores Propios}
+
+Calculamos la matriz Jacobiana \( J \) del sistema \eqref{eq:van_der_pol_sistema}:
+
+\begin{equation}
+    J = 
+    \begin{pmatrix}
+        \dfrac{\partial x'}{\partial x} & \dfrac{\partial x'}{\partial y} \\
+        \dfrac{\partial y'}{\partial x} & \dfrac{\partial y'}{\partial y}
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        0 & 1 \\
+        -1 - 2\epsilon x y & \epsilon (1 - x^2)
+    \end{pmatrix}.
 \end{equation}
-donde
-$$\bar{f}(\bar{r},\epsilon)=\frac{1}{2\pi}\int\limits_0^{2\pi}r'd\theta$$
-Calculamos esta integral
-$$\bar{f}(\bar{r},\epsilon)=\frac{1}{2\pi}\int\limits_0^{2\pi}-\epsilon r\sin^2(\theta)(r^2\cos^2(\theta)-1)d\theta$$
-$$=\frac{1}{2\pi}[-\epsilon r^3\int\limits_0^{2\pi}\sin^2(\theta)\cos^2(\theta)d\theta+\epsilon r\int\limits_0^{2\pi}\sin^2(\theta)d\theta]$$
-$$=\frac{1}{2\pi}[-\epsilon r^3[\frac{1}{32}(4\theta-\sin(4\theta))]_0^{2\pi}+\epsilon r[\frac{1}{2}(\theta-\sin(\theta)\cos(\theta))]_0^{2\pi}]$$
-$$=\frac{1}{2\pi}[\frac{-\epsilon r^3}{32}(8\pi)+\frac{\epsilon r}{2}(2\pi)]=\frac{1}{2\pi}[\frac{-\epsilon r^3}{4}\pi+\epsilon r\pi].$$
-Entonces
-$$\bar{f}(\bar{r},\epsilon)=\frac{\epsilon r}{2}-\frac{\epsilon r^3}{8}$$
-Pormediamos $\theta$
-$$\bar{\theta}=2\pi t$$
-Vamos a analizar $\eqref{eq: drbar}$
-\begin{equation}\label{eq: drvander}
-	\bar{r}'=\frac{\epsilon}{8}r(4-r^2)
+
+Evaluando en el punto de equilibrio \((0, 0)\):
+
+\begin{equation}
+    J|_{(0,0)} = 
+    \begin{pmatrix}
+        0 & 1 \\
+        -1 & \epsilon
+    \end{pmatrix}.
 \end{equation}
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=12cm]{graficavanderpol.png}
-	\caption{Plano fase de $\eqref{eq: drvander}$.}
-\end{figure}
-Las soluciones de equilibrio son $r=0$ y $r=2$.
+
+Obtenemos los valores propios \(\lambda\) resolviendo el determinante característico:
+
+\begin{equation}
+    \det(J - \lambda I) = 0,
+\end{equation}
+
+es decir,
+
+\begin{equation}
+    \left| \begin{array}{cc}
+        -\lambda & 1 \\
+        -1 & \epsilon - \lambda
+    \end{array} \right| = 0.
+\end{equation}
+
+Calculamos el determinante:
+
+\begin{equation}
+    (-\lambda)(\epsilon - \lambda) - (-1)(1) = \lambda^2 - \epsilon \lambda + 1 = 0.
+\end{equation}
+
+Resolviendo la ecuación cuadrática:
+
+\begin{equation}
+    \lambda = \frac{\epsilon \pm \sqrt{\epsilon^2 - 4}}{2}.
+\end{equation}
+
+Para \(\epsilon > 0\), si \(\epsilon^2 - 4 > 0\) (es decir, \(\epsilon > 2\)), los valores propios son reales y positivos, lo que indica que el punto de equilibrio es un \textbf{nodo inestable}. Si \(0 < \epsilon < 2\), los valores propios son complejos con parte real positiva, lo que implica que el origen es un \textbf{foco inestable}.
+
+\subsection*{Aplicación del Teorema de Poincaré-Bendixson}
+
+Para demostrar la existencia de un ciclo límite, utilizamos el \textbf{teorema de Poincaré-Bendixson}, que establece que si un conjunto compacto, invariante y sin puntos de equilibrio en su interior existe para un sistema planar, entonces el sistema tiene una órbita periódica dentro de ese conjunto.
+
+\subsubsection{Construcción de una Región Acotada Invariante}
+
+Definimos una función de Lyapunov candidata:
+
+\begin{equation}
+    V(x, y) = \dfrac{1}{2} \left( x^2 + y^2 \right).
+\end{equation}
+
+Calculamos la derivada total de \( V \) respecto al tiempo:
+
+\begin{equation}
+    \dot{V} = x \dot{x} + y \dot{y} = x y + y \left( \mu (1 - x^2) y - x \right) = y^2 \left( \mu (1 - x^2) \right).
+\end{equation}
+
+Analizamos el signo de \( \dot{V} \):
+
+\begin{itemize}
+    \item Para \( |x| > 1 \), se tiene \( x^2 > 1 \), por lo que \( 1 - x^2 < 0 \) y entonces:
+
+    \begin{equation}
+        \dot{V} = y^2 \mu (1 - x^2) < 0.
+    \end{equation}
+
+    Esto indica que en la región donde \( |x| > 1 \), la energía total \( V \) decrece, y las trayectorias se dirigen hacia el interior de esta región.
+
+    \item Para \( |x| < 1 \), se tiene \( 1 - x^2 > 0 \), y por lo tanto \( \dot{V} > 0 \), indicando que en esta región la energía total \( V \) aumenta, y las trayectorias se alejan del origen.
+\end{itemize}
+
+Concluimos que las trayectorias que empiezan fuera del círculo \( x^2 + y^2 = R^2 \) con \( R > 1 \) eventualmente entran en esta región y permanecen en un conjunto compacto y acotado.
+
+Dado que:
+
 \begin{enumerate}
-	\item Si $0<r<2$, entonces $r'>0$, por lo que $0$ es un punto fuente o repulsivo.
-	\item Si $r>2$, entonces $r'<0$, entonces $r=2$ es sumidero o atractor.
-\end{enumerate}\\
+    \item El sistema es plano y continuo.
+    \item Existe una región compacta e invariante (por la función de Lyapunov) sin puntos de equilibrio distintos del origen.
+    \item El origen es un punto de equilibrio inestable.
+\end{enumerate}
 
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=11cm]{vanderpol.png}
-	\caption{Plano fase. Dibujado en https://aeb019.hosted.uark.edu/pplane.html}
-\end{figure}
-\\Esto quiere decir que entre dos circunferencias de radios $0<r_{min}<2$ y $2<r_{max}$
-existe al menos una curva cerrada a la cual las curvas convergen.
-
-\newpage
+Aplicando el teorema de Poincaré-Bendixson, concluimos que existe al menos una órbita periódica (ciclo límite) en la región acotada definida.
 
 \section{Ecuación de Rayleigh}
 La ecuación de Rayleigh con amortiguamiento no lineal, se utiliza
@@ -653,39 +992,131 @@ Extendemos a un sistema de ecuaciones.
 		x'=y
 	\end{matrix}
 \end{equation}
-Haremos el cambio de coordenadas a polares.
-$$r\cos(\theta)\theta'+r'\sin(\theta)=-\epsilon (r^2\sin^2(\theta)-1)r\sin(\theta)-\omega^2r\cos(\theta) $$
-$$-r\sin(\theta)\theta'+r'\cos(\theta)=r\sin(\theta)$$
-Obtenemos la ecuación.
-\begin{equation}\label{eq: Rayleighpolar}
-	r'=\epsilon(1-r^2\sin^2(\theta))r\sin^2(\theta)+r\sin(\theta)\cos(\theta)(1-\omega^2)
+
+
+Los puntos de equilibrio se encuentran resolviendo \(\dot{x} = 0\) y \(\dot{y} = 0\):
+
+\begin{equation}
+    \begin{cases}
+        y = 0, \\
+        \epsilon \left(1 - y^2\right) y - x = 0.
+    \end{cases}
 \end{equation}
-Definimos para $\eqref{eq: Rayleighpolar}$ el promedio
-$$\bar{r}=\bar{f}(\bar{r},\epsilon)=\frac{1}{2\pi}\int\limits_0^{2\pi}r'd\theta$$
-Calculamos esta integral
-$$\bar{f}(\bar{r},\epsilon)=\frac{1}{2\pi}\int\limits_0^{2\pi}[\epsilon(1-r^2\sin^2(\theta))r\sin^2(\theta)+r\sin(\theta)\cos(\theta)(1-\omega^2)]d\theta$$
-$$=\frac{1}{2\pi}\epsilon r\int\limits_0^{2\pi}\sin^2(\theta)d\theta-\frac{1}{2\pi}\epsilon r^3\int\limits_0^{2\pi}\sin^4(\theta)d\theta+\frac{1}{2\pi}r(1-\omega^2)\int\limits_0^{2\pi}\cos(\theta)\sin(\theta)d\theta$$
-$$=\frac{1}{2\pi}\epsilon r[\frac{1}{2}(\theta-\sin(\theta)\cos(\theta))]\Big|_2^{2\pi}-\frac{1}{2\pi}\epsilon r^3[\frac{1}{32}(-8\sin(2\theta)+\sin(4\theta)+12\theta)]\Big|_0^{2\pi}+$$
-$$\frac{1}{2\pi}r(1-\omega^2)[\cos^2(\theta)]\Big|_0^{2\pi}]=\frac{1}{2\pi}\epsilon r\pi-\frac{1}{2\pi}\epsilon r^3\frac{3}{4}\pi$$
-$$=\frac{\epsilon r}{8}(4-3r^2)$$
-Entonces tenemos el sistema
-$$\bar{r}'=\frac{\epsilon r}{8}(4-3r^2)$$
-$$\bar{\theta}'=2\pi t$$
-Las soluciones de equilibrio son $r=0$ y $r=\frac{2}{3}\sqrt{3}$
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=9cm]{graficarayleigh.png}
-	\caption{Plano fase.Dibujado en https://aeb019.hosted.uark.edu/pplane.html}
-\end{figure}
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=11cm]{planorayleigh.png}
-	\caption{Plano fase.Dibujado en https://aeb019.hosted.uark.edu/pplane.html}
-\end{figure}
 
-\newpage
+Sustituyendo \( y = 0 \) en la segunda ecuación, obtenemos:
 
+\begin{equation}
+    - x = 0 \implies x = 0.
+\end{equation}
 
+Por lo tanto, el único punto de equilibrio es el origen \((0, 0)\).
+
+\subsubsection{Matriz Jacobiana y Valores Propios}
+
+Calculamos la matriz Jacobiana \( J \) del sistema \eqref{eq:rayleigh_sistema}:
+
+\begin{equation}
+    J =
+    \begin{pmatrix}
+        \dfrac{\partial \dot{x}}{\partial x} & \dfrac{\partial \dot{x}}{\partial y} \\
+        \dfrac{\partial \dot{y}}{\partial x} & \dfrac{\partial \dot{y}}{\partial y}
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        0 & 1 \\
+        -1 & \epsilon \left(1 - 3 y^2\right)
+    \end{pmatrix}.
+\end{equation}
+
+Evaluamos en el punto de equilibrio \((0, 0)\):
+
+\begin{equation}
+    J|_{(0,0)} =
+    \begin{pmatrix}
+        0 & 1 \\
+        -1 & \epsilon
+    \end{pmatrix}.
+\end{equation}
+
+Los valores propios \(\lambda\) se obtienen resolviendo:
+
+\begin{equation}
+    \det(J - \lambda I) = \left| \begin{array}{cc}
+        -\lambda & 1 \\
+        -1 & \epsilon - \lambda
+    \end{array} \right| = 0.
+\end{equation}
+
+Calculamos el determinante:
+
+\begin{equation}
+    (-\lambda)(\epsilon - \lambda) - (-1)(1) = \lambda^2 - \epsilon \lambda + 1 = 0.
+\end{equation}
+
+Resolviendo la ecuación cuadrática:
+
+\begin{equation}
+    \lambda = \dfrac{\epsilon \pm \sqrt{\epsilon^2 - 4}}{2}.
+\end{equation}
+
+\begin{itemize}
+    \item Si \(\epsilon^2 - 4 > 0\) (es decir, \(\epsilon > 2\)), los valores propios son reales y de signos opuestos si \(\epsilon > 0\), lo que indica un \textbf{silla de montar} en el origen.
+    \item Si \(\epsilon^2 - 4 < 0\) (es decir, \(0 < \epsilon < 2\)), los valores propios son complejos conjugados con parte real positiva, ya que \(\epsilon > 0\). Esto implica que el origen es un \textbf{foco inestable}.
+\end{itemize}
+
+\subsection*{Aplicación del Teorema de Poincaré-Bendixson}
+
+Para demostrar la existencia de un ciclo límite, aplicaremos el teorema de Poincaré-Bendixson, mostrando que las trayectorias están confinadas en una región acotada y que no hay otros puntos de equilibrio en esa región aparte del origen.
+
+\subsubsection{Construcción de una Región Acotada Invariante}
+
+Consideramos la siguiente función de Lyapunov candidata:
+
+\begin{equation}
+    V(x, y) = \dfrac{1}{2} y^2 + \dfrac{1}{2} x^2.
+\end{equation}
+
+Calculamos su derivada temporal:
+
+\begin{align}
+    \dot{V} &= y \dot{y} + x \dot{x} \\
+    &= y \left[ \epsilon \left(1 - y^2\right) y - x \right] + x y \\
+    &= y \left[ \epsilon \left(1 - y^2\right) y - x \right] + x y \\
+    &= \epsilon y^2 \left(1 - y^2\right) - y x + x y \\
+    &= \epsilon y^2 \left(1 - y^2\right).
+\end{align}
+
+Analizamos el signo de \(\dot{V}\):
+
+\begin{itemize}
+    \item Para \( |y| > 1 \), se tiene \( y^2 > 1 \), entonces \( 1 - y^2 < 0 \) y por lo tanto:
+
+    \begin{equation}
+        \dot{V} = \epsilon y^2 (1 - y^2) < 0.
+    \end{equation}
+
+    Esto indica que las trayectorias se dirigen hacia la región donde \( |y| \leq 1 \).
+
+    \item Para \( |y| < 1 \), se tiene \( 1 - y^2 > 0 \), y por lo tanto:
+
+    \begin{equation}
+        \dot{V} = \epsilon y^2 (1 - y^2) \geq 0.
+    \end{equation}
+
+    En esta región, la energía \( V \) no decrece, pero debido a la inestabilidad en el origen, las trayectorias tienden a alejarse del punto de equilibrio.
+\end{itemize}
+
+Observamos que:
+
+\begin{enumerate}
+    \item Las trayectorias que empiezan fuera de la región \( |y| \leq 1 \) eventualmente entran en esta región y quedan confinadas en un conjunto compacto debido a la disminución de \( V \).
+
+    \item No hay otros puntos de equilibrio distintos del origen en esta región.
+
+    \item El origen es inestable (foco inestable o silla de montar dependiendo del valor de \(\epsilon\)).
+\end{enumerate}
+
+Por el \textbf{teorema de Poincaré-Bendixson}, existe al menos un ciclo límite en esta región acotada.
 
 \section{Sistemas Lienard}
 
@@ -743,6 +1174,248 @@ Veamos si $F$ y $g$ satisfacen las hipótesis del teorema de Lienard
 \end{enumerate}
 Por lo tanto, por el teorema de Lienard el oscilador de Van der Pol tiene un único ciclo límite y es estable.
 Esto ya lo comprobamos anteriormente, pero este teorema nos garantiza que es el único ciclo límite.
+
+\chapter{Teoría de promediación}
+
+Como vimos determinar la existencia y propiedades cualitativas y cuantitativas
+de los ciclos límite en sistemas no lineales no es tarea fácil. En muchos
+casos los métodos analíticos fallan o se vuelve sumamente complejo y los
+métodos numéricos pueden ser ineficientes o inexactos. \\
+
+El Método de Promediación es una herramienta poderosa y efectiva,
+parte de la teoría de perturbaciones y nos ayuda a simplificar el análisis
+de sistemas no lineales  transformando las ecuaciones originales en un sistema
+más manejable. La premisa fundamental es que, bajo ciertas condiciones, el
+comportamiento promedio del sistema a lo largo del tiempo puede revelar
+la existencia y la estructura de los ciclos límite.\\
+
+La aplicación del Método de Premediación para verificar la existencia de
+ciclos límite en sistemas no lineales no solo proporciona una técnica
+analítica robusta sino que también ofrece una perspectiva más profunda
+del comportamiento oscilatorio inherente en dichos sistemas. Este enfoque
+no solo permite simplificar las ecuaciones diferenciales originales, sino
+también captar la esencia del comportamiento dinámico del sistema,
+facilitando así la identificación y caracterización de ciclos límite.\\
+
+Definiendo el promedio local de una función y algunas de sus propiedades.
+
+\section{Método de promediación}
+
+\begin{definition}
+	Sea $f:\mathbb{R}\times\mathbb{R}^p\to\mathbb{R}^n$ continua y $T>0$.
+	Definimos:
+	$$
+		f_T(t,x)=\frac{1}{T}\int_{0}^{T}f(t+\tau,x)d\tau
+	$$
+	como el promedio local de $f$.
+\end{definition}
+\\
+La función $f_T(t,x)$ calcula el valor promedio de la función $f(t,x)$ 
+respecto a la variable $t$ en el intervalo $[t,t+T]$, visto de otro 
+modo, calcula el comportamiento promedio futuro del tiempo $t$ a tiempo $t+T$.
+
+\begin{proposition}
+	Sea $f:\mathbb{R}\times\mathbb{R}^p\to\mathbb{R}^n$ continua y de periodo $T$ en $t$, entonces
+	$$
+		f_T(t,x)=f_0(x)
+	$$
+\end{proposition}
+\\
+Si la función a promediar es de Lipschitz entonces la diferencia entre ambas
+funciones está acotada, esto quiere decri que el mapeo del promedio local de 
+la función no se aleja demasiado de la función original, solo lo simplifica 
+y guarda el comportamiento promedio de la función.
+\begin{proposition}
+	Si $\phi:\mathbb{R}\to\mathbb{R}$ es de Lipschitz en $\mathbb{R}$ con constante de Lipschitz $\lambda$ entonces
+	$$
+		\abs{\phi(x)-\phi_T(x)}\leq\frac{\lambda T}{2}
+	$$
+	i.e. $\phi(t)$ es $o(T)$ con respecto a $\phi_T(x)$.
+\end{proposition}
+\\
+\begin{example}
+	Consideremos la función $\phi(t)=\sqrt{t^2+1}$, esta función es de Lipschitz
+	con constante $\lambda=1$, calculamos su promedio local con $T=0.5$
+
+	$$\phi_T(t)=\frac{1}{2T}(((T + t)\sqrt{1 + (T + t)^2} + \sinh^{-1}(T + t)) - (t\sqrt{1 + t^2} + \sinh^{-1}(t)))$$
+
+	graficamos ambas funciones.
+
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=10cm]{fl.png}
+		\caption{Función vs  función promediada.}
+	\end{figure}
+
+	la diferencia esta acotada por $M=\frac{\lambda T}{2}=\frac{0.5}{2}=0.25$. En este caso en la
+	gráfica se puede observar que la diferencia converge a la cota $M$.
+
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=13cm]{d.png}
+		\caption{Diferencia de la Función con la función promediada.}
+	\end{figure}
+
+\end{example}
+
+\newpage
+
+este comportamiento asintótico no necesariamente ocurre siempre, un ejemplo es la función $\sin(x)$. 
+
+\begin{lemma}
+	Consideremos la EDO
+	$$
+		x'=\epsilon f(t,x)
+	$$
+	con $x(0)=x_0$, donde $f$ es de Lipschitz en $x\in D\subseteq\mathbb{R}^n$
+	y $f$ continua en $t\in[0,t]$.\\
+	Sea $M=\sup_{x\in D} \sup_{0\leq\epsilon t\leqL} \abs{f(t,x)}<+\infty$
+	\\Si $\phi(t)=\int_{0}^{t}f(\tau,x(\tau))d\tau$ con $x$ solución de la EDO.
+	\\Entonces:
+	$$
+		\abs{\phi_T(t)-\int_{0}^{t}f_T(\tau,x(\tau))d\tau}\leq\frac{1}{2}(1+\lambda L)MT
+	$$
+	para $o(\frac{1}{\epsilon})=t$, donde $\lambda\equiv cte$ de Lipschitz.
+	\\i.e. $\phi_T(t)=\int_{0}^{t}f_T(\tau,x(\tau))d\tau+o(T)$
+\end{lemma}
+
+\begin{lemma}
+	Consideremos el problema de valor inicial
+	$$
+		x'=\epsilon f(t,x)
+	$$
+	$x(0)=x_0$, con $f$ Lipschitz en $x\in D\subseteq\mathbb{R}^n$ y continua
+	en $t\in[0,t]$. \\
+	Si $y$ es solución de $y'=\epsilon f_T(t,y)$, $y(0)=x_0$, entonces
+	$$
+		x(t)-y(t)=o(\epsilon T)
+	$$
+	p.t. $t=o(\frac{1}{\epsilon})$
+\end{lemma}
+
+\begin{theorem}
+	Consideremos $x'=\epsilon f(t,x)$, $x(t_0)=x_0$ y $y'=f^0(y)$, $y(t_0)=x_0$,
+	donde $x_0,x,y\in D\subseteq\mathbb{R}^n$ y $\epsilon\in[0,\epsilon_0]$.\\
+
+	Satisfaciendo:
+	\begin{enumerate}
+		\item $\bar{f}(t,x)$ es $T$ periódica con promedio $f^0(x)$.
+		\item $f$ es continua en $t$ y Lipschitz en $x\in D$.
+		\item $y(t)$ permanece en el interior de $D$ para todo $t=O(\frac{1}{\epsilon})$.
+	\end{enumerate}
+	Entonces
+	$$x(t)-y(t)=O(\delta(\epsilon))$$
+	para todo $t=o(\frac{1}{\epsilon})$ con $\delta=\delta(\epsilon)$ función de orden.
+\end{theorem}
+
+\section{Oscilador de Van der Pol}
+De nuevo vamos a trabajar e Oscilador de Van der Pol pero ahora vamos a implementar la teoría de promediación para demostrar la existencia de ciclos límite.\\
+
+Sea el sistema de ecuaciones
+
+\begin{equation}\label{eq: VPsis}
+	\begin{matrix}
+		y'=-x-\epsilon y(x^2-1) \\
+		x'=y
+	\end{matrix}
+\end{equation}
+
+Haremos el cambio de coordenadas a polares.
+Sustituimos en $\eqref{eq: dxpolar}$ y $\eqref{eq: dypolar}$ en $\eqref{eq: VPsis}$
+$$r\cos(\theta)\theta'+r'\sin(\theta)=-r\cos(\theta)-\epsilon r\sin(\theta)(r^2\cos^2(\theta)-1)$$
+$$-r\sin(\theta)\theta'+r'\cos(\theta)=r\sin(theta)$$
+entonces
+\begin{equation}\label{eq: VPdr}
+	r'=-\epsilon r\sin^2(\theta)(r^2\cos^2(\theta)-1)
+\end{equation}
+\begin{equation}\label{eq: VPdtheta}
+	\theta'=-1-\epsilon r\sin(\theta)\cos(\theta)(r^2\cos(\theta^2)-1)
+\end{equation}
+Definimos para $\eqref{eq: VPdr}$ el promedio
+\begin{equation}\label{eq: drbar}
+	\bar{r}'=\bar{f}(\bar{r},\epsilon)
+\end{equation}
+donde
+$$\bar{f}(\bar{r},\epsilon)=\frac{1}{2\pi}\int\limits_0^{2\pi}r'd\theta$$
+Calculamos esta integral
+$$\bar{f}(\bar{r},\epsilon)=\frac{1}{2\pi}\int\limits_0^{2\pi}-\epsilon r\sin^2(\theta)(r^2\cos^2(\theta)-1)d\theta$$
+$$=\frac{1}{2\pi}[-\epsilon r^3\int\limits_0^{2\pi}\sin^2(\theta)\cos^2(\theta)d\theta+\epsilon r\int\limits_0^{2\pi}\sin^2(\theta)d\theta]$$
+$$=\frac{1}{2\pi}[-\epsilon r^3[\frac{1}{32}(4\theta-\sin(4\theta))]_0^{2\pi}+\epsilon r[\frac{1}{2}(\theta-\sin(\theta)\cos(\theta))]_0^{2\pi}]$$
+$$=\frac{1}{2\pi}[\frac{-\epsilon r^3}{32}(8\pi)+\frac{\epsilon r}{2}(2\pi)]=\frac{1}{2\pi}[\frac{-\epsilon r^3}{4}\pi+\epsilon r\pi].$$
+Entonces
+$$\bar{f}(\bar{r},\epsilon)=\frac{\epsilon r}{2}-\frac{\epsilon r^3}{8}$$
+Pormediamos $\theta$
+$$\bar{\theta}=2\pi t$$
+Vamos a analizar $\eqref{eq: drbar}$
+\begin{equation}\label{eq: drvander}
+	\bar{r}'=\frac{\epsilon}{8}r(4-r^2)
+\end{equation}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=14cm]{graficavanderpol.png}
+	\caption{Plano fase de $\eqref{eq: drvander}$.}
+\end{figure}
+Las soluciones de equilibrio son $r=0$ y $r=2$.
+\begin{enumerate}
+	\item Si $0<r<2$, entonces $r'>0$, por lo que $0$ es un punto fuente o repulsivo.
+	\item Si $r>2$, entonces $r'<0$, entonces $r=2$ es sumidero o atractor.
+\end{enumerate}\\
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=11cm]{vanderpol.png}
+	\caption{Plano fase. Dibujado en https://aeb019.hosted.uark.edu/pplane.html}
+\end{figure}
+\\Esto quiere decir que entre dos circunferencias de radios $0<r_{min}<2$ y $2<r_{max}$
+existe al menos una curva cerrada a la cual las curvas convergen.
+
+\newpage
+
+\section{Ecuación de Rayleigh}
+
+Vamos a implementar en la ecuación de Rayleigh la teoría de promediación para demostrar la existencia de ciclos límite.
+
+\begin{equation}\label{eq: Rayleigh}
+	\begin{matrix}
+		y'=-\epsilon(y^2-1)y-x \\
+		x'=y
+	\end{matrix}
+\end{equation}
+
+Haremos el cambio de coordenadas a polares.
+$$r\cos(\theta)\theta'+r'\sin(\theta)=-\epsilon (r^2\sin^2(\theta)-1)r\sin(\theta)-\omega^2r\cos(\theta) $$
+$$-r\sin(\theta)\theta'+r'\cos(\theta)=r\sin(\theta)$$
+Obtenemos la ecuación.
+\begin{equation}\label{eq: Rayleighpolar}
+	r'=\epsilon(1-r^2\sin^2(\theta))r\sin^2(\theta)+r\sin(\theta)\cos(\theta)(1-\omega^2)
+\end{equation}
+Definimos para $\eqref{eq: Rayleighpolar}$ el promedio
+$$\bar{r}=\bar{f}(\bar{r},\epsilon)=\frac{1}{2\pi}\int\limits_0^{2\pi}r'd\theta$$
+Calculamos esta integral
+$$\bar{f}(\bar{r},\epsilon)=\frac{1}{2\pi}\int\limits_0^{2\pi}[\epsilon(1-r^2\sin^2(\theta))r\sin^2(\theta)+r\sin(\theta)\cos(\theta)(1-\omega^2)]d\theta$$
+$$=\frac{1}{2\pi}\epsilon r\int\limits_0^{2\pi}\sin^2(\theta)d\theta-\frac{1}{2\pi}\epsilon r^3\int\limits_0^{2\pi}\sin^4(\theta)d\theta+\frac{1}{2\pi}r(1-\omega^2)\int\limits_0^{2\pi}\cos(\theta)\sin(\theta)d\theta$$
+$$=\frac{1}{2\pi}\epsilon r[\frac{1}{2}(\theta-\sin(\theta)\cos(\theta))]\Big|_2^{2\pi}-\frac{1}{2\pi}\epsilon r^3[\frac{1}{32}(-8\sin(2\theta)+\sin(4\theta)+12\theta)]\Big|_0^{2\pi}+$$
+$$\frac{1}{2\pi}r(1-\omega^2)[\cos^2(\theta)]\Big|_0^{2\pi}]=\frac{1}{2\pi}\epsilon r\pi-\frac{1}{2\pi}\epsilon r^3\frac{3}{4}\pi$$
+$$=\frac{\epsilon r}{8}(4-3r^2)$$
+Entonces tenemos el sistema
+$$\bar{r}'=\frac{\epsilon r}{8}(4-3r^2)$$
+$$\bar{\theta}'=2\pi t$$
+Las soluciones de equilibrio son $r=0$ y $r=\frac{2}{3}\sqrt{3}$
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=9cm]{graficarayleigh.png}
+	\caption{Plano fase.Dibujado en https://aeb019.hosted.uark.edu/pplane.html}
+\end{figure}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=11cm]{planorayleigh.png}
+	\caption{Plano fase.Dibujado en https://aeb019.hosted.uark.edu/pplane.html}
+\end{figure}
+
+\newpage
+
+
+
 
 \section{Van der Pol y Rayleigh}
 Ahora vamos a analizar la EDO
