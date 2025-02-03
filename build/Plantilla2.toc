@@ -1,6 +1,0 @@
-\beamer@sectionintoc {1}{Trayectoria acad\'emica}{2}{0}{1}
-\beamer@sectionintoc {2}{Tesis de posgrado}{3}{0}{2}
-\beamer@subsectionintoc {2}{1}{Problema 16\^A\IeC {\textdegree } de Hilbert.}{3}{0}{2}
-\beamer@subsectionintoc {2}{2}{Ecuaciones de movimiento}{5}{0}{2}
-\beamer@sectionintoc {3}{L\'imite continuo}{6}{0}{3}
-\beamer@sectionintoc {4}{Conclusiones}{7}{0}{4}

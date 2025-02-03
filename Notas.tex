@@ -8,6 +8,30 @@
 \usepackage{amssymb,amsmath,amsthm,amstext,amsfonts}
 \usepackage{color}
 
+%%%%%%%%%%%%%%%%%%%% CÓDIGO %%%%%%%%%%%%%%%%%%%%%%
+\usepackage{listings}
+\usepackage{xcolor}
+
+% Configuración del estilo para código en Python
+\lstset{
+    language=Python,                    % Cambia el lenguaje a Python
+    backgroundcolor=\color{lightgray!20}, % Color de fondo
+    basicstyle=\ttfamily\footnotesize,   % Estilo básico del código
+    keywordstyle=\color{blue},           % Color de las palabras clave
+    commentstyle=\color{green!50!black}, % Color de los comentarios
+    stringstyle=\color{red},             % Color de las cadenas de texto
+    numbers=left,                        % Mostrar los números de línea a la izquierda
+    numberstyle=\tiny\color{gray},       % Estilo de los números de línea
+    stepnumber=1,                        % Incremento entre los números de línea
+    breaklines=true,                     % Dividir líneas largas automáticamente
+    frame=single,                        % Agregar un borde alrededor del código
+    captionpos=b,                        % Poner la leyenda (caption) debajo del código
+}
+
+%\begin{lstlisting}[caption={Función de nodos}, label={lst:nodos}]
+ %% ESCIBE TU CÓDIGO AQUÍ
+%\end{lstlisting}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \setlength{\parindent}{0pt}
 
