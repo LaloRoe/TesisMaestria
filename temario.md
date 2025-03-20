@@ -84,3 +84,12 @@
 ---
 
 Podemos empezar con cualquiera de estas secciones, o trabajar ejemplos específicos si ya tienes algún sistema en mente. ¿Quieres que desarrollemos el marco teórico o un ejemplo práctico de promediación y aplicación del teorema de Poincaré-Bendixson?
+
+Tesis/
+├── main.tex          % Archivo principal
+├── preamble.tex      % Configuraciones generales (paquetes, entornos, etc.)
+├── capitulo1.tex     % Contenido del Capítulo 1
+├── capitulo2.tex     % Contenido del Capítulo 2
+├── bibliografia.bib  % Base de datos de referencias bibliográficas
+├── Img/              % Carpeta para imágenes
+└── Code/             % Carpeta para código Python u otros scripts

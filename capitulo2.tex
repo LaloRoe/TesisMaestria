@@ -1,0 +1,410 @@
+% capitulo2.tex
+\chapter{Preliminares}
+
+\section{Coordenadas polares}
+
+Consideremos las variables $(x,y)\in\mathbb{R}^2$, las cuales están parametrizadas en términos del tiempo $t$, es decir, $x=x(t)$ y $y=y(t)$ con parámetro $t\geq0$. Definimos el cambio de coordenadas cartesianas $(x,y)$
+a coordenadas polares $(r,\theta)$ mediante las relaciones:
+\begin{equation}\label{eq: xpolar}
+	x=r\cos(\theta)
+\end{equation}
+
+\begin{equation}\label{eq: ypolar}
+	y=r\sin(\theta)
+\end{equation}
+
+donde $r=r(t)$ y $\theta=\theta(t)$ también están parametrizadas en términos de $t$.\\
+
+Estas ecuaciones nos llevan a las siguientes identidades:
+
+\begin{equation}\label{eq: r2}
+	r^2=x^2+y^2\\
+\end{equation}
+
+\begin{equation}\label{eq: theta}
+	\theta=\arctan{(\frac{y}{x})}
+\end{equation}
+
+en este caso restringimos $\theta\in\left[-\frac{\pi}{2},\frac{\pi}{2}\right]$ ya que en ese intervalo la función $\tan\left(\theta\right)$ es invertible y continua.\\
+
+Derivamos las ecuaciones \eqref{eq: r2} y \eqref{eq: theta} respecto a $t$, obtenemos las relaciones dinámicas en coordenadas polares:
+
+\begin{equation}\label{eq: drcart}
+	rr'=xx'+yy'
+\end{equation}
+
+\begin{equation}\label{eq: dthetacart}
+	r^2\theta'=xy'-yx'
+\end{equation}
+
+Estas relaciones nos van a permitir simplificar sistemas de ecuaciones diferenciales en coordenadas cartesianas a coordenadas polares, además nos permiten estudiar la evolución radial y angular de las trayectorias en el plano de fases, lo cual es clave para analizar ciclos límite \cite{perko2001differential}.\\
+
+\newpage
+
+\section{Teoría de perturbaciones}
+
+Definimos un \textbf{problema perturbado} como una ecuación 
+
+\begin{equation}\label{eq: problemaPerturbado}
+	P^\epsilon\left(x\right)=0
+\end{equation}
+
+que incluye un parámetro pequeño $\epsilon$ con $0<\epsilon<1$, el cual que representa la perturbación.\\
+
+El objetivo es encontrar soluciones aproximadas $x=x\left(\epsilon\right)$ en función de este parámetro y estudiar su comportamiento cuando $\epsilon\to0$ \cite{hinch1991perturbation}.\\
+
+Para estudiar el comportamiento asintótico de las soluciones vamos a introducir el concepto de función de orden.
+
+\begin{definition}[Función de orden]
+	Se dice que una función $\delta=\delta\left(\epsilon\right)$ es de orden si cumple las siguientes condiciones:
+	\begin{enumerate}
+		\item Es continua en una vecindad de $\epsilon=0$.
+		\item Tiene signo definido en esa vecindad (es decir, $\delta(\epsilon)>0$ o $\delta(\epsilon)<0$ para $0<\epsilon<\epsilon_0$ con $\epsilon_0>0$).
+		\item Existe el límite:
+		$$\displaystyle\lim_{\epsilon\to0}\delta\left(\epsilon\right)$$
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}
+	Sean $\delta_1\left(\epsilon\right)$ y $\delta_2\left(\epsilon\right)$ funciones de orden. Decimos que: 
+	\begin{enumerate}
+		\item $\delta_1\left(\epsilon\right)=O\left(\delta_2\left(\epsilon\right)\right)$ si existe $k\in\mathbb{R}^+$ y un $\epsilon_0>0$ tales que:
+		\begin{equation}\label{eq: Big-O}
+			|\delta_1\left(\epsilon\right)|\leq k|\delta_2\left(\epsilon\right)|
+		\end{equation}
+		para todo $0<\epsilon<\epsilon_0$.\\
+
+		Esta definición describe una cota superior en el crecimiento de la función $\delta_1\left(\epsilon\right)$ en términos de $\delta_2\left(\epsilon\right)$ cuando $\epsilon\to0$. Es decir, $\delta_2(\epsilon)$ actúa como una cota superior para $\delta_1(\epsilon)$ \cite{bender2013advanced}.\\
+		\item $\delta_1\left(\epsilon\right)=o(\delta_2\left(\epsilon\right))$ si:
+		\begin{equation}\label{eq: small-o}
+		\displaystyle\lim_{\epsilon\to0}\frac{\delta_1\left(\epsilon\right)}{\delta_2\left(\epsilon\right)}=0
+		\end{equation}
+		Esta definición indica que $\delta_1\left(\epsilon\right)$ es asintóticamente insignificante en comparación con $\delta_2\left(\epsilon\right)$ cuando $\epsilon\to0$; es decir, $\delta_2(\epsilon)$ crece (o decrece) más rápido que $\delta_1(\epsilon)$ \cite{bender2013advanced}.\\
+	\end{enumerate}
+\end{definition} 
+
+Consideremos las funciones $\delta_1\left(\epsilon\right)=\ln\left(1+\epsilon\right)$ y $\delta_2\left(\epsilon\right)=\epsilon$.\\
+
+La serie de Taylor de $\ln\left(1+\epsilon\right)$ alrededor de $\epsilon=0$ es:
+
+$$\ln\left(1+\epsilon\right)=\epsilon-\frac{\epsilon^2}{2}+\frac{\epsilon^3}{3}-\dots$$
+
+evaluamos el límite:
+
+$$\displaystyle\lim_{\epsilon\to0}\frac{\delta_1\left(\epsilon\right)}{\delta_2\left(\epsilon\right)}=\lim_{\epsilon\to0}\frac{\epsilon-\frac{\epsilon^2}{2}+\frac{\epsilon^3}{3}-\dots}{\epsilon}=\lim_{\epsilon\to0}\left(1-\frac{\epsilon}{2}+\frac{\epsilon^2}{3}-\dots\right)=1.$$
+
+El límite es distinto de cero, por lo que $\ln\left(1+\epsilon\right)$ no es $o\left(\epsilon\right)$. Sin embargo, dado que el límite es finito y positivo, concluimos que $\ln\left(1+\epsilon\right)=O\left(\epsilon\right)$ \cite{bender2013advanced}.\\
+
+Veamos algunos ejemplos más para comprender mejor estas definiciones.
+
+\begin{example}
+    
+    Sea \(\delta_1(\epsilon) = \sin(\epsilon)\) y \(\delta_2(\epsilon) = \epsilon\).
+
+    Sabemos que para \(\epsilon \to 0\):
+    
+    \[
+    \sin(\epsilon) = \epsilon - \frac{\epsilon^3}{6} + \frac{\epsilon^5}{120} - \dots
+    \]
+    
+    Calculamos el límite:
+    
+    \[
+    \lim_{\epsilon \to 0} \frac{\sin(\epsilon)}{\epsilon} = \lim_{\epsilon \to 0} \left(1 - \frac{\epsilon^2}{6} + \frac{\epsilon^4}{120} - \dots \right) = 1.
+    \]
+    
+    El límite es finito y positivo, por lo que \(\sin(\epsilon) = O\left( \epsilon \right)\).
+    
+\end{example}
+
+\begin{example}
+    Sea \(\delta_1(\epsilon) = e^\epsilon - 1\) y \(\delta_2(\epsilon) = \epsilon\).
+
+La serie de Taylor de \(e^\epsilon\) es:
+
+\[
+e^\epsilon = 1 + \epsilon + \frac{\epsilon^2}{2} + \frac{\epsilon^3}{6} + \dots
+\]
+
+Entonces:
+
+\[
+e^\epsilon - 1 = \epsilon + \frac{\epsilon^2}{2} + \frac{\epsilon^3}{6} + \dots
+\]
+
+Calculamos el límite:
+
+\[
+\lim_{\epsilon \to 0} \frac{e^\epsilon - 1}{\epsilon} = \lim_{\epsilon \to 0} \left(1 + \frac{\epsilon}{2} + \frac{\epsilon^2}{6} + \dots \right) = 1.
+\]
+
+Por lo tanto, \(e^\epsilon - 1 = O\left( \epsilon \right)\).
+
+\end{example}
+
+\begin{example}
+    Sea \(\delta_1(\epsilon) = \epsilon^2\) y \(\delta_2(\epsilon) = \epsilon\).
+
+Calculamos el límite:
+
+\[
+\lim_{\epsilon \to 0} \frac{\epsilon^2}{\epsilon} = \lim_{\epsilon \to 0} \epsilon = 0.
+\]
+
+Entonces, \(\epsilon^2 = o\left( \epsilon \right)\), lo que significa que \(\epsilon^2\) es insignificante en comparación con \(\epsilon\) cuando \(\epsilon \to 0\) \cite{bender2013advanced}.
+
+\end{example}
+
+\begin{example}
+    Sea \(\delta_1(\epsilon) = \epsilon \ln(\epsilon)\) y \(\delta_2(\epsilon) = \epsilon\).
+
+Para \(\epsilon \to 0^+\), \(\ln(\epsilon) \to -\infty\), por lo que \(\epsilon \ln(\epsilon) \to 0^-\).
+
+Calculamos el límite:
+
+\[
+\lim_{\epsilon \to 0^+} \frac{\epsilon \ln(\epsilon)}{\epsilon} = \lim_{\epsilon \to 0^+} \ln(\epsilon) = -\infty.
+\]
+
+Aunque el límite es infinito negativo, observamos que \(\epsilon \ln(\epsilon)\) tiende a cero más lentamente que \(\epsilon\). Por lo tanto, \(\epsilon \ln(\epsilon) = o(1)\), pero no es \(o\left( \epsilon \right)\) ni \(O\left( \epsilon \right)\) \cite{bender2013advanced}.
+
+\end{example}
+
+\begin{example}
+    Sea \(\delta_1(\epsilon) = e^{-1/\epsilon}\) y \(\delta_2(\epsilon) = \epsilon^n\) para cualquier \(n > 0\).
+
+Cuando \(\epsilon \to 0^+\):
+
+\[
+e^{-1/\epsilon} \to e^{-\infty} = 0,
+\]
+
+y
+
+\[
+\lim_{\epsilon \to 0^+} \frac{e^{-1/\epsilon}}{\epsilon^n} = 0,
+\]
+
+ya que \(e^{-1/\epsilon}\) decrece más rápidamente que cualquier potencia de \(\epsilon\). Por lo tanto, \(e^{-1/\epsilon} = o\left( \epsilon^n \right)\) \cite{bender2013advanced}.
+
+\end{example}
+
+\begin{example}
+    Sea \(\delta_1(\epsilon) = \epsilon^n\) y \(\delta_2(\epsilon) = e^{-1/\epsilon}\) para cualquier \(n > 0\).
+
+Calculamos:
+
+\[
+\lim_{\epsilon \to 0^+} \frac{\epsilon^n}{e^{-1/\epsilon}} = \lim_{\epsilon \to 0^+} \epsilon^n e^{1/\epsilon} = \infty,
+\]
+
+ya que \(e^{1/\epsilon}\) crece más rápido que cualquier potencia negativa de \(\epsilon\). Por lo tanto, \(\delta_2(\epsilon) = o\left( \delta_1(\epsilon) \right)\) \cite{bender2013advanced}.
+
+\end{example}
+
+\section{Teoría de la Linealización de Sistemas de Ecuaciones Diferenciales}
+
+El análisis de sistemas de ecuaciones diferenciales no lineales puede ser complejo debido a su naturaleza intrínseca. Sin embargo, bajo ciertas condiciones, es posible aproximar el comportamiento del sistema cerca de puntos de equilibrio mediante su linealización. Este método simplifica el estudio de la estabilidad local y la dinámica del sistema \cite{perko2001differential}.
+
+\subsection{Conceptos Fundamentales}
+
+\subsubsection{Sistemas de Ecuaciones Diferenciales No Lineales}
+
+Consideremos un sistema autónomo de ecuaciones diferenciales ordinarias (EDO) en $\mathbb{R}^n$:
+
+\begin{equation}\label{eq:sistema_no_lineal}
+    \dot{\mathbf{x}} = \mathbf{f}(\mathbf{x}),
+\end{equation}
+
+donde $\mathbf{x} \in \mathbb{R}^n$ es el vector de estado y $\mathbf{f}: \mathbb{R}^n \to \mathbb{R}^n$ es una función vectorial continua y al menos diferenciable una vez en un entorno del punto de equilibrio.
+
+\subsubsection{Puntos de Equilibrio}
+
+Un punto $\mathbf{x}_0 \in \mathbb{R}^n$ es un \textbf{punto de equilibrio} del sistema \eqref{eq:sistema_no_lineal} si satisface:
+
+\begin{equation}
+    \mathbf{f}(\mathbf{x}_0) = \mathbf{0}.
+\end{equation}
+
+En otras palabras, si el sistema se encuentra en $\mathbf{x}_0$, permanecerá allí para todo tiempo $t$.
+
+\subsection{Linealización del Sistema}
+
+La idea principal de la linealización es aproximar el sistema no lineal \eqref{eq:sistema_no_lineal} cerca de un punto de equilibrio $\mathbf{x}_0$ mediante su sistema lineal asociado. Esto se logra utilizando la \textbf{expansión en serie de Taylor} de $\mathbf{f}(\mathbf{x})$ alrededor de $\mathbf{x}_0$.
+
+\subsubsection{Expansión en Serie de Taylor}
+
+La expansión de $\mathbf{f}(\mathbf{x})$ en torno a $\mathbf{x}_0$ es:
+
+\begin{equation}
+    \mathbf{f}(\mathbf{x}) = \mathbf{f}(\mathbf{x}_0) + D\mathbf{f}(\mathbf{x}_0)(\mathbf{x} - \mathbf{x}_0) + \mathbf{R}(\mathbf{x}),
+\end{equation}
+
+donde:
+
+\begin{itemize}
+    \item $D\mathbf{f}(\mathbf{x}_0)$ es la \textbf{matriz Jacobiana} evaluada en $\mathbf{x}_0$, cuyos elementos son $\left[ D\mathbf{f}(\mathbf{x}_0) \right]_{ij} = \dfrac{\partial f_i}{\partial x_j} \bigg|_{\mathbf{x}_0}$.
+    \item $\mathbf{R}(\mathbf{x})$ es el término de residuo que contiene las partes de orden superior.
+\end{itemize}
+
+Dado que $\mathbf{f}(\mathbf{x}_0) = \mathbf{0}$, la aproximación lineal del sistema cerca de $\mathbf{x}_0$ es:
+
+\begin{equation}\label{eq:sistema_linealizado}
+    \dot{\mathbf{x}} = D\mathbf{f}(\mathbf{x}_0)(\mathbf{x} - \mathbf{x}_0).
+\end{equation}
+
+\subsection{Análisis de Estabilidad mediante Linealización}
+
+La linealización permite estudiar la estabilidad local del punto de equilibrio $\mathbf{x}_0$ analizando el sistema linealizado \eqref{eq:sistema_linealizado}. La solución general de este sistema lineal se puede expresar en términos de exponentes y vectores propios de la matriz Jacobiana $D\mathbf{f}(\mathbf{x}_0)$.
+
+\subsubsection{Solución del Sistema Linealizado}
+
+Sea $\mathbf{A} = D\mathbf{f}(\mathbf{x}_0)$. El sistema linealizado es:
+
+\begin{equation}
+    \dot{\mathbf{z}} = \mathbf{A} \mathbf{z},
+\end{equation}
+
+donde $\mathbf{z} = \mathbf{x} - \mathbf{x}_0$.
+
+La solución general es:
+
+\begin{equation}
+    \mathbf{z}(t) = e^{\mathbf{A} t} \mathbf{z}_0,
+\end{equation}
+
+donde $\mathbf{z}_0 = \mathbf{z}(0)$ es la condición inicial.
+
+\subsubsection{Análisis de los Autovalores}
+
+La estabilidad del punto de equilibrio está determinada por los autovalores $\lambda_i$ de la matriz $\mathbf{A}$:
+
+\begin{itemize}
+    \item Si todos los autovalores tienen parte real negativa ($\text{Re}(\lambda_i) < 0$), el punto de equilibrio es \textbf{asintóticamente estable}.
+    \item Si alguno de los autovalores tiene parte real positiva ($\text{Re}(\lambda_i) > 0$), el punto de equilibrio es \textbf{inestable}.
+    \item Si todos los autovalores tienen parte real no positiva y al menos uno con parte real cero, se requiere un análisis más detallado (no se puede concluir estabilidad sólo con la linealización).
+\end{itemize}
+
+\subsection{Teoremas que Justifican el Método}
+
+\subsubsection{Teorema de Hartman-Grobman}
+
+El \textbf{teorema de Hartman-Grobman} establece que, cerca de un punto de equilibrio hiperbólico, el sistema no lineal es topológicamente equivalente a su sistema linealizado.
+
+\begin{theorem}[Hartman-Grobman]
+Sea $\mathbf{x}_0$ un punto de equilibrio hiperbólico del sistema \eqref{eq:sistema_no_lineal}, es decir, la matriz Jacobiana $\mathbf{A} = D\mathbf{f}(\mathbf{x}_0)$ no tiene autovalores con parte real cero. Entonces, existe un entorno $U$ de $\mathbf{x}_0$ tal que el flujo del sistema no lineal en $U$ es topológicamente equivalente al flujo del sistema linealizado en $U$ \cite{hartman1960lemma}.
+\end{theorem}
+
+Este teorema justifica el uso de la linealización para analizar la estabilidad local alrededor de puntos de equilibrio hiperbólicos.
+
+\subsubsection{Puntos de Equilibrio Hiperbólicos}
+
+Un punto de equilibrio $\mathbf{x}_0$ es \textbf{hiperbólico} si ninguno de los autovalores de $\mathbf{A} = D\mathbf{f}(\mathbf{x}_0)$ tiene parte real cero.
+
+\subsubsection{Limitaciones del Método}
+
+La linealización no es concluyente en los siguientes casos:
+
+\begin{itemize}
+    \item Si la matriz Jacobiana tiene autovalores con parte real cero (punto de equilibrio no hiperbólico).
+    \item Si se desea conocer el comportamiento global del sistema (la linealización sólo proporciona información local).
+\end{itemize}
+
+En tales casos, es necesario utilizar métodos más avanzados, como la teoría de sistemas dinámicos no lineales, funciones de Lyapunov o métodos numéricos.
+
+\subsection{Ejemplo de Aplicación}
+
+Consideremos el sistema:
+
+\begin{equation}\label{eq:ejemplo_sistema}
+    \begin{cases}
+        \dot{x} = x (1 - x) - xy, \\
+        \dot{y} = y (-\alpha + x),
+    \end{cases}
+\end{equation}
+
+donde $\alpha > 0$ es un parámetro.
+
+\subsubsection{Puntos de Equilibrio}
+
+Encontramos los puntos de equilibrio resolviendo:
+
+\begin{equation}
+    \begin{cases}
+        x (1 - x) - x y = 0, \\
+        y (-\alpha + x) = 0.
+    \end{cases}
+\end{equation}
+
+Las soluciones son:
+
+\begin{itemize}
+    \item $E_1 = (0, 0)$.
+    \item $E_2 = (1, 0)$.
+    \item $E_3 = (\alpha, 0)$ si $0 < \alpha < 1$.
+\end{itemize}
+
+\subsubsection{Linealización en $E_2 = (1, 0)$}
+
+Calculamos la matriz Jacobiana:
+
+\begin{equation}
+    \mathbf{A} = D\mathbf{f}(x, y) =
+    \begin{pmatrix}
+        \dfrac{\partial \dot{x}}{\partial x} & \dfrac{\partial \dot{x}}{\partial y} \\
+        \dfrac{\partial \dot{y}}{\partial x} & \dfrac{\partial \dot{y}}{\partial y}
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        1 - 2x - y & -x \\
+        y & -\alpha + x
+    \end{pmatrix}.
+\end{equation}
+
+Evaluamos en $E_2 = (1, 0)$:
+
+\begin{equation}
+    \mathbf{A}|_{(1,0)} =
+    \begin{pmatrix}
+        -1 & -1 \\
+        0 & 1 - \alpha
+    \end{pmatrix}.
+\end{equation}
+
+Los autovalores son las soluciones de:
+
+\begin{equation}
+    \det(\mathbf{A} - \lambda \mathbf{I}) = 0.
+\end{equation}
+
+Calculamos:
+
+\begin{equation}
+    \left| \begin{array}{cc}
+        -1 - \lambda & -1 \\
+        0 & 1 - \alpha - \lambda
+    \end{array} \right| = (-1 - \lambda)(1 - \alpha - \lambda) - (0)(-1) = 0.
+\end{equation}
+
+Resolviendo para $\lambda$:
+
+\begin{equation}
+    (-1 - \lambda)(1 - \alpha - \lambda) = 0.
+\end{equation}
+
+Obtenemos los autovalores:
+
+\begin{equation}
+    \lambda_1 = -1, \quad \lambda_2 = 1 - \alpha.
+\end{equation}
+
+La estabilidad del punto de equilibrio $E_2$ depende del valor de $\alpha$:
+
+\begin{itemize}
+    \item Si $\alpha < 1$, entonces $\lambda_2 > 0$ y el punto es un \textbf{silla de montar} (inestable).
+    \item Si $\alpha > 1$, entonces $\lambda_2 < 0$ y el punto es un \textbf{nodo estable}.
+\end{itemize}
+
+\subsection{Conclusión}
+
+La linealización es una herramienta poderosa para analizar la estabilidad local de sistemas de ecuaciones diferenciales no lineales cerca de puntos de equilibrio hiperbólicos. El teorema de Hartman-Grobman proporciona el fundamento teórico para este método, asegurando que, bajo las condiciones adecuadas, el comportamiento cualitativo del sistema no lineal es capturado por su linealización.

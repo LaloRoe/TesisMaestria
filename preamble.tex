@@ -1,0 +1,50 @@
+% preamble.tex
+\usepackage[spanish]{babel}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{amssymb,amsmath,amsthm,amstext,amsfonts}
+\usepackage{color}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{csquotes}
+\usepackage[colorlinks=true, linkcolor=linkcolor, citecolor=citecolor, urlcolor=urlcolor]{hyperref}
+
+% Configuración de listings para código Python
+\lstset{
+    language=Python,
+    backgroundcolor=\color{lightgray!20},
+    basicstyle=\ttfamily\footnotesize,
+    keywordstyle=\color{blue},
+    commentstyle=\color{green!50!black},
+    stringstyle=\color{red},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    stepnumber=1,
+    breaklines=true,
+    frame=single,
+    captionpos=b,
+}
+
+% Entornos personalizados
+\newtheorem{definition}{Definición}[section]
+\newtheorem{proposition}[definition]{Proposición}
+\newtheorem{remark}[definition]{Observación}
+\newtheorem{notation}[definition]{Notación}
+\newtheorem{lemma}[definition]{Lema}
+\newtheorem{theorem}[definition]{Teorema}
+\newtheorem{example}[definition]{Ejemplo}
+
+% Otras configuraciones
+\graphicspath{{Img/}}
+\setlength{\parindent}{0pt}
+
+% Configuración de biblatex
+\usepackage[backend=biber, style=numeric, sorting=none]{biblatex} % Usa biber como backend
+\addbibresource{bibliografia.bib} % Nombre de tu archivo .bib (sin extensión)
+
+\usepackage{xcolor} % Carga el paquete xcolor
+\definecolor{linkcolor}{RGB}{0, 0, 255}    % Define linkcolor
+\definecolor{citecolor}{RGB}{0, 128, 0}    % Define citecolor
+\definecolor{urlcolor}{RGB}{136, 0, 21}    % Define urlcolor
+
+\usepackage[colorlinks=true, linkcolor=linkcolor, citecolor=citecolor, urlcolor=urlcolor]{hyperref}
