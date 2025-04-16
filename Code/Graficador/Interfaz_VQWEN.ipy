@@ -1,0 +1,692 @@
+import tkinter as tk
+from tkinter import ttk, messagebox, filedialog
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
+from matplotlib.collections import LineCollection
+from matplotlib.colors import LinearSegmentedColormap  # Para crear mapas de colores personalizados
+import sympy as sp
+import basicdifeq as bde
+
+class App:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Análisis de Sistemas Dinámicos")
+        
+        # Maximizar la ventana al iniciar (compatible con todas las plataformas)
+        screen_width = self.root.winfo_screenwidth()
+        screen_height = self.root.winfo_screenheight()
+        self.root.geometry(f"{screen_width}x{screen_height}+0+0")  # Ajustar al tamaño de la pantalla
+        
+        # Variables de control
+        self.sistema_seleccionado = tk.StringVar()
+        self.dx_dt = tk.StringVar()
+        self.dy_dt = tk.StringVar()
+        self.nombre_sistema = tk.StringVar()
+        self.parametros = {}
+        self.linealizar = tk.BooleanVar(value=False)
+        self.nulclinas_var = tk.BooleanVar(value=False)
+        self.lim_x_inf = tk.DoubleVar(value=-5)
+        self.lim_x_sup = tk.DoubleVar(value=5)
+        self.lim_y_inf = tk.DoubleVar(value=-5)
+        self.lim_y_sup = tk.DoubleVar(value=5)
+        self.num_puntos = tk.IntVar(value=20)
+        self.pasos_rk = 1000
+        
+        # Diseño de la interfaz
+        self.create_widgets()
+    
+    def create_widgets(self):
+        # Barra morada con título y subtítulo
+        frame_barra = tk.Frame(self.root, bg="purple", height=60)
+        frame_barra.grid(row=0, column=0, columnspan=2, sticky="ew")
+        
+        titulo = tk.Label(frame_barra, text="Gráfica del plano fase", font=("Arial", 16, "bold"), fg="white", bg="purple")
+        titulo.place(relx=0.5, rely=0.4, anchor="center")
+        subtitulo = tk.Label(frame_barra, text="Creado por LaloRoe", font=("Arial", 10), fg="white", bg="purple")
+        subtitulo.place(relx=0.5, rely=0.7, anchor="center")
+        
+        # Frame izquierdo para entradas
+        frame_entradas = ttk.Frame(self.root, padding="10")
+        frame_entradas.grid(row=1, column=0, sticky="nsew")
+        
+        # Sistema predefinido
+        ttk.Label(frame_entradas, text="Sistema predefinido:").grid(row=0, column=0, sticky="w")
+        sistemas_predefinidos = ["Seleccionar", "Van der Pol", "Lotka-Volterra", "Rayleigh", "FitzHugh-Nagumo"]
+        self.menu_sistemas = ttk.Combobox(frame_entradas, textvariable=self.sistema_seleccionado, values=sistemas_predefinidos)
+        self.menu_sistemas.grid(row=0, column=1, sticky="ew")
+        self.menu_sistemas.bind("<<ComboboxSelected>>", self.cargar_sistema_predefinido)
+        
+        # Sistema manual
+        ttk.Label(frame_entradas, text="dx/dt:").grid(row=1, column=0, sticky="w")
+        ttk.Entry(frame_entradas, textvariable=self.dx_dt).grid(row=1, column=1, sticky="ew")
+        ttk.Label(frame_entradas, text="dy/dt:").grid(row=2, column=0, sticky="w")
+        ttk.Entry(frame_entradas, textvariable=self.dy_dt).grid(row=2, column=1, sticky="ew")
+        ttk.Label(frame_entradas, text="Nombre del sistema:").grid(row=3, column=0, sticky="w")
+        ttk.Entry(frame_entradas, textvariable=self.nombre_sistema).grid(row=3, column=1, sticky="ew")
+        
+        # Parámetros
+        ttk.Label(frame_entradas, text="Parámetros (ejemplo: mu=1):").grid(row=4, column=0, sticky="w")
+        self.parametros_entry = ttk.Entry(frame_entradas)
+        self.parametros_entry.grid(row=4, column=1, sticky="ew")
+        
+        # Opciones adicionales
+        ttk.Checkbutton(frame_entradas, text="Linealizar", variable=self.linealizar).grid(row=5, column=0, sticky="w")
+        ttk.Checkbutton(frame_entradas, text="Calcular nulclinas", variable=self.nulclinas_var).grid(row=6, column=0, sticky="w")
+        
+        # Límites del gráfico
+        ttk.Label(frame_entradas, text="Límite inferior x:").grid(row=7, column=0, sticky="w")
+        ttk.Entry(frame_entradas, textvariable=self.lim_x_inf).grid(row=7, column=1, sticky="ew")
+        ttk.Label(frame_entradas, text="Límite superior x:").grid(row=8, column=0, sticky="w")
+        ttk.Entry(frame_entradas, textvariable=self.lim_x_sup).grid(row=8, column=1, sticky="ew")
+        ttk.Label(frame_entradas, text="Límite inferior y:").grid(row=9, column=0, sticky="w")
+        ttk.Entry(frame_entradas, textvariable=self.lim_y_inf).grid(row=9, column=1, sticky="ew")
+        ttk.Label(frame_entradas, text="Límite superior y:").grid(row=10, column=0, sticky="w")
+        ttk.Entry(frame_entradas, textvariable=self.lim_y_sup).grid(row=10, column=1, sticky="ew")
+        ttk.Label(frame_entradas, text="Número de puntos:").grid(row=11, column=0, sticky="w")
+        ttk.Entry(frame_entradas, textvariable=self.num_puntos).grid(row=11, column=1, sticky="ew")
+        
+        # Botones
+        ttk.Button(frame_entradas, text="Graficar", command=self.graficar).grid(row=12, column=0, columnspan=2, pady=10)
+        ttk.Button(frame_entradas, text="Guardar Gráfico", command=self.guardar_grafico).grid(row=13, column=0, columnspan=2, pady=10)
+        
+        # Frame derecho para el gráfico
+        frame_grafico = ttk.Frame(self.root, padding="10")
+        frame_grafico.grid(row=1, column=1, sticky="nsew")
+        
+        # Gráfico (más grande)
+        self.fig, self.ax = plt.subplots(figsize=(10, 10))  # Aumentar el tamaño del gráfico
+        self.canvas = FigureCanvasTkAgg(self.fig, master=frame_grafico)
+        self.canvas.get_tk_widget().pack(fill=tk.BOTH, expand=True)
+        
+        # Barra de herramientas de matplotlib
+        toolbar = NavigationToolbar2Tk(self.canvas, frame_grafico)
+        toolbar.update()
+        toolbar.pack(side=tk.TOP, fill=tk.X)
+    
+    def cargar_sistema_predefinido(self, event):
+        sistema = self.sistema_seleccionado.get()
+        if sistema == "Van der Pol":
+            self.dx_dt.set("y")
+            self.dy_dt.set("mu*(1-x**2)*y - x")
+            self.nombre_sistema.set("Van der Pol")
+            self.parametros_entry.delete(0, tk.END)
+            self.parametros_entry.insert(0, "mu=1")
+        elif sistema == "Lotka-Volterra":
+            self.dx_dt.set("a*x - b*x*y")
+            self.dy_dt.set("c*x*y - d*y")
+            self.nombre_sistema.set("Lotka-Volterra")
+            self.parametros_entry.delete(0, tk.END)
+            self.parametros_entry.insert(0, "a=1,b=1,c=1,d=1")
+        elif sistema == "Rayleigh":
+            self.dx_dt.set("y")
+            self.dy_dt.set("mu*(1-y**2)*y - x")
+            self.nombre_sistema.set("Rayleigh")
+            self.parametros_entry.delete(0, tk.END)
+            self.parametros_entry.insert(0, "mu=1")
+        elif sistema == "FitzHugh-Nagumo":
+            self.dx_dt.set("x - (x**3)/3 - y + I")
+            self.dy_dt.set("epsilon*(x + a - b*y)")
+            self.nombre_sistema.set("FitzHugh-Nagumo")
+            self.parametros_entry.delete(0, tk.END)
+            self.parametros_entry.insert(0, "I=1,epsilon=1,a=1,b=1")
+        
+        # Reiniciar el gráfico y las variables al cambiar de sistema
+        self.reset_variables()
+    
+    def reset_variables(self):
+        """Reinicia todas las variables para evitar conflictos al cambiar de sistema."""
+        self.dx_dt.set("")
+        self.dy_dt.set("")
+        self.nombre_sistema.set("")
+        self.parametros_entry.delete(0, tk.END)
+        self.linealizar.set(False)
+        self.nulclinas_var.set(False)
+        self.lim_x_inf.set(-5)
+        self.lim_x_sup.set(5)
+        self.lim_y_inf.set(-5)
+        self.lim_y_sup.set(5)
+        self.num_puntos.set(20)
+        self.reset_grafico()
+    
+    def reset_grafico(self):
+        """Reinicia el gráfico para eliminar elementos anteriores."""
+        self.ax.clear()
+        self.canvas.draw()
+    
+    def graficar(self):
+        try:
+            # Limpiar gráfico anterior
+            self.ax.clear()
+            
+            # Obtener valores ingresados
+            f1_original = self.dx_dt.get()
+            f2_original = self.dy_dt.get()
+            nombre = self.nombre_sistema.get()
+            parametros_str = self.parametros_entry.get()
+            linealizar = self.linealizar.get()
+            nulclinas = self.nulclinas_var.get()
+            Lx_inf = self.lim_x_inf.get()
+            Lx_sup = self.lim_x_sup.get()
+            Ly_inf = self.lim_y_inf.get()
+            Ly_sup = self.lim_y_sup.get()
+            n = self.num_puntos.get()
+            
+            # Procesar parámetros
+            parametros = {}
+            for param in parametros_str.split(","):
+                key, value = param.split("=")
+                parametros[key.strip()] = float(value.strip())
+            
+            # Definir variables simbólicas
+            x, y = sp.symbols('x y')
+            
+            # Sustituir parámetros en las ecuaciones
+            f1 = sp.sympify(f1_original)
+            f2 = sp.sympify(f2_original)
+            f1 = f1.subs(parametros)
+            f2 = f2.subs(parametros)
+            
+            # Calcular Jacobiano y linealizar si es necesario
+            if linealizar:
+                J = bde.calcular_jacobiano(f1, f2, [x, y])
+                J_eq = J.subs({x: 0, y: 0})
+                eigenvals = J_eq.eigenvals()
+                print("Valores propios:", eigenvals)
+                
+                # Graficar la aproximación lineal
+                f1_linealizado = str(np.array(J_eq)[0][0] * x + np.array(J_eq)[0][1] * y)
+                f2_linealizado = str(np.array(J_eq)[1][0] * x + np.array(J_eq)[1][1] * y)
+                self.ax.text(0.05, 0.95, "Linealización", transform=self.ax.transAxes, fontsize=10, verticalalignment='top', bbox=dict(boxstyle="round", facecolor="white", alpha=0.5))
+                
+                # Resolver el sistema linealizado
+                t_span = np.linspace(0, 10, self.pasos_rk)
+                sol_lineal = bde.runge_kutta(f1_linealizado, f2_linealizado, [0.1, 0.1], 0.1, self.pasos_rk, {})
+                x_sol_lineal, y_sol_lineal = sol_lineal[0, :], sol_lineal[1, :]
+                self.ax.plot(x_sol_lineal, y_sol_lineal, label="Aproximación lineal", color="green", linestyle="--")
+            
+            # Calcular nulclinas si es necesario
+            if nulclinas:
+                nulclina_x = sp.solve(f1, y)
+                nulclina_y = sp.solve(f2, y)
+                print("Nulclinas:", nulclina_x, nulclina_y)
+                
+                # Graficar nulclinas
+                v = np.linspace(Lx_inf, Lx_sup, 500)
+                for sol in nulclina_x:
+                    y_values = sp.lambdify(x, sol, 'numpy')(v)
+                    if np.isscalar(y_values):
+                        y_values = np.full_like(v, y_values)
+                    self.ax.plot(v, y_values, label=f"Nulclina de x: {sol}", color="blue", linestyle="--")
+                for sol in nulclina_y:
+                    y_values = sp.lambdify(x, sol, 'numpy')(v)
+                    if np.isscalar(y_values):
+                        y_values = np.full_like(v, y_values)
+                    self.ax.plot(v, y_values, label=f"Nulclina de y: {sol}", color="red", linestyle="--")
+            
+            # Graficar campo vectorial
+            x_grid = np.linspace(Lx_inf, Lx_sup, n)
+            y_grid = np.linspace(Ly_inf, Ly_sup, n)
+            X, Y = np.meshgrid(x_grid, y_grid)
+            f1_func = sp.lambdify((x, y), f1 _entrant_vars_selection.addtk()
+setdefaultvariables self grid lambda
+ setdefault(valuesvar_inputsarios
+ v state("tk_params = sp.get("root
+ setdefault
+los valores self
+ paramsetros(selflose
+_params(self.grid_args selection_state self.carg.setdefault
+state.append(self)()
+
+state tstate(" funciones(True
+estado
+()
+.__init("values
+State valor
+ self.setdefault
+Stateacion self.state("substate("Sii
+_state(top(self
+ texto_armiento("True(state trainizaracio completo
+_state**("Estado
+1.setdefault_state("Parameters("z seleccion("fondo.setdefault_state_grid.setdefault
+ self.func seleccion("estado.setdefault("Selector("5 parametros(" self.T0(" self.grid(defaults self.gridadd("self.parameters(" **graf(" estado(" self.grid_def(" self.grid(" self.tipo(" self.grid("1(self.childreninicioar self(grid_argument("1max("selection("")
+str(self
+Variable4 self.clear
+_state(False
+ self.grid_title self.cent
+are_text0("1 **setState
+ self.grid("Parametro(self, self.tk(fillvalor_name.setdefaultimport(tk(" self.dif self.tipo(self.grid_default_state("1
+ self.frame
+ self)
+Entr
+ self.grid(" self.grid = propiedad.setdefaultdict22self.gridica.setdefault_vars("tk(self, selfLabel self, self
+4self_state
+ self.grid("root(self_argument(" self
+ self.linesVar self.grid("self
+ self
+(selfstate(text
+1.grid()
+ self.gridio
+self.grid("Region(self0_argument("1
+ self)
+5.get("si__()
+.write('self
+ self.gridazon.add self.coloresar self.grid("tkente("self.invokev_selection("self
+ self.expand("100_estado self.state_dictDefault(' valores
+ self.reset_stateados("_state
+ self
+1
+_state ~
+ self.grid_title("self
+ pady_delta("0
+ self)
+("selfar self
+ self.grid self.grid(" self.padreall(selfstate
+ self)
+0_state
+ self
+("acion self
+ self
+3
+ self
+ self
+(self
+ self.variables(" self.arearesult
+ self
+ super()
+ self
+acion("ado("self
+_state="adores
+ self
+ state("self
+ self
+state selfstate self
+_state("self.grid("self, self
+ self.var(self.gridearDefault
+ self
+_state
+ self.setdefault_model self
+ self
+ self
+1 # Valculo(self_state, self.state0 self
+1 социально
+0(self, self
+ self
+_state self5
+aciones(self self.gridado
+
+self
+ self0(self.grid
+ self.f.name.get_valueenv(self.setdefault(" self.gridadoparameters(" self.grid(self, self
+self, self.endterm self
+ self
+ self
+1, self )
+
+self
+ self.gridate tk self)
+ selftext(selfprint("Actual0 self, self
+ self
+Operator("self
+ self
+ self
+ self.grid
+ self.gridarseiv_argument("value
+self.t(self.grid("self.iv_argument(" self)
+ self
+ self0 self.grid("self
+self
+ self_stateario self_state.set_default
+ self0 self.grid()
+selfense(self_state self
+ self_state self
+ self("]
+ self_state selfar self_argument(" self.print("")
+.value="self)
+ self.grid("Submitf self state
+ self.pack_default="self()
+("
+
+ self.grid("Valoraviso(self.tipo
+5 = self.gridado
+ self
+ generar("self
+()
+ self
+()
+
+ self.grid0
+ self, int("Lineal5_state self.grid()
+ self.add_state.set_default_state
+ tk
+2 selfariable self
+acion(self()
+0()
+(self0_argument("self, value self, self.grid(" self, selfasemath_linearm.setdefault(.0 self, state self.grid("_self
+ self.grid()
+1.setdefault ttk("self, self # self
+self.grid()
+0
+deeparsual52_argument("self
+ self.dim("ar ребенка
+0
+ self, self = self.grid25.setdefault_state self, self.grid0
+ self
+ self, self.setdefault, self
+ self, self.scale
+ self:TextView('self.grid("self
+ self.setdefault(selfdef self
+ self.grid("Sage self.grid_validseance self.gridado
+0
+1.fill("e self
+ self)
+ self
+ self
+ self)
+ self.grid("self
+ self
+.grid(self.grid10 self
+0
+2line(" self.grid("self
+ self
+1.setdefault_state self.gridBox_stateade self.sub("Stateize self)
+ selfarval self
+ self
+ self.grid0 self, text="打通(self, self.grid("self: self
+ self)
+ self)
+0ex("self.tkencabez("3
+ self.grid("10 self, state0 self.grid selfd_argument("self, self.setdefault("self
+4
+0
+self, self.grid_state
+ self
+ self.grid("self, self.grid_state self00
+ self, self.setdefault("self
+ self
+ self.gridéself: self, pady(self
+ self.grid("self.constants["Value("self
+ self.grid("1
+ self)
+ self.grid("Estate self.grid("self.grid0 self
+ self, self.pack0 self, self:Widget text.setdefault.add ttkuesto(" function()
+_state
+ selfarallel, self.setdefault.add_argument("self, self.grid00 self.grid1.set("reset("self.add_argument(" self.grid self.clear(self0 self.cl = self.grid_state: selfarDict("self, self.grid_state self.gridare self()
+ self.grid self.grid_state_argument("self: self, self: self
+ self01.setdefault
+ self.call("self, self.grid0 parametro
+self.setdefault
+ self.grid_state res.pack(selfside self, self.grid self: self.grid
+ self.gridado self, self.grid self.gridado
+ self, self.grid0 self)
+ self, self: self.grid_column("le_argument(self, self: self.grid("tkazo(self, self: any
+ self: self, self: self
+ self
+1: self, self: self
+ self
+ans("Agregar(self: self: self
+ self
+ self
+ self: self: self
+ self.T("```
+ self
+ self
+ self: self: self()
+tk
+ selfstate self:Parameter("te self: self0 selfdev(self: self: selfparamet self.vector("self, self.grid("self: self.grid("ador self.grid(True self
+ self: print(self: self.grid self, self: self
+ self: self
+ self
+ self: selfarField self.grid.addWidget("Valor("ore self, self.an State: self.gridundo("Func self.gridue_argument("self
+ self
+ self
+ self
+ __state:statear self, pady
+ensararrows
+ self: self
+ self.grid: self: self55: self.grid(selfx pdefault Estado("self.grid: self4
+ self, state:rcdef
+ self: self.grid: self
+ self: self.grid: self
+ self, self.grid: self, self.setdefaultar self.grid: self.add_argument("05 ^ self: anyVariables self: self
+ self.grid: self
+return
+ self: any
+ self7 self: self,ext
+ self: self.grid: self:   
+ire self, maxarse self.make_argument
+selfenimport("``7state: self
+arX_test(self s(n default
+4
+ self: self.grid("ase
+0 default(".py self, vOR
+ self:pass
+ self: self
+com_state: self
+ self.grid: self: selfarrows       ar self
+ self, selfar self: self.grid: self: self.add_argument("self: self.children("params_selection("self: self.grid: self
+ self.grid("Texto
+0 self, self.grid: self.add("Default
+ self.grid: self
+ self: self0 self.grid self: self.setdefault
+self: self.grid: self
+ selfar self: self: self
+ self.grid_state: self
+ self.grid: self.tr e self: self.v0
+ self, state self: self.grid(default="Letrasoro_state self: self
+ self: self, self: self1: self.car("
+ self: self, **import(" tkinter`: self._default()
+: self: self: self: self
+0 self: self: self
+2 self: self, self: self.setdefault: self)
+ self)
+ self: self.emp10 self: self.grid: self # self, proyecto
+self: self:text("self: self: self.check("self
+ self.log(" LOSide self: self
+ self.grid: self.fields
+ self: self
+ self.grid: self.setdefault
+ self.grid: self: self: self
+ self: self.setdefault
+ self 
+ np_import(" self
+ self
+1: self
+ self
+ self
+1: self
+ self.stoparamiento
+ self)
+ nv_funcional1: self.k False("egg(self1: self, self.grid self.createcommand(" #valueslet�self
+State(" pantalla
+ self
+ self
+state # defaultdict
+ self: self: self11: self, apply_async("self.grid     # Parameters(root: self.grid.add_argument("values_default
+ self.grid("ial self: selfar self.grid(self: self.gridado self: self.setdefault: self.setdefault("Texto self.Key
+self.setdefault
+ self.destroy("**
+ self, self, self: self: self.grideteque selfstate("TKwargs.getard self.grid.add1: self #1: self: self.cleaned("self: self: self call self0 self.g self.title("Subfield self
+ self: self.grid(" self: self.create_window("self
+ self: self.create_window("self= self: self.setdefault self: self.create_argument("self: self.grid: self, self, self: self.setdefault("self: citertools()
+1: self.get("self, self: self: selfar self.assertEqual("selfir self: self.in.readline("Manual: selfax self0 self: self: selfarvalor(self, self: selftest: self: selfile self, self: self, self.gridaderoname
+ self.grid("o: self.gridado
+ self, self: self, selface self: self: self1: self: self: self, self.pack("Estado
+Variable self: self: self, self.stop("default: self: self: self: self: self.state("self1: self: self, self: self.setdefault(" self: self- self: selfar self: self1: self.add("child}
+self, self.play("state: self: self)
+ self.line("default
+ self: self: self.grid: self
+ self: self.grid: self: self.grid()
+self: self.grid: self0metroself: self: self.grid(0 self: self: self.newself.setdefault: self
+0 self.grid: self: self: self: self.compute(" self: self: self.eval("self: self.grid self.grid(self)
+ get.arange("self: self: self, self: self_state ._state: self, self: self.toggle("self: self: self.grid(self: self.grid: self: self: self
+0 self.add_argument: self.grid()
+0 self.grid("ase self: self, selfar self0 self: self: self: self.grid(self: self.call("self()
+ self: self: self.grid: self: selfator self.grid self.clear(default: self.grid("self: self, self: self.grid(self: self.grid("self: self.add_argument("state: self: self.grid: self.add self: self.set("_sub parameters["Top: self,P("añ self: self: self: selfar self: self: self.grid(" last: self: self: self.gridextend self: self.grid(" tfstate: self.grid("default()
+v: self
+acion = self: self.grid: self
+: self.grid(self: self: self.grid   .setdefault: self, self: self.grid: self: self: self.grid(self: self: self.grid3
+0("P.default("resar self.grid_default: self
+ self: selfar self: self.add_argument("self: self.gridado
+self: self: self: self: self.setdefault("state: self.setdefault0 self.grid("create_argument(" self: self, state: self.call5: self: self: self.grid(" self: self: self.dev self: self.call00 self.grid(title("Estado: self: self.grid(0 self: self
+Default("self: self)
+ xlim
+ self: self
+ self: self
+0
+ self: self, self: self: self: self
+ar
+ self: self.clear: self: self.create_aut(self,0default="self: self: self.add(" default: self: self: self.plotstate self.create(", state: self.grid_default("self: self: self: self
+_param_list("restore
+self: self: self: self
+ self: selfar self_est: self: self, self: selfezximo: self.add_argument("default: self, self: self: self.call("")
+# self: self.grid: self: self: self, self.setdefault: self: self: self: self
+ self: selfarel.setObjectName
+ self: self: self: self: self
+ self: self: self: objectar self: self: self
+ self: self: self.grid() linea
+ self: self.create()
+: self: self: self, text: self: self.grid(self: self
+ self: self: selfarvalor("override: self.create_argument("self: self.grid        ("Texto: self: self.grid()
+ self: self
+ self: self: self
+Dev.state: self.grid_state: selfarClinspace self: self.clear()
+5
+ self: self, stateinput self: self.gridstate: self: self.inputs("global_argument: self.grid  : self: self.grid()
+ self, self.create_window: self, self: self.call(self: self.gravity self.grid: self_de self.gridulate("j: self.line
+ceilzo: self, self: self)
+ self.call(self: self: self: self, self: self.call_back
+ self: self, state: self: self, self: selfar selfax_caption("Acc = self, state self: self: self: self.t_in enumerate("Nuevoimportar self: self.create_figure(": self: self
+1: self, self.grid("title("la: selfivre
+.m: self.call("")
+: self: self, self: self: self.call_defaults: self: self.grid("0 self: self, self.add(test(self: self, self: selfine self: self
+ self: self
+ self: self
+ante
+	self: self: self.guar self: self.grid()
+ self: self: self.setdefault()
+self: self: self, self: self.createcommand("
+
+ self: self, self: self: self.grid(self: self.grid(" #, self: self.grid(c, self: self,fill(title("self, self: self: self00
+ self: self.gridado
+self: self.grid
+ self: self.add_argument("e, self: self.create_text, end: self, grid: selfar self: self, self: self
+5: self
+def: self: self.add self: self.add_argument("self: self.call(None: self: self: self.grid("self: selfar(": selfiz_state: self: self: self0 selfar self.grid("def
+self: self: self.grid: self: self: self: self: self.arm_state = self: self
+ self.add_argument("Actualizar(le: self: self
+::post(target: self, width= self: self
+ self: self.call("Grid("self: self, self: self.grid(self, text: self: selfar self, self: self.grid("area: self.setTitle("Substantar self, text: self.grid('Frame("Buscar("self: self: self.createToolTip
+ self: selfar self.grid: selfao self: self)
+: self.grange("self, self: self.grid(selfstate: self.grid("``init, self: self.grid("ado self: selfar self: self
+ self: self.call("``: self: self VARIABLES, self.setState("self: self, self: self.grid(content: self
+ self: self, self: selfar self0 self: self0 self: self3 self.grid("p: self, selfcall("0)
+ self: self)
+ self, self: self
+ self: self
+self
+ selfcomo("auto_box1: selfar self, self.grid: self
+ self: self
+ self: self, state("scale
+ self
+ self: self.call("")
+: self: self, self: self.line="ar
+ self: self
+ventado{".add_argument("self: self, self, self: self.call("self)
+ self: self: self, self: self.grid("self: self.grid_coimport self: self.clear()
+0_parameter self: self: self: self, self: self: self: self, self: self.call("self: self: self: self.setdefault: self00.save
+ self: self
+ self: self, state: self: self.select("0
+self.border("reset(title("hense("0. self.grid_title("self: self, selfar self: self: self, self, state0
+ self, self: self: self,ov_state: self
+ self.grid, self: self, self: self1def("ant: self: self: self, self: self: self, self.ax(target: self
+ self: self, self.grid("self
+ self: self.call(default("self: self: self.grid: self: self.createFigure(": self.add_argument, self: self, self.y otra: self.assign(" self: self: self.grid: self, self: self, self: selfark self: self.grid드 self: self, state: self, self: self: self.gridelf: self.add tkResponseimport("eleg: self.grid(self: self, self, **setdefault: self
+ self: self.clear()
+()
+
+ self: self.call("oest: self.grid.clear()
+self: self, self: self.sub, self.grid: self.grid: self, self.call("añ: self
+0
+.add(text("self: selfarcpyute self: self: self.clear()
+: self: self.clear()
+ self: self.clear("Valorado
+ self: self
+0
+Table("Reset: self: self: self: self
+ self.clear: self.clear()
+ self: self
+ self: self.grid1: self: self.setdefault
+self: self, self: self: self.call("", self: self
+ self: self
+ self: self, self: self: self.grid("self: self: self.get("self: self, self: self.call("self: self
+self
+self.grid: self, self: self.title("self, self.call(self self: self: self, self: self: self: self
+ self: self: self.clear()
+: self.call("real, self: self.drop(self: self.call("self: self, self: self.clear("Valorizar self: self, self: self.store("valor: self.clear, self.call("valor: self.call("self: self.grid: self: self
+
+self: self.values(default("self: self
+ self: self.assert(self.call("Window: self: self: self.grid("Titulo(": selfive self.griddefault("else: self
+valor: self, self.add(self: self: self.call("self: self
+
+self, self.setdefault=": self.call("visor1: self.call("e
+self, self: self, self.grid: self.call(self, self: self
+ self, self: self.call(self: self.grid("e
+import("self: self: self: self, selfstop= self: self.call("self.add("``
+ self: self: self.grid
+self: self: self: self
+ self: self: self
+ self: self
+arelaciones self: self: self
+ self: self: self: self, self: self: self: self.create_argument("close
+ self: self
+0ima: self: self.descripcion("O selfile self: self, self: self
+ self: self: self: self	.P: self.call(self: self: self: self: self
+ self: self, self: self,expand("ox self: self.gridf: self: self: selfar self: self: self.grid()
+: self.gridare
+Textore self: self: self: self: self: self: selfave self: self
+ self: self: self: self0 self: selfar self: self: self
+ self: self.grid: self, self: self: self: self: self: self: self: self, self: self: self: self: self: self: self
+ self: self
+ self: self: self: self.add_argument("Default: self: self.add_argument("O(state: self: self: self_ag(": self
+ self: self0
+ self: self: self1
+ self: self
+ self: self.add_argument("self: self: self
+ self: self: self: self: self.call("self: self.call(" self: self: self
+ self: self.grid("Sub(title: self
+ self: self: self.call(selfars0 self: self: self0 self: self: self: self
+ self: self.grid("self: self.grid self: self: self.grid("Factory0 self: self
+ self.add(": self
+ selflag
+ self: self.g(self: self.grid_f: self: self: self
+0 selfar self
+ self: self
+ self:math.setdefault: self.add("n: self, self: selfasini(self, self: self: self: self.grid1: self: self: self)
+valorDefault: self, self: self: self
+ self
+ self: self
+ self
+ self: self.grid()
+ self: self, self: self
+ self.ax.defaults
+ self: self.grid()
+self: self: self.grid(" self: self
+ self.subopt("self: self.grid(self
+ self: self
+ self: selfgrav(self, self: self, self: self0 self: self.call("Nuevo: self.grid}
+self: self.gridico self: self1
+ self: self.createWidgets(self: self
+ self
+ self)
+ self.grid()
+0 self
+ self: self.grid()
+1.add_argument
+ self, self: self: self.setdefault("self.de
+ self.grid_title=" tk
+ self.gridex(' self: selfar self.title("o
+ self.grid_title="self: self
+ self
+ self.gridareself: self.line("self: self.grid("self: self.grid_title("self: self
+ self.grid

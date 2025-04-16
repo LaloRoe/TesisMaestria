@@ -1,0 +1,142 @@
+import tkinter as tk
+from tkinter import ttk
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from matplotlib.collections import LineCollection
+from matplotlib.colors import LinearSegmentedColormap
+import sympy as sp
+import basicdifeq as bde
+
+# Desactiva el modo interactivo de matplotlib
+plt.ioff()
+
+# Variables globales
+pasos_rk = 1000
+parametros = {}
+
+# Función para graficar
+def graficar():
+    global ax, canvas
+    
+    # Limpiar el gráfico anterior
+    ax.clear()
+    
+    # Obtener valores de entrada
+    try:
+        Lx_inf = float(entry_Lx_inf.get())
+        Lx_sup = float(entry_Lx_sup.get())
+        Ly_inf = float(entry_Ly_inf.get())
+        Ly_sup = float(entry_Ly_sup.get())
+        n = int(entry_n.get())
+        
+        # Convertir las expresiones en funciones evaluables
+        f1_func = sp.lambdify((x, y), f1, 'numpy')
+        f2_func = sp.lambdify((x, y), f2, 'numpy')
+
+        # Crear la cuadrícula
+        x_grid = np.linspace(Lx_inf, Lx_sup, n)
+        y_grid = np.linspace(Ly_inf, Ly_sup, n)
+        X, Y = np.meshgrid(x_grid, y_grid)
+
+        # Calcula las derivadas en cada punto de la cuadrícula
+        dX = f1_func(X, Y)
+        dY = f2_func(X, Y)
+
+        # Verificar que dX y dY sean matrices de números válidos
+        if not np.all(np.isfinite(dX)) or not np.all(np.isfinite(dY)):
+            raise ValueError("Las derivadas contienen valores no finitos (NaN o inf).")
+
+        # Graficar el campo vectorial
+        ax.quiver(X, Y, dX, dY, units='x', pivot='tip', width=0.009, scale=30)
+        ax.set_title(f'{nombre}')
+        ax.set_xlabel('x')
+        ax.set_ylabel('y')
+        ax.set_xlim(Lx_inf, Lx_sup)
+        ax.set_ylim(Ly_inf, Ly_sup)
+        ax.grid(True)
+
+        # Actualizar la gráfica
+        canvas.draw()
+    except Exception as e:
+        print(f"Error al graficar: {e}")
+
+# Función para manejar el evento de clic
+def onclick(event):
+    if event.inaxes:
+        x, y = event.xdata, event.ydata
+        print(f"Coordenada seleccionada: ({x:.2f}, {y:.2f})")
+        z0.append((x, y))
+        y0 = [x, y]
+
+        # Marcar el punto en la gráfica
+        ax.plot(x, y, 'ro')  # Punto rojo
+
+        # Plano fase del sistema original
+        z_rk = bde.runge_kutta(f1_original, f2_original, y0, 0.1, pasos_rk, parametros)
+        x_rk = z_rk[0, :]
+        y_rk = z_rk[1, :]
+
+        # Crear un gradiente para la trayectoria original
+        points = np.array([x_rk, y_rk]).T.reshape(-1, 1, 2)
+        segments = np.concatenate([points[:-1], points[1:]], axis=1)
+        norm = plt.Normalize(0, len(x_rk))
+        lc = LineCollection(segments, cmap=custom_cmap, norm=norm)
+        lc.set_array(np.arange(len(x_rk)))
+        lc.set_linewidth(2)
+        ax.add_collection(lc)
+
+        # Actualizar la gráfica
+        canvas.draw()
+
+# Crear la ventana principal
+root = tk.Tk()
+root.title("Visualización de Sistemas Dinámicos")
+
+# Panel de entrada
+frame_entrada = ttk.Frame(root, padding="10")
+frame_entrada.grid(row=0, column=0, sticky="nsew")
+
+# Etiquetas y entradas
+ttk.Label(frame_entrada, text="Límite inferior de x:").grid(row=0, column=0, sticky="w")
+entry_Lx_inf = ttk.Entry(frame_entrada)
+entry_Lx_inf.grid(row=0, column=1)
+
+ttk.Label(frame_entrada, text="Límite superior de x:").grid(row=1, column=0, sticky="w")
+entry_Lx_sup = ttk.Entry(frame_entrada)
+entry_Lx_sup.grid(row=1, column=1)
+
+ttk.Label(frame_entrada, text="Límite inferior de y:").grid(row=2, column=0, sticky="w")
+entry_Ly_inf = ttk.Entry(frame_entrada)
+entry_Ly_inf.grid(row=2, column=1)
+
+ttk.Label(frame_entrada, text="Límite superior de y:").grid(row=3, column=0, sticky="w")
+entry_Ly_sup = ttk.Entry(frame_entrada)
+entry_Ly_sup.grid(row=3, column=1)
+
+ttk.Label(frame_entrada, text="Número de puntos:").grid(row=4, column=0, sticky="w")
+entry_n = ttk.Entry(frame_entrada)
+entry_n.grid(row=4, column=1)
+
+# Botón para generar la gráfica
+btn_graficar = ttk.Button(frame_entrada, text="Generar Gráfica", command=graficar)
+btn_graficar.grid(row=5, column=0, columnspan=2)
+
+# Panel de gráfica
+frame_grafica = ttk.Frame(root, padding="10")
+frame_grafica.grid(row=0, column=1, sticky="nsew")
+
+# Crear figura de Matplotlib
+fig, ax = plt.subplots(figsize=(6, 6))
+canvas = FigureCanvasTkAgg(fig, master=frame_grafica)
+canvas_widget = canvas.get_tk_widget()
+canvas_widget.pack(fill=tk.BOTH, expand=True)
+
+# Conectar el evento de clic
+fig.canvas.mpl_connect('button_press_event', onclick)
+
+# Mapa de colores personalizado
+custom_cmap = LinearSegmentedColormap.from_list("naranja_a_morado", ["orange", "purple"])
+
+# Ejecutar la aplicación
+root.mainloop()

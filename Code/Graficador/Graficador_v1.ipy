@@ -1,0 +1,170 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import sympy as sp
+import basicdifeq as bde
+
+plt.ioff()  # Desactiva el modo interactivo de matplotlib
+
+###############################################################################
+# SISTEMA DE ECUACIONES DIFERENCIALES PREDEFINIDOS
+sistemas_predefinidos = {
+    1: ("Van der Pol","y","mu*(1-x**2)*y - x", ["mu"]),
+    2: ("Lotka-Volterra", "a*x - b*x*y", "c*x*y - d*y", ["a", "b", "c", "d"]),
+    3: ("Rayleigh","y","mu*(1-y**2)*y - x", ["mu"]),
+    4: ("FitzHugh-Nagumo", "x - (x**3)/3 - y + I", "epsilon*(x + a - b*y)", ["I", "epsilon", "a", "b"])
+}
+###############################################################################
+# OBTENER LA EXPRESIÓN DE LA ECUACIÓN DIFERENCIAL
+seleccionar_sistema = input("¿Desea seleccionar un sistema? (s/n): ").lower()
+if seleccionar_sistema == "s":
+    print("Selecciona un sistema:\n")
+    for key, value in sistemas_predefinidos.items():
+        print(f"{key}. {value[0]}")
+    sistema = int(input(" = ")) # Opción seleccionada 
+    print(f"El sistema {sistemas_predefinidos[sistema][0]} se expresa como:")
+    print(f"dx/dt = {sistemas_predefinidos[sistema][1]}")
+    print(f"dy/dt = {sistemas_predefinidos[sistema][2]}")
+    print("Ingresa el valor del parámetro:")
+    parametros = {}
+    for i in sistemas_predefinidos[sistema][3]: # Parámetros del sistema
+        exec(f"{i}=float(input('{i} = '))")
+        parametros[i] = eval(i)
+    print("Sistema seleccionado:")
+    f1_original = sistemas_predefinidos[sistema][1]
+    f2_original = sistemas_predefinidos[sistema][2]
+    nombre = sistemas_predefinidos[sistema][0]
+else:
+    f1_original = input("dx/dt = ")
+    f2_original = input("dy/dt = ")
+    nombre = input("Ingresar el nombre del sistema = ")
+    print(f"El sistema {nombre} se expresa como:")
+    print(f"dx/dt = {f1_original}")
+    print(f"dy/dt = {f2_original}")
+
+linealizar = input("¿Desea linealizar el sistema? (s/n): ").lower()
+nulclinas = input("¿Desea calcular las nulclinas? (s/n): ").lower()
+###############################################################################
+x, y = sp.symbols('x y')
+f1 = eval(f1_original)
+f2 = eval(f2_original)
+###############################################################################
+# JACOBIANO
+if linealizar == "s": 
+    # Calcular Jacobiano
+    J = bde.calcular_jacobiano(f1, f2, [x, y])
+
+    print("Matriz Jacobiana del sistema:")
+    sp.pprint(J)
+    
+    # Evaluar en un punto de equilibrio (ejemplo en (0,0))
+    J_eq = J.subs({x: 0, y: 0})
+    print("\nJacobiano evaluado en (0,0):")
+    sp.pprint(J_eq)
+    
+    # Calcular valores propios (para análisis de estabilidad)
+    eigenvals = J_eq.eigenvals()
+    print("\nValores propios en (0,0):")
+    sp.pprint(eigenvals)
+
+    # Sistema linealizado
+    f1_linealizado = str(np.array(J_eq)[0][0] * x + np.array(J_eq)[0][1] * y)
+    f2_linealizado = str(np.array(J_eq)[1][0] * x + np.array(J_eq)[1][1] * y)
+    print("\nSistema linealizado:")
+    print(f"dx/dt = {f1_linealizado}")
+    print(f"dy/dt = {f2_linealizado}")
+###############################################################################
+# NULCLINAS
+if nulclinas == "s":
+    # Calcular nulclinas
+    nulclina_x = sp.solve(f1, y)  # Resuelve dx/dt = 0 para y
+    nulclina_y = sp.solve(f2, y)  # Resuelve dy/dt = 0 para y
+
+    print("Nulclinas:")
+    print(f"Nulclina de x (dx/dt = 0): y = {nulclina_x}")
+    print(f"Nulclina de y (dy/dt = 0): y = {nulclina_y}")
+
+###############################################################################
+# GRAFICAR EL CAMPO VECTORIAL
+Lx_inf = float(input("Límite inferior de x: "))
+Lx_sup = float(input("Límite superior de x: "))
+Ly_inf = float(input("Límite inferior de y: "))
+Ly_sup = float(input("Límite superior de y: "))
+
+n = int(input("Número de puntos: "))  # Número de puntos en cada lado de la cuadrícula
+x_grid = np.linspace(Lx_inf, Lx_sup, n)  # Crea un vector de n puntos entre -L y L
+y_grid = np.linspace(Ly_inf, Ly_sup, n)  # Crea un vector de n puntos entre -L y L
+X, Y = np.meshgrid(x_grid, y_grid)  # Crea la cuadrícula
+
+# Convertir las expresiones en funciones evaluables
+f1_func = sp.lambdify((x, y), f1, 'numpy')
+f2_func = sp.lambdify((x, y), f2, 'numpy')
+
+# Calcula las derivadas en cada punto de la cuadrícula
+dX = f1_func(X, Y)
+dY = f2_func(X, Y)
+
+# Verificar que dX y dY sean matrices de números válidos
+if not np.all(np.isfinite(dX)) or not np.all(np.isfinite(dY)):
+    raise ValueError("Las derivadas contienen valores no finitos (NaN o inf).")
+
+# Graficar el campo vectorial
+fig, ax = plt.subplots(figsize=(10, 10))
+q = ax.quiver(X, Y, dX, dY, units='x', pivot='tip', width=0.009, scale=30)
+ax.quiverkey(q, 0.9, 0.9, 1, label='Plano fase', labelpos='E', coordinates='figure')
+ax.set_title(f'{nombre}')
+ax.set_xlabel('x')
+ax.set_ylabel('y')
+ax.set_xlim(Lx_inf, Lx_sup)
+ax.set_ylim(Ly_inf, Ly_sup)
+plt.legend()
+plt.grid(True)
+###############################################################################
+# GRAFICAR LAS NULCLINAS
+if nulclinas == "s":
+    v = np.linspace(Lx_inf, Lx_sup, 500)
+    
+    # Nulclina de x
+    for sol in nulclina_x:
+        y_values = sp.lambdify(x, sol, 'numpy')(v)
+        if np.isscalar(y_values):  # Si es escalar, crear arreglo
+            y_values = np.full_like(v, y_values)
+        plt.plot(v, y_values, label=f"Nulclina de x: {sol}", color="orange")
+    
+    # Nulclina de y
+    for sol in nulclina_y:
+        y_values = sp.lambdify(x, sol, 'numpy')(v)
+        if np.isscalar(y_values):
+            y_values = np.full_like(v, y_values)
+        plt.plot(v, y_values, label=f"Nulclina de y: {sol}", color="red")
+###############################################################################
+# Configuración del gráfico
+plt.axhline(0, color="gray", linestyle="--", linewidth=0.5)
+plt.axvline(0, color="gray", linestyle="--", linewidth=0.5)
+###############################################################################
+# CLICKS
+z0 = []
+# Función que maneja el evento de clic
+def onclick(event):
+    if event.inaxes:
+        x, y = event.xdata, event.ydata
+        print(f"Coordenada seleccionada: ({x:.2f}, {y:.2f})")
+        z0.append((x, y))
+        y0 = [x, y]
+        # Marcar el punto en la gráfica
+        ax.plot(x, y, 'ro')  # Punto rojo
+        # Plano fase del sistema original
+        z_rk=bde.runge_kutta(f1_original,f2_original,y0,0.1,1000,parametros)
+        x_rk=z_rk[0,:]
+        y_rk=z_rk[1,:]
+        plt.plot(x_rk, y_rk, color='blue')
+        # Plano fase del sistema linealizado
+        if linealizar == "s":
+            z_rk_lineal=bde.runge_kutta(f1_linealizado,f2_linealizado,y0,0.1,1000,parametros)
+            x_rk_lineal=z_rk_lineal[0,:]
+            y_rk_lineal=z_rk_lineal[1,:]
+            plt.plot(x_rk_lineal, y_rk_lineal, color='green')
+        fig.canvas.draw()  # Actualizar la gráfica inmediatamente
+# Conectar el evento de clic a la función onclick
+cid = fig.canvas.mpl_connect('button_press_event', onclick)
+
+plt.show()

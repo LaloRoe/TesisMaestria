@@ -25,17 +25,12 @@
 \contentsline {subsubsection}{Linealización en $E_2 = (1, 0)$}{20}{section*.12}%
 \contentsline {subsection}{\numberline {2.3.6}Conclusión}{21}{subsection.2.3.6}%
 \contentsline {chapter}{\numberline {3}Teoría de ciclos límite}{22}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Motivación}{22}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Conjuntos $\omega $ y $\alpha $ límite.}{29}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Teorema de Poincaré-Bendixson}{30}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Oscilador de Van der Pol}{31}{section.3.4}%
-\contentsline {subsubsection}{Construcción de una Región Acotada Invariante}{32}{section*.15}%
-\contentsline {section}{\numberline {3.5}Ecuación de Rayleigh}{33}{section.3.5}%
-\contentsline {subsubsection}{Matriz Jacobiana y Valores Propios}{34}{section*.16}%
-\contentsline {subsubsection}{Construcción de una Región Acotada Invariante}{35}{section*.18}%
-\contentsline {section}{\numberline {3.6}Sistemas Liénard}{36}{section.3.6}%
-\contentsline {chapter}{\numberline {4}Teoría de promediación}{38}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Método de promediación}{38}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Oscilador de Van der Pol}{41}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Ecuación de Rayleigh}{43}{section.4.3}%
-\contentsline {section}{\numberline {4.4}Van der Pol y Rayleigh}{45}{section.4.4}%
+\contentsline {section}{\numberline {3.1}La no linealidad y los ciclos límite}{22}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Conjuntos $\omega $ y $\alpha $ límite.}{30}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Teorema de Poincaré-Bendixson}{31}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Oscilador de Van der Pol}{32}{section.3.4}%
+\contentsline {subsubsection}{Construcción de una Región Acotada Invariante}{33}{section*.15}%
+\contentsline {section}{\numberline {3.5}Ecuación de Rayleigh}{34}{section.3.5}%
+\contentsline {subsubsection}{Matriz Jacobiana y Valores Propios}{35}{section*.16}%
+\contentsline {subsubsection}{Construcción de una Región Acotada Invariante}{36}{section*.18}%
+\contentsline {section}{\numberline {3.6}Sistemas Liénard}{37}{section.3.6}%

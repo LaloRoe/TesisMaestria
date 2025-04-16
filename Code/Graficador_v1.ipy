@@ -1,0 +1,173 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import sympy as sp
+
+plt.ioff()  # Desactiva el modo interactivo de matplotlib
+
+###############################################################################
+# SISTEMA DE ECUACIONES DIFERENCIALES
+sistemas_predefinidos = {1:("Van der pol", "mu*(1-x**2)*x - y", "x",["mu"]),2:("Lotka-Volterra", "a*x - b*x*y", "c*x*y - d*y",["a","b","c","d"]),3:("Rayleigh", "x*(1-x**2-y**2)", "y*(1-x**2-y**2)",[]),4:("FitzHugh-Nagumo", "x - (x**3)/3 - y + I", "epsilon*(x + a - b*y)",["I","epsilon","a","b"])}
+
+###############################################################################
+# OBTENER LA EXPRESIÓN DE LA ECUACIÓN DIFERENCIAL
+"""
+Obtener la expresión de la ecuación diferencial
+
+Se pide al usuario ingresar la expresión de la ecuación diferencial.
+
+Se pide al usuario si se desea incluir la perturbación o no. Si se desea incluir la perturbación, se pide al usuario ingresar la expresión de la perturbación.
+"""
+seleccionar_sistema = input("¿Desea seleccionar un sistema? (s/n): ").lower()
+if seleccionar_sistema == "s":
+    print("Selecciona un sistema:\n")
+    print("1. Van der Pol")
+    print("2. Lotka-Volterra")
+    print("3. Rayleigh")
+    print("4. FitzHugh-Nagumo")
+    sistema = input(" =")
+    print("Ingresa el valor del parametro:")
+    for i in sistemas_predefinidos[int(sistema)][3]:
+        exec(f"{i} = float(input('{i} = '))")
+    print("Sistema seleccionado:")
+    f1_original = sistemas_predefinidos[int(sistema)][1]
+    f2_original = sistemas_predefinidos[int(sistema)][2]
+    nombre = sistemas_predefinidos[int(sistema)][0]
+else:
+    f1_original = input("dx/dt = ")
+    f2_original = input("dy/dt = ")
+    nombre = input("Ingresar el nombre del sistema = ")
+print(f"El sistema {nombre} se expresa como:")
+print(f"dx/dt = {f1_original}")
+print(f"dy/dt = {f2_original}")
+linealizar = input("¿Desea linealizar el sistema? (s/n): ").lower()
+nulclinas = input("¿Desea calcular las nulclinas? (s/n): ").lower()
+###############################################################################
+# JACOBIANO
+# Definir variables simbólicas
+if linealizar == "s":
+    x, y = sp.symbols('x y')
+    f1 = eval(f1_original)
+    f2 = eval(f2_original)
+    # Calcular Jacobiano
+    J = calcular_jacobiano(f1, f2, [x, y])
+
+    print("Matriz Jacobiana del sistema:")
+    sp.pprint(J)
+    
+    # Evaluar en un punto de equilibrio (ejemplo en (0,0))
+    J_eq = J.subs({x:0, y:0})
+    print("\nJacobiano evaluado en (0,0):")
+    sp.pprint(J_eq)
+    
+    # Calcular valores propios (para análisis de estabilidad)
+    eigenvals = J_eq.eigenvals()
+    print("\nValores propios en (0,0):")
+    sp.pprint(eigenvals)
+
+    # Sistema linealizado
+    f1_original_lineal=str(np.array(J_eq)[0][0]*x+np.array(J_eq)[0][1]*y)
+    f2_original_lineal=str(np.array(J_eq)[1][0]*x+np.array(J_eq)[1][1]*y)
+    print("\nSistema linealizado:")
+    print(f"dx/dt = {f1_original_lineal}")
+    print(f"dy/dt = {f2_original_lineal}")
+
+###############################################################################
+# NUNCLINAS
+# Convertir las expresiones en funciones simbólicas
+if nulclinas == "s":
+    x, y = sp.symbols('x y')
+    for i in sistemas_predefinidos[int(sistema)][3]:
+        exec(f"{i} = sp.symbols('{i}')")
+    f1_expr = sp.sympify(f1_original)
+    f2_expr = sp.sympify(f2_original)
+
+    # Crear funciones lambda para evaluar numéricamente
+    f1_func = sp.lambdify((x, y), f1_expr, 'numpy')
+    f2_func = sp.lambdify((x, y), f2_expr, 'numpy')
+
+    # Calcular nulclinas
+    nulclina_x = sp.solve(f1_expr, y)  # Resuelve dx/dt = 0 para y
+    nulclina_y = sp.solve(f2_expr, y)  # Resuelve dy/dt = 0 para y
+
+    print("Nulclinas:")
+    print(f"Nulclina de x (dx/dt = 0): y = {nulclina_x}")
+    print(f"Nulclina de y (dy/dt = 0): y = {nulclina_y}")
+
+###############################################################################
+# GRAFICAR EL CAMPO VECTORIAL
+# Crea una cuadrícula de valores x e y
+# Límites
+Lx_inf = float(input("Límite inferior de x: "))
+Lx_sup = float(input("Límite superior de x: "))
+Ly_inf = float(input("Límite inferior de y: "))
+Ly_sup = float(input("Límite superior de y: "))
+
+n = int(input("Número de puntos: "))  # Número de puntos en cada lado de la cuadrícula
+x_grid = np.linspace(Lx_inf, Lx_sup, n)  # Crea un vector de n puntos entre -L y L
+y_grid = np.linspace(Ly_inf, Ly_sup, n)  # Crea un vector de n puntos entre -L y L
+X, Y = np.meshgrid(x_grid, y_grid)  # Crea la cuadrícula-y+
+
+# Calcula las derivadas en cada punto de la cuadrícula
+d = f(np.array([X, Y]), f1_original, f2_original)
+dX=d[0,:,:]
+dY=d[1,:,:]
+
+# Definir la graficación pero no graficar
+# Graficar el campo vectorial
+fig, ax = plt.subplots(figsize = (10,10))
+q = ax.quiver(X, Y, dX, dY, units='x', pivot='tip', width=0.009, scale=30)
+ax.quiverkey(q, 0.9, 0.9, 1, label = 'Plano fase',labelpos='E',coordinates='figure')
+ax.set_title(f'{nombre}')
+ax.set_xlabel('x')
+ax.set_ylabel('y')
+ax.set_xlim(Lx_inf, Lx_sup)
+ax.set_ylim(Ly_inf, Ly_sup) 
+plt.legend()
+plt.grid(True)
+
+if nulclinas == "s":
+    # Graficar las nulclinas
+    v = np.linspace(Lx_inf, Lx_sup, 500)  # Rango de valores para x
+
+    # Nulclina de x
+    for sol in nulclina_x:
+        w_nulcline_x = sp.lambdify(x, sol, 'numpy')(v)
+        plt.plot(v, w_nulcline_x, label=f"Nulclina de x: {sol}", color="orange")
+
+    # Nulclina de y
+    for sol in nulclina_y:
+        w_nulcline_y = sp.lambdify(x, sol, 'numpy')(v)
+        plt.plot(v, w_nulcline_y, label=f"Nulclina de y: {sol}", color="red")
+
+# Configuración del gráfico
+plt.axhline(0, color="gray", linestyle="--", linewidth=0.5)
+plt.axvline(0, color="gray", linestyle="--", linewidth=0.5)
+
+# CLICKS
+
+z0 = []
+# Función que maneja el evento de clic
+def onclick(event):
+    if event.inaxes:
+        x, y = event.xdata, event.ydata
+        print(f"Coordenada seleccionada: ({x:.2f}, {y:.2f})")
+        z0.append((x, y))
+        y0 = [x, y]
+        # Marcar el punto en la gráfica
+        ax.plot(x, y, 'ro')  # Punto rojo
+        # Plano fase del sistema original
+        z_rk=runge_kutta(f1_original,f2_original,y0,0.1,300)
+        x_rk=z_rk[0,:]
+        y_rk=z_rk[1,:]
+        plt.plot(x_rk, y_rk, color='blue')
+        # Plano fase del sistema linealizado
+        if linealizar == "s":
+            z_rk_lineal=runge_kutta(f1_original_lineal,f2_original_lineal,y0,0.1,300)
+            x_rk_lineal=z_rk_lineal[0,:]
+            y_rk_lineal=z_rk_lineal[1,:]
+            plt.plot(x_rk_lineal, y_rk_lineal, color='green')
+        fig.canvas.draw()  # Actualizar la gráfica inmediatamente
+# Conectar el evento de clic a la función onclick
+cid = fig.canvas.mpl_connect('button_press_event', onclick)
+
+plt.show()

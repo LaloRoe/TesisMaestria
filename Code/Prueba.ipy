@@ -1,0 +1,35 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Lista para almacenar las coordenadas seleccionadas
+coordenadas = []
+
+# Función que maneja el evento de clic
+def onclick(event):
+    if event.inaxes:
+        x, y = event.xdata, event.ydata
+        print(f"Coordenada seleccionada: ({x:.2f}, {y:.2f})")
+        coordenadas.append((x, y))
+        
+        # Marcar el punto en la gráfica
+        ax.plot(x, y, 'ro')  # Punto rojo
+        fig.canvas.draw()  # Actualizar la gráfica inmediatamente
+
+# Crear datos para graficar
+x = np.linspace(-10, 10, 100)
+y = x**2
+
+# Crear la figura y los ejes
+fig, ax = plt.subplots()
+ax.plot(x, y, label='y = x^2', color='blue')
+ax.legend()
+ax.grid(True)
+
+# Conectar el evento de clic a la función onclick
+cid = fig.canvas.mpl_connect('button_press_event', onclick)
+
+# Mostrar la gráfica
+plt.show()
+
+# Después de cerrar la gráfica, puedes ver las coordenadas capturadas
+print("Coordenadas guardadas:", coordenadas)

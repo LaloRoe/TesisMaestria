@@ -1,7 +1,12 @@
 \chapter{Teoría de ciclos límite}
-\section{Motivación}
+\section{La no linealidad y los ciclos límite}
+En el estudio cualitativo de sistemas dinámicos no lineales, los \textit{ciclos límite} juegan un papel fundamental al describir comportamientos periódicos estables o inestables que no dependen de las condiciones iniciales específicas del sistema. Estos ciclos representan soluciones cerradas aisladas en el plano fase, lo que los convierte en objetos clave para entender fenómenos oscilatorios en diversas áreas de aplicación.\\
 
-Consideremos el sistema no lineal
+El análisis de la existencia y estabilidad de ciclos límite está íntimamente ligado al famoso \textit{Teorema de Poincaré-Bendixson}, uno de los resultados más importantes en la teoría de sistemas dinámicos planos. Este teorema proporciona las condiciones bajo las cuales las trayectorias de un sistema bidimensional acotado convergen hacia un conjunto límite, ya sea un punto de equilibrio o una órbita periódica. Su relevancia radica en que permite descartar comportamientos caóticos en sistemas planos y ofrece herramientas rigurosas para identificar ciclos límite.\\
+
+En este capítulo, nos enfocamos en el desarrollo teórico de los ciclos límite y presentamos el Teorema de Poincaré-Bendixson como una herramienta central para su estudio.\\
+
+Comenzamos analizando el sistema no lineal
 
 \begin{equation}\label{eq: sis1}
 	\begin{matrix}
@@ -23,7 +28,7 @@ las condiciones iniciales $r(0)=r_0$ y $\theta(0)=\theta_0$.\\
 Sustituimos el sistema $\eqref{eq: sis1}$ en $\eqref{eq: drcart}$:
 $$rr'=xx'+yy'=x[-y+x(1-x^2-y^2)]+y[x+y(1-x^2-y^2)]$$
 $$rr'=x^2(1-x^2-y^2)+y^2(1-x^2-y^2)=(x^2+y^2)[1-(x^2+y^2)]$$
-luego sustituimos $\eqref{eq: r2}$
+luego sustitituimos $\eqref{eq: r2}$ y obtenemos la ecuación diferencial
 $$rr'=r^2(1-r^2)$$
 \begin{equation}\label{eq: drsis1}
 	r'=r(1-r^2)
@@ -32,6 +37,7 @@ $$rr'=r^2(1-r^2)$$
 Por otro lado sustituimos el sistema $\eqref{eq: sis1}$ en $\eqref{eq: dthetacart}$:
 $$r^2\theta'=xx'-yy'=x[x+y(1-x^2-y^2)]-y[-y+x(1-x^2-y^2)]$$
 $$r^2\theta'=x^2+y^2=r^2$$
+y obtenemos la ecuación diferencial
 \begin{equation}\label{eq: dthetasis1}
 	\theta'=1
 \end{equation}
