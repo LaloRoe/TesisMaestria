@@ -3,9 +3,10 @@ import sympy as sp
 import sympy as sp
 from sympy import symbols, expand, Poly
 import math
+import ast
 ###############################################################################
 # Differential equations system
-def f(z,f1,f2,parametros):
+def f(z,f1,f2,parametros={},type = "cartesian"):
     """
     Función que calcula las derivadas del sistema
     Parámetros:
@@ -18,13 +19,19 @@ def f(z,f1,f2,parametros):
     """
     for key, value in parametros.items():
         exec(f"{key} = value")
-    x, y =z
-    dx = eval(f1)
-    dy = eval(f2)
-    return np.array([dx,dy])
+    if type == "cartesian":
+        x, y =z
+        dx = eval(f1)
+        dy = eval(f2)
+        return np.array([dx,dy])
+    elif type == "polar":
+        r, theta = z
+        dx = eval(f1)
+        dy = eval(f2)
+        return np.array([dx,dy])
 ###############################################################################
 # RUNGE KUTTA 4° ORDER
-def runge_kutta(f1, f2, y0, h, n,parametros):
+def runge_kutta(f1, f2, y0, h, n,parametros={},type = "cartesian"):
     """
     Implementación del método de Runge-Kutta de cuarto orden para sistemas de ecuaciones diferenciales.
     
@@ -41,10 +48,10 @@ def runge_kutta(f1, f2, y0, h, n,parametros):
     y[:,0] = y0
     
     for k in range(n):
-        k1 = f(y[:,k], f1, f2, parametros)
-        k2 = f(y[:,k] + (h/2)*k1, f1, f2, parametros)
-        k3 = f(y[:,k] + (h/2)*k2, f1, f2, parametros)
-        k4 = f(y[:,k] + h*k3, f1, f2, parametros)
+        k1 = f(y[:,k], f1, f2, parametros,type)
+        k2 = f(y[:,k] + (h/2)*k1, f1, f2, parametros,type)
+        k3 = f(y[:,k] + (h/2)*k2, f1, f2, parametros,type)
+        k4 = f(y[:,k] + h*k3, f1, f2, parametros,type)
         y[:,k+1] = y[:,k] + (h/6)*(k1 + 2*k2 + 2*k3 + k4)
         
     return y
@@ -102,7 +109,7 @@ def hilbert_system(A):
     return D
 ###############################################################################
 # Averaging
-def average_system(A,B):
+def average_system(B,A):
     n = len(A)
     m = len(A[0])
     R = [[0 for _ in range(n)] for _ in range(m)]
@@ -148,3 +155,18 @@ def polynomial_averaging(R):
                 else:
                     D += "*r**" + str(i)
     return D
+###############################################################################
+###############################################################################
+# Convertir la matriz de coeficientes en una lista de listas
+def convertir_matriz(matriz):
+    # Convertir la cadena en una lista de listas
+    try:
+        matriz = ast.literal_eval(matriz)  # Convierte la cadena en una estructura de datos
+        if isinstance(matriz, list):  # Verifica que sea una lista
+            print("Matriz convertida:", matriz)
+            print("Tipo de dato:", type(matriz))
+        else:
+            print("La entrada no es una lista válida.")
+    except (ValueError, SyntaxError):
+        print("Entrada inválida. Asegúrate de ingresar una matriz en formato correcto.")
+    return matriz

@@ -4,6 +4,7 @@ from matplotlib.collections import LineCollection
 from matplotlib.colors import LinearSegmentedColormap  # Para crear mapas de colores personalizados
 import sympy as sp
 import basicdifeq as bde
+import math
 
 plt.ioff()  # Desactiva el modo interactivo de matplotlib
 
@@ -22,8 +23,8 @@ sistemas_predefinidos = {
 }
 ###############################################################################
 # OBTENER LA EXPRESIÓN DE LA ECUACIÓN DIFERENCIAL
-seleccionar_sistema = input("¿Desea seleccionar un sistema? (s/n): ").lower()
-if seleccionar_sistema == "s":
+seleccionar_sistema = input("Elije una opción: \n 1. Seleccionar un sistema predefinido \n 2. Ingresar un sistema manualmente \n 3. Ingresar la matriz de coeficientes \n =").lower()
+if seleccionar_sistema == "1":
     print("Selecciona un sistema:\n")
     for key, value in sistemas_predefinidos.items():
         print(f"{key}. {value[0]}")
@@ -40,14 +41,32 @@ if seleccionar_sistema == "s":
     f1_original = sistemas_predefinidos[sistema][1]
     f2_original = sistemas_predefinidos[sistema][2]
     nombre = sistemas_predefinidos[sistema][0]
-else:
+elif seleccionar_sistema == "2":
     f1_original = input("dx/dt = ")
     f2_original = input("dy/dt = ")
     nombre = input("Ingresar el nombre del sistema = ")
     print(f"El sistema {nombre} se expresa como:")
     print(f"dx/dt = {f1_original}")
     print(f"dy/dt = {f2_original}")
-
+elif seleccionar_sistema == "3":
+    A = input("Ingresar la matriz de coeficientes de dx/dt: ")
+    B = input("Ingresar la matriz de coeficientes de dy/dt: ")
+    A = bde.convertir_matriz(A)
+    B = bde.convertir_matriz(B)
+    f1_original = bde.hilbert_system(A)
+    f2_original = bde.hilbert_system(B)
+    nombre = input("Ingresar el nombre del sistema = ")
+    R = bde.average_system(A,B)
+    print(R)
+    R_poly = bde.polynomial_averaging(R)
+    theta_poly = "math.pi/2"
+    print(f"La matriz de coeficientes de dx/dt es: {A}")
+    print(f"La matriz de coeficientes de dy/dt es: {B}")
+    print(f"El sistema {nombre} se expresa como:")
+    print("Differential equations system:")
+    print(f"dx/dt = {f1_original}")
+    print(f"dy/dt = {f2_original}")
+    print(f"Average differential equation system: r' = {R_poly}, theta' = {theta_poly}")
 linealizar = input("¿Desea linealizar el sistema? (s/n): ").lower()
 nulclinas = input("¿Desea calcular las nulclinas? (s/n): ").lower()
 ###############################################################################
@@ -152,17 +171,24 @@ plt.axvline(0, color="gray", linestyle="--", linewidth=0.5)
 ###############################################################################
 # Crear un mapa de colores personalizado (naranja a morado)
 custom_cmap = LinearSegmentedColormap.from_list("naranja_a_morado", ["orange", "purple"])
-
+custom_cmap_polar = LinearSegmentedColormap.from_list("amarillo_a_azul", ["yellow", "blue"])
 # CLICKS
 z0 = []
+z0_polar = []
 
 # Función que maneja el evento de clic
 def onclick(event):
     if event.inaxes:
         x, y = event.xdata, event.ydata
+        r = np.sqrt(x**2 + y**2)
+        theta = np.arctan2(y, x)
         print(f"Coordenada seleccionada: ({x:.2f}, {y:.2f})")
         z0.append((x, y))
         y0 = [x, y]
+        z0_polar.append((r, theta))
+        r0 = [r,theta]
+
+        
         
         # Marcar el punto en la gráfica
         ax.plot(x, y, 'ro')  # Punto rojo
@@ -171,7 +197,24 @@ def onclick(event):
         z_rk = bde.runge_kutta(f1_original, f2_original, y0, 0.1, pasos_rk, parametros)
         x_rk = z_rk[0, :]
         y_rk = z_rk[1, :]
-        
+
+        # Plano fase del sistema promedio
+        if seleccionar_sistema == "3":
+            z_rk_polar = bde.runge_kutta(R_poly, theta_poly, r0, 0.1, pasos_rk,type="polar")
+            r_rk_polar = z_rk_polar[0, :]
+            theta_rk_polar = z_rk_polar[1, :]
+            x_rk_polar = r_rk_polar * np.cos(theta_rk_polar)
+            y_rk_polar = r_rk_polar * np.sin(theta_rk_polar)
+             
+            # Crear un gradiente para la trayectoria polar
+            points = np.array([x_rk_polar, y_rk_polar]).T.reshape(-1, 1, 2)
+            segments = np.concatenate([points[:-1], points[1:]], axis=1)
+            norm = plt.Normalize(0, len(x_rk_polar))
+            lc = LineCollection(segments, cmap=custom_cmap_polar, norm=norm)  # Usar el mapa personalizado
+            lc.set_array(np.arange(len(x_rk_polar)))
+            lc.set_linewidth(2)
+            ax.add_collection(lc)
+
         # Crear un gradiente para la trayectoria original
         points = np.array([x_rk, y_rk]).T.reshape(-1, 1, 2)
         segments = np.concatenate([points[:-1], points[1:]], axis=1)
@@ -194,3 +237,4 @@ def onclick(event):
 cid = fig.canvas.mpl_connect('button_press_event', onclick)
 
 plt.show()
+
