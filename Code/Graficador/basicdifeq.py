@@ -156,17 +156,3 @@ def polynomial_averaging(R):
                     D += "*r**" + str(i)
     return D
 ###############################################################################
-###############################################################################
-# Convertir la matriz de coeficientes en una lista de listas
-def convertir_matriz(matriz):
-    # Convertir la cadena en una lista de listas
-    try:
-        matriz = ast.literal_eval(matriz)  # Convierte la cadena en una estructura de datos
-        if isinstance(matriz, list):  # Verifica que sea una lista
-            print("Matriz convertida:", matriz)
-            print("Tipo de dato:", type(matriz))
-        else:
-            print("La entrada no es una lista válida.")
-    except (ValueError, SyntaxError):
-        print("Entrada inválida. Asegúrate de ingresar una matriz en formato correcto.")
-    return matriz

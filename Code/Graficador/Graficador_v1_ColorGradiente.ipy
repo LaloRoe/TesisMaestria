@@ -49,10 +49,22 @@ elif seleccionar_sistema == "2":
     print(f"dx/dt = {f1_original}")
     print(f"dy/dt = {f2_original}")
 elif seleccionar_sistema == "3":
+    print("¿Su sistema requiere de parámetros?")
+    respuesta = input("(s/n): ").lower()
+    # Estructura de los parámetros {"nombre":valor}
+    parametros = {}
+    while respuesta == "s":
+        nombre_parametro = input("Ingresar el nombre del parámetro: ")
+        valor_parametro = input("Ingresar el valor del parámetro: ")
+        parametros[nombre_parametro] = float(valor_parametro)
+        respuesta = input("¿Desea ingresar otro parámetro? (s/n): ").lower()
     A = input("Ingresar la matriz de coeficientes de dx/dt: ")
     B = input("Ingresar la matriz de coeficientes de dy/dt: ")
-    A = bde.convertir_matriz(A)
-    B = bde.convertir_matriz(B)
+    print(B)
+    for key, value in parametros.items():
+        exec(f"{key} = float(value)")
+    A = eval(A)
+    B = eval(B)
     f1_original = bde.hilbert_system(A)
     f2_original = bde.hilbert_system(B)
     nombre = input("Ingresar el nombre del sistema = ")
@@ -60,9 +72,9 @@ elif seleccionar_sistema == "3":
     print(R)
     R_poly = bde.polynomial_averaging(R)
     theta_poly = "math.pi/2"
+    print(f"Sistema: {nombre}")
     print(f"La matriz de coeficientes de dx/dt es: {A}")
     print(f"La matriz de coeficientes de dy/dt es: {B}")
-    print(f"El sistema {nombre} se expresa como:")
     print("Differential equations system:")
     print(f"dx/dt = {f1_original}")
     print(f"dy/dt = {f2_original}")
