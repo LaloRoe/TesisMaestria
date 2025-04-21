@@ -4,6 +4,7 @@ import sympy as sp
 from sympy import symbols, expand, Poly
 import math
 import ast
+import matplotlib.pyplot as plt
 ###############################################################################
 # Differential equations system
 def f(z,f1,f2,parametros={},type = "cartesian"):
@@ -156,3 +157,9 @@ def polynomial_averaging(R):
                     D += "*r**" + str(i)
     return D
 ###############################################################################
+# Función para guardar la gráfica cuando se presiona una tecla
+def on_key_press(event):
+    if event.key == 'g':  # Guardar si se presiona 's'
+        filename = "plano_fase.png"
+        plt.savefig(filename, dpi=300)
+        print(f"Gráfica guardada como {filename}")

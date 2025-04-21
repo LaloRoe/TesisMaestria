@@ -27,11 +27,10 @@
 \contentsline {chapter}{\numberline {3}Teoría de ciclos límite}{22}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Sistemas dinámicos}{22}{section.3.1}%
 \contentsline {section}{\numberline {3.2}Conjuntos límite}{24}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Conjuntos $\omega $ y $\alpha $ límite.}{32}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Teorema de Poincaré-Bendixson}{33}{section.3.4}%
-\contentsline {section}{\numberline {3.5}Oscilador de Van der Pol}{34}{section.3.5}%
+\contentsline {section}{\numberline {3.3}Teorema de Poincaré-Bendixson}{32}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Oscilador de Van der Pol}{34}{section.3.4}%
 \contentsline {subsubsection}{Construcción de una Región Acotada Invariante}{35}{section*.15}%
-\contentsline {section}{\numberline {3.6}Ecuación de Rayleigh}{36}{section.3.6}%
+\contentsline {section}{\numberline {3.5}Ecuación de Rayleigh}{36}{section.3.5}%
 \contentsline {subsubsection}{Matriz Jacobiana y Valores Propios}{37}{section*.16}%
 \contentsline {subsubsection}{Construcción de una Región Acotada Invariante}{38}{section*.18}%
-\contentsline {section}{\numberline {3.7}Sistemas Liénard}{39}{section.3.7}%
+\contentsline {section}{\numberline {3.6}Sistemas Liénard}{39}{section.3.6}%

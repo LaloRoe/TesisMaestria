@@ -189,8 +189,7 @@ Pasemos las soluciones $\eqref{eq: rsis1}$ y $\eqref{eq: thetasis1}$ a coordenad
 \begin{equation}\label{eq: ysis1}
 	y(t)=\frac{e^t\sin(t+\theta_0)}{\sqrt{\frac{1}{r_0^2}-1+e^{2t}}}
 \end{equation}
-con $r_0=\sqrt{x_0^2+y_0^2}$ y $\theta_0=\arctan(\frac{y_0}{x_0})$.\\
-Definen el flujo $\varphi^t$ en $\mathbb{R}^2$ como
+con $r_0=\sqrt{x_0^2+y_0^2}$ y $\theta_0=\arctan(\frac{y_0}{x_0})$. Definen el flujo $\varphi^t$ en $\mathbb{R}^2$ como
 $$\varphi^t(x_0,y_0)=(x(t),y(t))$$
 
 \begin{figure}[h]
@@ -226,20 +225,29 @@ $$\omega(\vec{X}_0)=\{\vec{z}\in\mathbb{R}^2\mid\vec{z} \text{  es  } \omega\tex
 	$$\lim_{n\to\infty}\varphi^{t_n}(\vec{X}_0)=\vec{z}$$
 \end{definition}
 
-Por otro lado si tomamos un punto $(x_0,y_0)$ que no está en la circunferencia, entonces si  $r_0<1$ entonces $x(t)\to 0$ y $y(t)\to 0$ cuando $t\to\infty$, por lo tanto el punto $(x_0,y_0)$ es un punto $\alpha$ límite, es decir que existe una sucesión de tiempos $\{t_n\}_{n\in \mathbb{N}}$ con $t_n\to-\infty$ tal que la trayectoria converge a ese punto.\\
+Por otro lado si tomamos un punto $(x_0,y_0)$ que no está en la circunferencia, entonces si  $r_0<1$ entonces $x(t)\to 0$ y $y(t)\to 0$ cuando $t\to-\infty$, por lo tanto el punto $(x_0,y_0)$ es un punto $\alpha$ límite, es decir que existe una sucesión de tiempos $\{t_n\}_{n\in \mathbb{N}}$ con $t_n\to-\infty$ tal que la trayectoria converge a ese punto.\\
 
 Notemos que analizamos los flujos cuando $t\to\infty$ y $t\to-\infty$, es decir que analizamos el comportamiento asintótico de las soluciones. Se define la trayectoria media positiva como
 $$\varGamma_{x_0}^{+}=\{x=\varphi(t,x_0)\mid t\geq0\}$$
 y la trayectoria media negativa como
 $$\varGamma_{x_0}^{-}=\{x=\varphi(t,x_0)\mid t\leq0\}$$
 
-La trayectoria del flujo $\varphi^t$ que pasa por $x_0$ es la unión de la trayectoria media positiva y la trayectoria media negativa, es decir
+\begin{figure}[h]\label{fig: plano_fase}
+	\centering
+	\includegraphics[width=12.5cm]{plano_fase.png}
+	\caption{Plano fase del sistema $\eqref{eq: sis1}$.}
+\end{figure}
+
+En la figura \ref{fig: plano_fase} podemos observar que la trayectoria del flujo $\varphi^t$ que pasa por $x_0$ es la unión de la trayectoria media positiva (naranja) y la trayectoria media negativa (verde), es decir
 $$\varGamma_{x_0}=\varGamma_{x_0}^{+}\cup\varGamma_{x_0}^{-}$$
 
+\begin{definition}
+	Decimos que un conjunto $U$ es positivamente invariante si dado $x_0\in U$ entonces  $\varGamma_{x_0}^{+}\subset U$
+\end{definition}
 
-
-
-
+\begin{definition}
+	Decimos que un conjunto $U$ es negativamente invariante si dado $x_0\in U$ entonces  $\varGamma_{x_0}^{-}\subset U$
+\end{definition}
 
 Además, notemos que para $\{t_n=2\pi n+\alpha_0-\theta_0\}_{n\in \mathbb{N}}$,
 la sucesión $\{(x(t_n),y(t_n))\}_{n\in\mathbb{N}}$ es una sucesión
@@ -277,86 +285,51 @@ una curva cerrada en el interior, donde $r_{min}<r<r_{max}$, en la cual
 las trayectorias convergen o alcanzan el equilibrio, de manera similar
 a lo observado en el ejemplo
 inicial, debido a su comportamiento. La idea de la existencia de una
-curva cerrada de este tipo es lo que conocemos como ciclo límite.
+curva cerrada de este tipo es lo que conocemos como ciclo límite.\\
+
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=13cm]{rminrmax.png}
 	\caption{Plano fase del sistema con perturbación.}
 \end{figure}
 
-\newpage
-
-\begin{definition}
-	Definimos
-	$$\varGamma_{\vec{x}}^{+}=\{\vec{y}=\varphi(t,\vec{x})\mid t>0\}$$
-	$$\varGamma_{\vec{x}}^{-}=\{\vec{y}=\varphi(t,\vec{x})\mid t<0\}$$
-	$$\varGamma_{\vec{x}}=\varGamma_{\vec{x}}^{+}\cup\varGamma_{\vec{x}}^{-}$$
-\end{definition}
-
-\begin{definition}
-	Decimos que un conjunto $U$ es positivamente invariante si dado $\vec{x}\in U$ entonces  $\varGamma_{\vec{x}}^{+}\subset U$
-\end{definition}
-
-\begin{definition}
-	Decimos que un conjunto $U$ es negativamente invariante si dado $\vec{x}\in U$ entonces  $\varGamma_{\vec{x}}^{-}\subset U$
-\end{definition}
-
 Notemos que esta sección del plano donde $r_{min}<r<r_{max}$ es positivamente invariante \cite{hirsch2012differential}.
 \newpage
-\section{Conjuntos $\omega$ y $\alpha$ límite.}
 
-Veamos más propiedades de los puntos y el conjunto $\omega$ límite. Comenzamos definiendo su análogo,
-que estudia su comportamiento asintótico para $t\to-\infty$.\\
+Veamos más propiedades de los puntos y el conjunto $\omega$ límite.
 
-\begin{definition}
-	Decimos que $\vec{z}\in\mathbb{R}^2$ es un punto $\alpha$-límite
-	de $\vec{X}_0\in\mathbb{R}^2$ si existe sucesión decreciente de
-	tiempos $\{t_n\}_{n\in\mathbb{N}}$
-	con $t_n \to-\infty$ cuando $n\to \infty$ tal que:
-	$$\lim_{n\to\infty}\varphi^{t_n}(\vec{X}_0)=\vec{z}$$
-\end{definition}
-
-\begin{definition}
-	Definimos el conjunto $\alpha$-límite como $$\alpha(\vec{x})=\{\vec{y}\in\mathbb{R}^2\mid\vec{y}
-		\text{ es } \alpha\text{-límite de }\vec{x}\}\equiv\text{Conjunto }\alpha\text{-límite}$$
-	donde
-	$$\vec{y}=\lim_{t_i\to-\infty}\varphi(t_i,\vec{x})$$
-	con $\{t_i\}_{i=1}^{\infty}$ sucesión decreciente a $-\infty$.
-\end{definition}
-
-Algunas propiedades
 \begin{itemize}
-	\item $\omega(\vec{x})=\omega(\varGamma_{\vec{x}}^{+})$
-	      y $\alpha(\vec{x})=\alpha(\varGamma_{\vec{x}}^{-})$.\\
-	\item Si $\vec{x}*$ es equilibrio de $\vec{x}'=f(\vec{x})$ entonces:
-	      $$\omega(\vec{x}*)=\alpha(\vec{x}*)=\{\vec{x}*\}$$
-	\item Si $\varGamma_0$ es una órbita periódica para un sistema $\vec{X}'=f(\vec{X})$, entonces
+	\item $\omega(x_0)=\omega(\varGamma_{x_0}^{+})$
+	      y $\alpha(x_0)=\alpha(\varGamma_{x_0}^{-})$.\\
+	\item Si $x_0$ es equilibrio de $x'=f(x)$ entonces:
+	    $$\omega(x_0)=\alpha(x_0)=\{x_0\}$$
+	\item Si $\varGamma_0$ es una órbita periódica para un sistema $x'=f(x)$, entonces
 	      $$\omega(\varGamma_0)=\alpha(\varGamma_0)=\varGamma_0$$.
 \end{itemize}
 
 \begin{lemma}
-	Sea $\vec{x}\in\mathbb{R}^n$ tal que $\Gamma_{\vec{x}}^+$ está acotada.
+	Sea $\vec{x}\in\mathbb{R}^n$ tal que $\Gamma_{x_0}^+$ está acotada.
 	Entonces:
 	\begin{enumerate}
-		\item $\omega(\vec{x})\neq\emptyset$
-		\item $\omega(\vec{x})$ es acotado.
-		\item $\omega(\vec{x})$ es cerrado.
-		\item $\omega(\vec{x})$ es conexo.
+		\item $\omega(x)\neq\emptyset$
+		\item $\omega(x)$ es acotado.
+		\item $\omega(x)$ es cerrado.
+		\item $\omega(x)$ es conexo.
 	\end{enumerate}
 \end{lemma}
 
 \begin{lemma}
-	Sea $\vec{x}\in\mathbb{R}^n$ con $\Gamma_{\vec{x}}^+$ acotada.
+	Sea $\vec{x}\in\mathbb{R}^n$ con $\Gamma_{x_0}^+$ acotada.
 	Entonces
-	$$\rho(\phi(t,\vec{x}),\omega(\vec{x}))\to0$$
+	$$\rho(\phi(t,x),\omega(\vec{x}))\to0$$
 	cuando $t \to \infty$ \cite{hirsch2012differential}.
 \end{lemma}
 
 \begin{lemma}[Invarianza]
-	Sea $\Gamma_{\vec{x}}^+$ acotada. Entonces $\omega(\vec{x})$
+	Sea $\Gamma_{x_0}^+$ acotada. Entonces $\omega(x)$
 	es invariante bajo el flujo
-	$\varphi^t$, es decir, para cada $\vec{y}\in\omega(\vec{x})$ entonces
-	$\varphi ^t(\vec{y})\in\omega(\vec{x})$ \cite{arnold1992ordinary}.
+	$\varphi^t$, es decir, para cada $\vec{y}\in\omega(x)$ entonces
+	$\varphi ^t(y)\in\omega(x)$ \cite{arnold1992ordinary}.
 \end{lemma}
 
 \begin{lemma}
@@ -370,7 +343,7 @@ Algunas propiedades
 \section{Teorema de Poincaré-Bendixson}
 
 \begin{theorem}[Poincaré-Bendixson]\label{TPB}
-	Sea $\vec{x}\in\mathbb{R}^2$ tal que $\varGamma_{\vec{x}}^2\subseteq D\subseteq\mathbb{R}^2$ con $D\equiv$ Cerrado y acotado,
+	Sea $x\in\mathbb{R}^2$ tal que $\varGamma_{x}^2\subseteq D\subseteq\mathbb{R}^2$ con $D\equiv$ Cerrado y acotado,
 	y conteniendo un número finito de equilibrios de la EDO:
 	\begin{equation}
 		\begin{matrix}
@@ -380,9 +353,9 @@ Algunas propiedades
 	\end{equation}
 	entonces se cumple alguna de las siguientes:
 	\begin{enumerate}
-		\item $\omega(\vec{x})=\omega(\varGamma_{\vec{x}}^+)$ está formado por un equilibrio.
-		\item $\omega(\vec{x})$ es una órbita periódica.
-		\item $\omega(\vec{x})$ está formada por equilibrios y órbitas que tienen a dichos equilibrios como puntos
+		\item $\omega(x)=\omega(\varGamma_{x}^+)$ está formado por un equilibrio.
+		\item $\omega(x)$ es una órbita periódica.
+		\item $\omega(x)$ está formada por equilibrios y órbitas que tienen a dichos equilibrios como puntos
 		      $\alpha$ u $\omega$ límite.
 	\end{enumerate}
 \end{theorem}

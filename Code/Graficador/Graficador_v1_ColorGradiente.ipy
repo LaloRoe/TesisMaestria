@@ -2,6 +2,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.collections import LineCollection
 from matplotlib.colors import LinearSegmentedColormap  # Para crear mapas de colores personalizados
+from matplotlib.widgets import Button
+
 import sympy as sp
 import basicdifeq as bde
 import math
@@ -265,6 +267,7 @@ def onclick(event):
 
 # Conectar el evento de clic a la función onclick
 cid = fig.canvas.mpl_connect('button_press_event', onclick)
+fig.canvas.mpl_connect('key_press_event', bde.on_key_press)
 
 plt.show()
 
