@@ -10,7 +10,7 @@ plt.ioff()  # Desactiva el modo interactivo de matplotlib
 
 ################################################################################
 # VARIABLES
-pasos_rk = 1000
+pasos_rk = 3000
 parametros = {}
 
 ###############################################################################
@@ -23,6 +23,7 @@ sistemas_predefinidos = {
 }
 ###############################################################################
 # OBTENER LA EXPRESIÓN DE LA ECUACIÓN DIFERENCIAL
+tiempo_negativo = input("¿Desea graficar el tiempo negativo? (s/n): ").lower()
 seleccionar_sistema = input("Elije una opción: \n 1. Seleccionar un sistema predefinido \n 2. Ingresar un sistema manualmente \n 3. Ingresar la matriz de coeficientes \n =").lower()
 if seleccionar_sistema == "1":
     print("Selecciona un sistema:\n")
@@ -184,6 +185,7 @@ plt.axvline(0, color="gray", linestyle="--", linewidth=0.5)
 # Crear un mapa de colores personalizado (naranja a morado)
 custom_cmap = LinearSegmentedColormap.from_list("naranja_a_morado", ["orange", "purple"])
 custom_cmap_polar = LinearSegmentedColormap.from_list("amarillo_a_azul", ["yellow", "blue"])
+custom_cmap_neg = LinearSegmentedColormap.from_list("rojo_a_verde", ["green", "blue"])
 # CLICKS
 z0 = []
 z0_polar = []
@@ -210,6 +212,12 @@ def onclick(event):
         x_rk = z_rk[0, :]
         y_rk = z_rk[1, :]
 
+        # Plano fase del sistema original con tiempo negativo
+        if tiempo_negativo == "s":
+            z_rk_neg = bde.runge_kutta(f1_original, f2_original, y0, -0.1, pasos_rk, parametros)
+            x_rk_neg = z_rk_neg[0, :]
+            y_rk_neg = z_rk_neg[1, :]
+
         # Plano fase del sistema promedio
         if seleccionar_sistema == "3":
             z_rk_polar = bde.runge_kutta(R_poly, theta_poly, r0, 0.1, pasos_rk,type="polar")
@@ -235,6 +243,16 @@ def onclick(event):
         lc.set_array(np.arange(len(x_rk)))
         lc.set_linewidth(2)
         ax.add_collection(lc)
+
+        # Crear un gradiente para la trayectoria original con tiempo negativo
+        if tiempo_negativo == "s":
+            points = np.array([x_rk_neg, y_rk_neg]).T.reshape(-1, 1, 2)
+            segments = np.concatenate([points[:-1], points[1:]], axis=1)
+            norm = plt.Normalize(0, len(x_rk_neg))
+            lc = LineCollection(segments, cmap=custom_cmap_neg, norm=norm)  # Usar el mapa personalizado
+            lc.set_array(np.arange(len(x_rk_neg)))
+            lc.set_linewidth(2)
+            ax.add_collection(lc)
         
         # Plano fase del sistema linealizado
         if linealizar == "s":

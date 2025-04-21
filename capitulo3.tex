@@ -1,12 +1,73 @@
 \chapter{Teoría de ciclos límite}
-\section{La no linealidad y los ciclos límite}
+
 En el estudio cualitativo de sistemas dinámicos no lineales, los \textit{ciclos límite} juegan un papel fundamental al describir comportamientos periódicos estables o inestables que no dependen de las condiciones iniciales específicas del sistema. Estos ciclos representan soluciones cerradas aisladas en el plano fase, lo que los convierte en objetos clave para entender fenómenos oscilatorios en diversas áreas de aplicación.\\
 
 El análisis de la existencia y estabilidad de ciclos límite está íntimamente ligado al famoso \textit{Teorema de Poincaré-Bendixson}, uno de los resultados más importantes en la teoría de sistemas dinámicos planos. Este teorema proporciona las condiciones bajo las cuales las trayectorias de un sistema bidimensional acotado convergen hacia un conjunto límite, ya sea un punto de equilibrio o una órbita periódica. Su relevancia radica en que permite descartar comportamientos caóticos en sistemas planos y ofrece herramientas rigurosas para identificar ciclos límite.\\
 
-En este capítulo, nos enfocamos en el desarrollo teórico de los ciclos límite y presentamos el Teorema de Poincaré-Bendixson como una herramienta central para su estudio.\\
+En este capítulo, nos enfocamos en el desarrollo teórico de los ciclos límite y presentamos el Teorema de Poincaré-Bendixson como una herramienta central para su estudio.
 
-Comenzamos analizando el sistema no lineal
+\section{Sistemas dinámicos}
+
+Dado un sistema autónomo de ecuaciones diferenciales ordinarias
+\begin{equation}\label{eq: sistAuto}
+	\begin{matrix}
+		x(t)'= F(x(t))\\
+		x(0)=x_0
+	\end{matrix}
+\end{equation}
+con $F\in C^1(D)$ y $D\subset\mathbb{R}^n$ un conjunto abierto, sabemos que este tiene una única solución $\varphi^t(x_0)=x(t)$ para cada condición inicial $x_0\in D$, para todo $t\in I(x_0)$, máximo intervalo de existencia de la solución. La solución $\varphi^t(x_0)$ se llama flujo del sistema y satisface que $\varphi^0(x_0)=x_0$ y $\varphi^t(\varphi^s(x_0))=\varphi^{t+s}(x_0)$ para todo $x_0\in D$ y $t,s\in I(x_0)$. \cite{perko2001differential}. \\
+
+Vamos a definir los sistemas dinámicos, así mismo vamos a abordar un teorema que nos permite extender en máximo intervalo de existencia de la solución.
+ 
+\begin{definition}[Sistema dinámico]
+	Sea $D\subset\mathbb{R}^n$ un conjunto abierto, un sistema dinámico en $D$ es una familia de aplicaciones continuas $C^1$
+	$$\varphi:D\times\mathbb{R}^n\to\mathbb{R}^n$$
+	tal que si $\varphi^t(x)=\varphi(t,x)$, entonces $\varphi^t$ satisface:
+	\begin{enumerate}
+		\item $\varphi^0(x)=x$ para todo $x\in D$
+		\item $\varphi^t(\varphi^s(x))=\varphi^{t+s}(x)$ para todo $x\in D$ y $t,s\in\mathbb{R}$
+	\end{enumerate}
+\end{definition}
+
+Si $\varphi(t,x)$ es un sistema dinámico en $D\subset\mathbb{R}^n$ y sea 
+$$F(x)= \frac{\partial\varphi}{\partial t}(t,x)|_{t=0}$$
+entonces $f$ es un campo vectorial en $D$ y se llama campo vectorial asociado al sistema dinámico $\varphi(t,x)$. Además $\varphi(t,x_0)$ es solución del problema de valor inicial
+\begin{equation}\label{eq: sisAuto}
+	\begin{matrix}
+		x(t)'= F(x(t))\\
+		x(0)=x_0
+	\end{matrix}
+\end{equation}
+
+\begin{definition}[Sistemas topológicamente equivalentes]
+	Sean dos sistemas de ecuaciones diferenciales ordinarias
+	\begin{equation}\label{eq: sis1}
+		x'=f(x)
+	\end{equation}
+	\begin{equation}\label{eq: sis2}
+		x'=g(x)
+	\end{equation}
+	con $f\in C^1(D)$ y $g\in C^1(E)$, $D,E\subset\mathbb{R}^n$ conjuntos abiertos. Decimos que los sistemas $\eqref{eq: sis1}$ y $\eqref{eq: sis2}$ son topológicamente equivalentes si existe un homeomorfismo $h:D\to E$ tal que mapea trayectorias de $\eqref{eq: sis1}$ en trayectorias de $\eqref{eq: sis2}$ y viceversa, además preserva el sentido de las trayectorias.
+\end{definition}
+
+\begin{definition}[Teorema de existencia global]
+	El problema de valor inicial
+	\begin{equation}\label{eq: sisAuto}
+		\begin{matrix}
+			x(t)'= \frac{F(x(t))}{1+|F(x(t))|}\\
+			x(0)=x_0
+		\end{matrix}
+	\end{equation}
+	tiene solución única para todo $x_0\in D$ y $t\in I(x_0)=(-\infty,\infty)$ máximo intervalo de existencia de la solución. \cite{perko2001differential} Además es topológicamente equivalente al sistema \eqref{eq: sisAuto} en $\mathbb{R}^n$.
+\end{definition}
+
+\begin{definition}[Conjunto invariante]
+	Un conjunto $U\subset\mathbb{R}^n$ es invariante bajo el flujo $\varphi^t$ si para todo $x\in U$ se tiene que $\varphi^t(x)\in U$ para todo $t\in\mathbb{R}$.
+\end{definition}
+
+\section{Conjuntos límite}
+
+Consideremos el sistema de ecuaciones diferenciales ordinarias
 
 \begin{equation}\label{eq: sis1}
 	\begin{matrix}
@@ -23,7 +84,7 @@ el sistema \cite{perko2001differential}, después vamos a resolver cuantitativam
 analizaremos algunas propiedades con ayuda de la solución analítica.\\
 
 Con el cambio de coordenadas $\eqref{eq: xpolar}$ y  $\eqref{eq: ypolar}$ tenemos
-las condiciones iniciales $r(0)=r_0$ y $\theta(0)=\theta_0$.\\
+las condiciones iniciales $r(0)=r_0=\sqrt{x_0^2+y_0^2}$ y $\theta(0)=\theta_0=\arctan(\frac{y_0}{x_0})$.\\
 
 Sustituimos el sistema $\eqref{eq: sis1}$ en $\eqref{eq: drcart}$:
 $$rr'=xx'+yy'=x[-y+x(1-x^2-y^2)]+y[x+y(1-x^2-y^2)]$$
@@ -94,6 +155,7 @@ Aplicamos la condición inicial $r(0)=r_0$.\\
 \begin{equation}\label{eq: thetasis1}
 	\theta(t)=t+\theta_0
 \end{equation}
+
 Dejaremos nuestra solución en coordenadas polares para realizar el siguiente
 análisis del comportamiento asintótico.\\
 \begin{enumerate}
@@ -120,14 +182,16 @@ y de radio  $1$.\\
 	$$\lim_{n\to\infty}\varphi^{t_n}(\vec{x}_0)=\vec{z}$$
 \end{definition}
 
-Regresemos las soluciones $\eqref{eq: rsis1}$ y $\eqref{eq: thetasis1}$ a
-coordenadas cartesianas, con $\eqref{eq: xpolar}$ y $\eqref{eq: ypolar}$ \cite{guckenheimer1983nonlinear}.
+Pasemos las soluciones $\eqref{eq: rsis1}$ y $\eqref{eq: thetasis1}$ a coordenadas cartesianas, con $\eqref{eq: xpolar}$ y $\eqref{eq: ypolar}$ \cite{guckenheimer1983nonlinear}.
 \begin{equation}\label{eq: xsis1}
 	x(t)=\frac{e^t\cos(t+\theta_0)}{\sqrt{\frac{1}{r_0^2}-1+e^{2t}}}
 \end{equation}
 \begin{equation}\label{eq: ysis1}
 	y(t)=\frac{e^t\sin(t+\theta_0)}{\sqrt{\frac{1}{r_0^2}-1+e^{2t}}}
 \end{equation}
+con $r_0=\sqrt{x_0^2+y_0^2}$ y $\theta_0=\arctan(\frac{y_0}{x_0})$.\\
+Definen el flujo $\varphi^t$ en $\mathbb{R}^2$ como
+$$\varphi^t(x_0,y_0)=(x(t),y(t))$$
 
 \begin{figure}[h]
 	\centering
@@ -135,13 +199,12 @@ coordenadas cartesianas, con $\eqref{eq: xpolar}$ y $\eqref{eq: ypolar}$ \cite{g
 	\caption{Plano fase del sistema $\eqref{eq: sis1}$.}
 \end{figure}
 
-Tomemos la trayectoria en el plano fase de $\eqref{eq: sis1}$ que pasa por el punto
-$(x_0,y_0)$, entonces existe $\theta_0=\arctan(\frac{y_0}{x_0})\in[0,2\pi]$.
-La trayectoria que pasa por $(x_0,y_0)$ está dada por las ecuaciones $\eqref{eq: xsis1}$ y
-$\eqref{eq: ysis1}$ donde $x_0=x(0)$ y $y_0=y(0)$.\\
-\\Tomemos un punto en la circunferencia centrada en el origen con radio $1$,
+en el plano fase de $\eqref{eq: sis1}$ que pasa por el punto
+$(x_0,y_0)$.\\
+
+Tomemos un punto en la circunferencia centrada en el origen con radio $1$,
 supongamos que
-en coordenadas polares tiene un álgulo $0<\alpha_0<2\pi$, veamos que es punto $\omega$ límite, para eso podemos definir
+en coordenadas polares tiene un álgulo $0<\alpha_0<2\pi$, veamos que este punto es $\omega$ límite, para eso podemos definir
 $\{t_n=2\pi n+\alpha_0-\theta_0\}_{n\in \mathbb{N}}$, entonces
 $$\lim_{n\to\infty}x(t_n)=\cos(\alpha_0)$$
 $$\lim_{n\to\infty}y(t_n)=\sin(\alpha_0)$$
@@ -154,6 +217,29 @@ entonces diremos que esta circunferencia es un conjunto $\omega$ límite de $(x_
 el conjunto $\omega$ límite se define como
 
 $$\omega(\vec{X}_0)=\{\vec{z}\in\mathbb{R}^2\mid\vec{z} \text{  es  } \omega\text{-límite de  } \vec{X}_0\}.$$
+
+\begin{definition}[Punto $\alpha$ límite]
+	Decimos que $\vec{z}\in\mathbb{R}^2$ es un punto $\alpha$-límite
+	de $\vec{X}_0\in\mathbb{R}^2$ si existe sucesión decreciente de
+	tiempos $\{t_n\}_{n\in\mathbb{N}}$
+	con $t_n \to-\infty$ cuando $n\to \infty$ tal que:
+	$$\lim_{n\to\infty}\varphi^{t_n}(\vec{X}_0)=\vec{z}$$
+\end{definition}
+
+Por otro lado si tomamos un punto $(x_0,y_0)$ que no está en la circunferencia, entonces si  $r_0<1$ entonces $x(t)\to 0$ y $y(t)\to 0$ cuando $t\to\infty$, por lo tanto el punto $(x_0,y_0)$ es un punto $\alpha$ límite, es decir que existe una sucesión de tiempos $\{t_n\}_{n\in \mathbb{N}}$ con $t_n\to-\infty$ tal que la trayectoria converge a ese punto.\\
+
+Notemos que analizamos los flujos cuando $t\to\infty$ y $t\to-\infty$, es decir que analizamos el comportamiento asintótico de las soluciones. Se define la trayectoria media positiva como
+$$\varGamma_{x_0}^{+}=\{x=\varphi(t,x_0)\mid t\geq0\}$$
+y la trayectoria media negativa como
+$$\varGamma_{x_0}^{-}=\{x=\varphi(t,x_0)\mid t\leq0\}$$
+
+La trayectoria del flujo $\varphi^t$ que pasa por $x_0$ es la unión de la trayectoria media positiva y la trayectoria media negativa, es decir
+$$\varGamma_{x_0}=\varGamma_{x_0}^{+}\cup\varGamma_{x_0}^{-}$$
+
+
+
+
+
 
 Además, notemos que para $\{t_n=2\pi n+\alpha_0-\theta_0\}_{n\in \mathbb{N}}$,
 la sucesión $\{(x(t_n),y(t_n))\}_{n\in\mathbb{N}}$ es una sucesión
