@@ -11,17 +11,19 @@
 \contentsline {figure}{\numberline {2.5}{\ignorespaces Nodo degenerado inestable}}{18}{figure.2.5}%
 \contentsline {figure}{\numberline {2.6}{\ignorespaces Centro}}{20}{figure.2.6}%
 \contentsline {figure}{\numberline {2.7}{\ignorespaces Equilibrio no aislado}}{21}{figure.2.7}%
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Modelo de depredador-presa}}{25}{figure.2.8}%
+\contentsline {figure}{\numberline {2.9}{\ignorespaces Trayectorias del sistema y curvas de nivel de la función de Liapunov. Las trayectorias convergen hacia el ciclo límite en $r = 1$, mientras que las curvas de nivel muestran regiones de estabilidad.}}{28}{figure.2.9}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Plano fase de \eqref {eq: drsis1}.}}{29}{figure.3.1}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Plano fase del sistema $\eqref {eq: sis1}$.}}{32}{figure.3.2}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Plano fase del sistema $\eqref {eq: sis1}$.}}{33}{figure.3.3}%
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Plano fase del sistema con perturbación.}}{35}{figure.3.4}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Plano fase de \eqref {eq: drsis1}.}}{33}{figure.3.1}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Plano fase del sistema $\eqref {eq: sis1}$.}}{36}{figure.3.2}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Plano fase del sistema $\eqref {eq: sis1}$.}}{37}{figure.3.3}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Plano fase del sistema con perturbación.}}{39}{figure.3.4}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Función vs función promediada.}}{52}{figure.5.1}%
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Diferencia de la Función con la función promediada.}}{53}{figure.5.2}%
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Plano fase de $\eqref {eq: drvander}$.}}{55}{figure.5.3}%
-\contentsline {figure}{\numberline {5.4}{\ignorespaces Plano fase. Dibujado en https://aeb019.hosted.uark.edu/pplane.html}}{56}{figure.5.4}%
-\contentsline {figure}{\numberline {5.5}{\ignorespaces Plano fase.Dibujado en https://aeb019.hosted.uark.edu/pplane.html}}{58}{figure.5.5}%
-\contentsline {figure}{\numberline {5.6}{\ignorespaces Plano fase.Dibujado en https://aeb019.hosted.uark.edu/pplane.html}}{59}{figure.5.6}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Función vs función promediada.}}{56}{figure.5.1}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Diferencia de la Función con la función promediada.}}{57}{figure.5.2}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Plano fase de $\eqref {eq: drvander}$.}}{59}{figure.5.3}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Plano fase. Dibujado en https://aeb019.hosted.uark.edu/pplane.html}}{60}{figure.5.4}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Plano fase.Dibujado en https://aeb019.hosted.uark.edu/pplane.html}}{62}{figure.5.5}%
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Plano fase.Dibujado en https://aeb019.hosted.uark.edu/pplane.html}}{63}{figure.5.6}%
 \addvspace {10\p@ }

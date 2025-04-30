@@ -198,16 +198,18 @@ La clasificación de puntos de equilibrio no solo nos permite entender el compor
 
 \section{Teoría de la Linealización de Sistemas de Ecuaciones Diferenciales}
 
-En la sección anterior, exploramos los diferentes tipos de puntos de equilibrio en sistemas lineales y su clasificación según los eigenvalores de la matriz asociada. Aprendimos cómo los nodos, puntos silla, espirales y centros describen comportamientos locales únicos, cada uno con su propia "personalidad". Sin embargo, muchos fenómenos del mundo real están modelados por sistemas no lineales, cuya complejidad puede dificultar un análisis directo. En esta sección, profundizaremos en un método clave para estudiar estos sistemas: la \textbf{linealización}.
+En la sección anterior, exploramos los diferentes tipos de puntos de equilibrio en sistemas lineales y su clasificación según los eigenvalores de la matriz asociada. Aprendimos cómo los nodos, puntos silla, espirales y centros describen comportamientos locales únicos, cada uno con su propia "personalidad". Sin embargo, muchos fenómenos del mundo real están modelados por sistemas no lineales, cuya complejidad puede dificultar un análisis directo. En esta sección, profundizaremos en un método clave para estudiar estos sistemas: la \textbf{linealización}.\\
 
 La idea central detrás de la linealización es aprovechar las herramientas desarrolladas para sistemas lineales y aplicarlas a sistemas no lineales cerca de puntos de equilibrio. Como vimos anteriormente, los puntos de equilibrio son estados donde el sistema "se detiene", y su estabilidad determina si el sistema regresa al equilibrio o se aleja tras pequeñas perturbaciones. La linealización nos permite aproximar el comportamiento local de un sistema no lineal mediante un sistema lineal asociado, simplificando significativamente el análisis.
 
 \subsection{De Lo Lineal a Lo No Lineal: Una Transición Natural}
 
 Recordemos que, en sistemas lineales, el comportamiento global está completamente determinado por los eigenvalores de la matriz del sistema. Por ejemplo:
-- Un \textbf{nodo estable} indica que todas las trayectorias convergen al origen.
-- Un \textbf{punto silla} revela direcciones estables e inestables.
-- Un \textbf{centro} describe órbitas cerradas sin convergencia ni divergencia.
+\begin{itemize} 
+    \item Un \textbf{nodo estable} indica que todas las trayectorias convergen al origen.
+    \item Un \textbf{punto silla} revela direcciones estables e inestables.
+    \item Un \textbf{centro} describe órbitas cerradas sin convergencia ni divergencia.
+\end{itemize}
 
 Sin embargo, en sistemas no lineales, estas propiedades pueden variar dependiendo de la región del espacio fase que estemos analizando. Aquí es donde entra la linealización: al enfocarnos en un entorno pequeño alrededor de un punto de equilibrio, podemos aproximar el sistema no lineal por uno lineal que capture su comportamiento local.
 
@@ -255,12 +257,14 @@ Estos resultados refuerzan lo que aprendimos en la sección anterior sobre la im
 \subsection{Profundizando en la Interpretación Geométrica}
 
 La matriz Jacobiana $D\mathbf{f}(\mathbf{x}_0)$ actúa como una "brújula" que nos indica la dirección y magnitud del cambio en cada variable del sistema cerca del punto de equilibrio. Por ejemplo:
-- Si los eigenvalores tienen parte real negativa, el sistema tiende a regresar al equilibrio, como un resorte que se comprime y luego vuelve a su posición original.
-- Si los eigenvalores tienen parte real positiva, el sistema se aleja del equilibrio, como una bola rodando cuesta abajo.
+\begin{itemize} 
+    \item Si los eigenvalores tienen parte real negativa, el sistema tiende a regresar al equilibrio, como un resorte que se comprime y luego vuelve a su posición original.
+    \item Si los eigenvalores tienen parte real positiva, el sistema se aleja del equilibrio, como una bola rodando cuesta abajo.
+\end{itemize}
 
 Este comportamiento es análogo a lo que observamos en sistemas lineales, pero ahora lo estamos aplicando a sistemas no lineales en un entorno local.
 
-\subsection{Ejemplo Práctico: Modelo de Depredador-Presa}
+\subsection{Ejemplo. Modelo de Depredador-Presa}
 
 Para ilustrar el proceso de linealización, consideremos nuevamente el modelo de depredador-presa discutido en la sección anterior:
 
@@ -317,8 +321,10 @@ Resolviendo, obtenemos:
 \end{equation}
 
 La estabilidad del punto de equilibrio $E_2$ depende del valor de $\alpha$:
-- Si $\alpha < 1$, entonces $\lambda_2 > 0$, y el punto es un \textbf{punto silla} (inestable). Las perturbaciones pueden llevar al sistema hacia otros estados.
-- Si $\alpha > 1$, entonces $\lambda_2 < 0$, y el punto es un \textbf{nodo estable}. El sistema tiende a regresar al equilibrio.
+\begin{itemize} 
+    \item Si $\alpha < 1$, entonces $\lambda_2 > 0$, y el punto es un \textbf{punto silla} (inestable). Las perturbaciones pueden llevar al sistema hacia otros estados.
+    \item Si $\alpha > 1$, entonces $\lambda_2 < 0$, y el punto es un \textbf{nodo estable}. El sistema tiende a regresar al equilibrio.
+\end{itemize}
 
 Este análisis refuerza lo que aprendimos en la sección anterior sobre la importancia de los puntos silla y nodos en la dinámica de sistemas.
 
@@ -326,3 +332,109 @@ La linealización es una herramienta poderosa que conecta los conceptos de punto
 
 Este enfoque no solo simplifica el análisis, sino que también brinda intuiciones valiosas sobre cómo interactúan las variables en sistemas complejos. Desde modelos ecológicos hasta sistemas mecánicos, la linealización sigue siendo una piedra angular en el estudio de sistemas dinámicos, permitiéndonos comprender tanto el comportamiento local como sus implicaciones globales.
 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{Img/DepredadorPresa.png}
+    \caption{Modelo de depredador-presa}
+    \label{fig:modelo_depredador_presa}
+\end{figure}
+
+
+\section{El Teorema de Liapunov y su Aplicación en la Determinación de Regiones de Estabilidad}
+
+El estudio de la estabilidad en sistemas dinámicos es fundamental para comprender el comportamiento a largo plazo de las soluciones de ecuaciones diferenciales. En este contexto, el \textbf{teorema de Liapunov} proporciona un marco teórico poderoso para analizar la estabilidad sin necesidad de resolver explícitamente las ecuaciones. Este método se basa en la construcción de funciones auxiliares, conocidas como \textbf{funciones de Liapunov}, que actúan como "medidores de energía" del sistema.
+
+La idea intuitiva detrás de este teorema es simple: si podemos encontrar una función que decrezca a lo largo de las trayectorias del sistema (como la energía en un sistema físico disipativo), entonces podemos inferir que las trayectorias convergen hacia un punto de equilibrio o hacia una región estable.
+
+Antes de enunciar el teorema, definimos algunos conceptos clave:
+
+\begin{definition}[Función Definida Positiva]
+Sea $V: \mathbb{R}^n \to \mathbb{R}$ una función continua. Decimos que $V$ es \textbf{definida positiva} en un entorno del origen si:
+\begin{enumerate}
+    \item $V(\mathbf{0}) = 0$,
+    \item $V(\mathbf{x}) > 0$ para todo $\mathbf{x} \neq \mathbf{0}$ en dicho entorno.
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[Derivada Temporal de $V$]
+Dado un sistema dinámico $\dot{\mathbf{x}} = \mathbf{f}(\mathbf{x})$, la derivada temporal de $V$ a lo largo de las trayectorias del sistema está dada por:
+\[
+\dot{V}(\mathbf{x}) = \nabla V(\mathbf{x}) \cdot \mathbf{f}(\mathbf{x}),
+\]
+donde $\nabla V$ denota el gradiente de $V$.
+\end{definition}
+
+El siguiente teorema es uno de los resultados centrales en la teoría de estabilidad:
+
+\begin{theorem}[Teorema de Liapunov]
+Sea $\mathbf{x} = \mathbf{0}$ un punto de equilibrio del sistema $\dot{\mathbf{x}} = \mathbf{f}(\mathbf{x})$. Supongamos que existe una función $V: \mathbb{R}^n \to \mathbb{R}$ tal que:
+\begin{enumerate}
+    \item $V$ es definida positiva en un entorno del origen,
+    \item $\dot{V}(\mathbf{x}) \leq 0$ en dicho entorno.
+\end{enumerate}
+Entonces, el origen es estable. Si además $\dot{V}(\mathbf{x}) < 0$ para todo $\mathbf{x} \neq \mathbf{0}$, entonces el origen es asintóticamente estable.
+\end{theorem}
+
+Para entender mejor el teorema, pensemos en $V(\mathbf{x})$ como una \textbf{superficie} en el espacio de estados:
+\begin{itemize}
+    \item Si $V(\mathbf{x})$ es definida positiva, entonces esta superficie tiene un mínimo en el origen, similar a una "cuenca" que atrae las trayectorias.
+    \item La condición $\dot{V}(\mathbf{x}) \leq 0$ implica que las trayectorias no pueden escalar esta superficie; más bien, descienden hacia el origen.
+\end{itemize}
+
+Podemos imaginar $V(\mathbf{x})$ como la energía potencial de un sistema físico. Si la energía siempre disminuye ($\dot{V}(\mathbf{x}) < 0$), el sistema eventualmente alcanza un estado de mínima energía (el equilibrio).
+
+\subsubsection{Construcción de una Función de Liapunov}
+Consideremos el sistema no lineal en coordenadas polares dado por:
+\[
+\dot{r} = r(1 - r^2 + \varepsilon \cos(\theta)), \quad \dot{\theta} = 1,
+\]
+donde $\varepsilon > 0$ es un parámetro pequeño.
+
+Proponemos la función candidata:
+\[
+V(r) = \frac{1}{2}(r^2 - 1)^2.
+\]
+Esta función es definida positiva para $r \neq 1$ y tiene un mínimo en $r = 1$. Calculamos su derivada temporal:
+\[
+\dot{V}(r) = \frac{\partial V}{\partial r} \dot{r} = 2(r^2 - 1)r \cdot r(1 - r^2 + \varepsilon \cos(\theta)).
+\]
+
+Simplificando:
+\[
+\dot{V}(r) = 2r^2(r^2 - 1)(1 - r^2 + \varepsilon \cos(\theta)).
+\]
+
+\subsubsection{Análisis de Estabilidad}
+El signo de $\dot{V}(r)$ depende del término $(1 - r^2 + \varepsilon \cos(\theta))$. Analizamos los casos principales:
+\begin{itemize}
+    \item Para $r < 1$, tenemos $r^2 - 1 < 0$, y si $\varepsilon$ es suficientemente pequeño, $\dot{V}(r) < 0$. Esto implica que las trayectorias dentro del ciclo límite ($r < 1$) son atraídas hacia él.
+    \item Para $r > 1$, tenemos $r^2 - 1 > 0$, y nuevamente $\dot{V}(r) < 0$. Esto sugiere que las trayectorias fuera del ciclo límite ($r > 1$) también convergen hacia él.
+\end{itemize}
+
+Por lo tanto, $V(r)$ decrece en ambos casos, lo que indica que las trayectorias son confinadas hacia la región donde $r \approx 1$.
+
+\begin{figure}[h!]\label{fig:lyapunov_region}
+    \centering
+    \includegraphics[width=0.8\textwidth]{Img/grafica_lyapunov.png}
+    \caption{Trayectorias del sistema y curvas de nivel de la función de Liapunov. Las trayectorias convergen hacia el ciclo límite en $r = 1$, mientras que las curvas de nivel muestran regiones de estabilidad.}
+    \label{fig:lyapunov_region}
+\end{figure}
+
+La Figura \ref{fig:lyapunov_region} muestra las trayectorias del sistema junto con las curvas de nivel de la función de Liapunov. Las curvas de nivel representan regiones de estabilidad asociadas a diferentes valores de $V(r)$. Observamos que:
+\begin{itemize}
+    \item Las trayectorias iniciadas dentro del ciclo límite ($r < 1$) convergen hacia él, atravesando las curvas de nivel de $V(r)$ en dirección decreciente.
+    \item Las trayectorias iniciadas fuera del ciclo límite ($r > 1$) también convergen hacia él, siguiendo el mismo comportamiento.
+    \item El ciclo límite ($r = 1$) actúa como un "atractor", confinando todas las trayectorias en su vecindad.
+\end{itemize}
+
+Este análisis ilustra cómo la función de Liapunov permite identificar cuantitativamente la región de atracción del ciclo límite.
+
+\subsection{Relación con el Teorema de Poincaré-Bendixson}
+El teorema de Liapunov complementa al teorema de Poincaré-Bendixson al proporcionar herramientas cuantitativas para analizar la estabilidad de ciclos límites. Mientras que Poincaré-Bendixson garantiza la existencia de ciclos límites bajo ciertas condiciones topológicas, el teorema de Liapunov ayuda a caracterizar explícitamente las regiones de atracción asociadas a dichos ciclos.
+
+\subsection*{Ejercicio Propuesto}
+Demuestra que la función $V(x, y) = x^2 + y^2$ es una función de Liapunov para el sistema lineal:
+\[
+\dot{x} = -x + y, \quad \dot{y} = -x - y.
+\]
+Interpreta geométricamente el resultado y grafica las trayectorias en el plano fase.

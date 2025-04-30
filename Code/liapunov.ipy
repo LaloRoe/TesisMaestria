@@ -1,0 +1,83 @@
+import numpy as np
+import matplotlib.pyplot as plt 
+
+# Parámetros del sistema
+mu = 0.9  # Perturbación
+
+# Sistema dinámico en coordenadas polares
+def polar(z):
+    r, theta = z[0], z[1]
+    dr = r * (1 - r**2) + mu * r * np.cos(theta)
+    dtheta = 1
+    return np.array([dr, dtheta])
+
+# Método de Runge-Kutta de orden 4 para resolver el sistema
+def rk4polar(y0, h, n):
+    y = np.zeros((2, n+1))
+    y[:, 0] = y0
+    for k in range(n):
+        k1 = polar(y[:, k])
+        k2 = polar(y[:, k] + (h / 2) * k1)
+        k3 = polar(y[:, k] + (h / 2) * k2)
+        k4 = polar(y[:, k] + h * k3)
+        y[:, k+1] = y[:, k] + (h / 6) * (k1 + 2 * k2 + 2 * k3 + k4)
+    return y
+
+# Radios mínimos y máximos
+r_min = np.sqrt(1 - mu)
+r_max = np.sqrt(1 + mu)
+
+# Circunferencias para r_min y r_max
+theta = np.linspace(0, 2 * np.pi, 100)
+c1 = r_max * np.cos(theta)
+d1 = r_max * np.sin(theta)
+c2 = r_min * np.cos(theta)
+d2 = r_min * np.sin(theta)
+
+# Simulación de trayectorias
+z01 = np.array([np.sqrt(1 + mu), 4])  # Condición inicial fuera del ciclo límite
+z02 = np.array([np.sqrt(1 - mu), 1])  # Condición inicial dentro del ciclo límite
+
+zz1 = rk4polar(z01, 0.1, 5000)
+r1 = zz1[0, :]
+theta1 = zz1[1, :]
+
+zz2 = rk4polar(z02, 0.1, 5000)
+r2 = zz2[0, :]
+theta2 = zz2[1, :]
+
+# Función de Liapunov
+def lyapunov_function(x, y):
+    r = np.sqrt(x**2 + y**2)
+    return 0.5 * (r**2 - 1)**2
+
+# Crear una malla para graficar las curvas de nivel de la función de Liapunov
+x = np.linspace(-2, 2, 400)
+y = np.linspace(-2, 2, 400)
+X, Y = np.meshgrid(x, y)
+Z = lyapunov_function(X, Y)
+
+# Gráfica
+L = 2
+fig, ax = plt.subplots(figsize=(10, 10))
+
+# Trayectorias
+plt.plot(r1 * np.cos(theta1), r1 * np.sin(theta1), label=f'Trayectoria con $(r_0, \\theta_0)$={z01}', color='red')
+plt.plot(r2 * np.cos(theta2), r2 * np.sin(theta2), label=f'Trayectoria con $(r_0, \\theta_0)$={z02}', color='blue')
+
+# Curvas de nivel de la función de Liapunov
+levels = [0.1, 0.5, 1.0, 2.0]  # Niveles de energía
+contour = plt.contour(X, Y, Z, levels=levels, colors='purple', linestyles='dotted', linewidths=1)
+plt.clabel(contour, inline=True, fontsize=8, fmt="V=%.1f")
+
+# Configuraciones de la gráfica
+ax.set_title(f'Plano Fase con Regiones de Atracción y Función de Liapunov ($\epsilon = {mu}$)')
+ax.set_xlabel('x')
+ax.set_ylabel('y')
+ax.set_xlim(-L, L)
+ax.set_ylim(-L, L)
+plt.axhline(0, color='gray', linewidth=0.5, linestyle='--')
+plt.axvline(0, color='gray', linewidth=0.5, linestyle='--')
+plt.legend()
+plt.grid(True)
+plt.show()
