@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.11.28)  21 APR 2025 04:23
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.11.28)  30 APR 2025 03:31
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -583,6 +583,18 @@ LaTeX Warning: Label `eq: sisAuto' multiply defined.
 
 LaTeX Warning: Label `eq: sis1' multiply defined.
 
+
+LaTeX Warning: Label `eq: VP' multiply defined.
+
+
+LaTeX Warning: Label `eq: VPsis' multiply defined.
+
+
+LaTeX Warning: Label `eq: Rayleigh' multiply defined.
+
+
+LaTeX Warning: Label `eq: cos_phi' multiply defined.
+
 )
 \openout1 = `main.aux'.
 
@@ -694,18 +706,18 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 LaTeX Info: Redefining \sptext on input line 1.
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
-)
-\tf@toc=\write5
-\openout5 = `main.toc'.
-
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.13 \listoffigures
-                    [1
+l.43 ...berline {4.6}Conclusión}{46}{section.4.6}
+                                                  % [1
 
-] (build/main.lof
+])
+\tf@toc=\write5
+\openout5 = `main.toc'.
+
+ [2] (build/main.lof
 LaTeX Info: Redefining \sptext on input line 1.
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
@@ -713,23 +725,23 @@ LaTeX Info: Redefining \% on input line 1.
 \tf@lof=\write6
 \openout6 = `main.lof'.
 
- (./capitulo1.tex [2
+ (./capitulo1.tex [3
 
 ]
 Cap\'{\i }tulo 1.
-[3
+[4
 
 ]
 Underfull \hbox (badness 10000) in paragraph at lines 38--39
 
  []
 
-[4] [5]
+[5] [6]
 Underfull \hbox (badness 10000) in paragraph at lines 80--81
 
  []
 
-<Img/introVanderPol.png, id=196, 609.9588pt x 617.9085pt>
+<Img/introVanderPol.png, id=312, 609.9588pt x 617.9085pt>
 File: Img/introVanderPol.png Graphic file (type png)
 <use Img/introVanderPol.png>
 Package pdftex.def Info: Img/introVanderPol.png  used on input line 90.
@@ -737,7 +749,7 @@ Package pdftex.def Info: Img/introVanderPol.png  used on input line 90.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[6{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
+[7{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
 Underfull \hbox (badness 10000) in paragraph at lines 99--100
 
  []
@@ -747,7 +759,7 @@ Overfull \hbox (6.9572pt too wide) in paragraph at lines 101--102
 []\OT1/cmr/m/n/12 La ecua-ci^^Son de Ray-leigh mo-de-la el com-por-ta-mien-to de cier-tos sis-te-mas mec^^Sani-
  []
 
-<Img/introRayleigh.png, id=210, 613.5723pt x 618.6312pt>
+<Img/introRayleigh.png, id=325, 613.5723pt x 618.6312pt>
 File: Img/introRayleigh.png Graphic file (type png)
 <use Img/introRayleigh.png>
 Package pdftex.def Info: Img/introRayleigh.png  used on input line 109.
@@ -755,12 +767,12 @@ Package pdftex.def Info: Img/introRayleigh.png  used on input line 109.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[7 <./Img/introVanderPol.png>]
+[8 <./Img/introVanderPol.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 116--117
 
  []
 
-<Img/introFitz.png, id=220, 613.5723pt x 617.9085pt>
+<Img/introFitz.png, id=335, 613.5723pt x 617.9085pt>
 File: Img/introFitz.png Graphic file (type png)
 <use Img/introFitz.png>
 Package pdftex.def Info: Img/introFitz.png  used on input line 129.
@@ -768,12 +780,12 @@ Package pdftex.def Info: Img/introFitz.png  used on input line 129.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[8 <./Img/introRayleigh.png>]
+[9 <./Img/introRayleigh.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 136--137
 
  []
 
-[9 <./Img/introFitz.png>]
+[10 <./Img/introFitz.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 147--148
 
  []
@@ -793,71 +805,66 @@ Overfull \hbox (3.9252pt too wide) in paragraph at lines 155--156
 []\OT1/cmr/m/n/12 En f^^S^^Psi-ca, los ci-clos l^^S^^Pmi-te des-cri-ben fen^^Some-nos os-ci-la-to-rios en sis-te-mas mec^^Sani-
  []
 
-[10]
+[11]
 Underfull \hbox (badness 10000) in paragraph at lines 156--157
 
  []
 
-) (./capitulo2.tex [11]
+) (./capitulo2.tex [12]
 Cap\'{\i }tulo 2.
+[13
 
-Underfull \hbox (badness 10000) in paragraph at lines 16--17
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 28--29
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 40--41
-
- []
-
-[12
-
-] [13]
-Underfull \hbox (badness 10000) in paragraph at lines 52--53
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 54--55
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 74--76
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 77--78
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 81--83
-
- []
+]
+<Img/Nodo.png, id=383, 722.7pt x 722.7pt>
+File: Img/Nodo.png Graphic file (type png)
+<use Img/Nodo.png>
+Package pdftex.def Info: Img/Nodo.png  used on input line 35.
+(pdftex.def)             Requested size: 292.77629pt x 292.7801pt.
+ [14 <./Img/Nodo.png>]
+<Img/PuntoSilla.png, id=390, 722.7pt x 722.7pt>
+File: Img/PuntoSilla.png Graphic file (type png)
+<use Img/PuntoSilla.png>
+Package pdftex.def Info: Img/PuntoSilla.png  used on input line 60.
+(pdftex.def)             Requested size: 292.77629pt x 292.7801pt.
+ [15 <./Img/PuntoSilla.png>]
+<Img/Espirales.png, id=399, 722.7pt x 722.7pt>
+File: Img/Espirales.png Graphic file (type png)
+<use Img/Espirales.png>
+Package pdftex.def Info: Img/Espirales.png  used on input line 77.
+(pdftex.def)             Requested size: 292.77629pt x 292.7801pt.
+ [16 <./Img/Espirales.png>]
+<Img/NodoEstrella.png, id=408, 722.7pt x 722.7pt>
+File: Img/NodoEstrella.png Graphic file (type png)
+<use Img/NodoEstrella.png>
+Package pdftex.def Info: Img/NodoEstrella.png  used on input line 100.
+(pdftex.def)             Requested size: 292.77629pt x 292.7801pt.
+ [17 <./Img/NodoEstrella.png>]
+<Img/NodoDegenerado.png, id=417, 722.7pt x 722.7pt>
+File: Img/NodoDegenerado.png Graphic file (type png)
+<use Img/NodoDegenerado.png>
+Package pdftex.def Info: Img/NodoDegenerado.png  used on input line 127.
+(pdftex.def)             Requested size: 292.77629pt x 292.7801pt.
+ [18 <./Img/NodoDegenerado.png>]
+<Img/Centros.png, id=427, 722.7pt x 722.7pt>
+File: Img/Centros.png Graphic file (type png)
+<use Img/Centros.png>
+Package pdftex.def Info: Img/Centros.png  used on input line 166.
+(pdftex.def)             Requested size: 292.77629pt x 292.7801pt.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 86--87
+LaTeX Warning: `h' float specifier changed to `ht'.
 
- []
+[19]
+<Img/NoAislados.png, id=436, 722.7pt x 722.7pt>
+File: Img/NoAislados.png Graphic file (type png)
+<use Img/NoAislados.png>
+Package pdftex.def Info: Img/NoAislados.png  used on input line 193.
+(pdftex.def)             Requested size: 292.77629pt x 292.7801pt.
 
-[14]
-Underfull \hbox (badness 10000) in paragraph at lines 96--97
 
- []
+LaTeX Warning: `h' float specifier changed to `ht'.
 
-[15] [16]
-Overfull \hbox (21.68521pt too wide) in paragraph at lines 246--247
-[]$\OML/cmm/m/it/12 D\OT1/cmr/bx/n/12 f\OT1/cmr/m/n/12 (\OT1/cmr/bx/n/12 x[]\OT1/cmr/m/n/12 )$ es la \OT1/cmr/bx/n/12 ma-triz Ja-co-bia-na \OT1/cmr/m/n/12 eva-lua-da en $\OT1/cmr/bx/n/12 x[]$\OT1/cmr/m/n/12 , cu-yos ele-men-tos son $[][] =
- []
-
-[17] [18] [19] [20]) (./capitulo3.tex [21]
+[20 <./Img/Centros.png>] [21 <./Img/NoAislados.png>] [22] [23]) (./capitulo3.tex [24] [25]
 Cap\'{\i }tulo 3.
 
 Underfull \hbox (badness 10000) in paragraph at lines 3--4
@@ -874,9 +881,9 @@ Underfull \hbox (badness 10000) in paragraph at lines 17--19
 
  []
 
-[22
+[26
 
-] [23]
+] [27]
 Underfull \hbox (badness 10000) in paragraph at lines 79--80
 
  []
@@ -906,8 +913,8 @@ Underfull \hbox (badness 10000) in paragraph at lines 109--110
 
  []
 
-[24]
-<Img/rej1.png, id=459, 739.3221pt x 395.3169pt>
+[28]
+<Img/rej1.png, id=571, 739.3221pt x 395.3169pt>
 File: Img/rej1.png Graphic file (type png)
 <use Img/rej1.png>
 Package pdftex.def Info: Img/rej1.png  used on input line 120.
@@ -932,7 +939,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 130--131
 
  []
 
-[25 <./Img/rej1.png>]
+[29 <./Img/rej1.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 149--152
 
  []
@@ -942,12 +949,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 159--161
 
  []
 
-[26]
+[30]
 Underfull \hbox (badness 10000) in paragraph at lines 172--174
 
  []
 
-<Img/planofase1.png, id=506, 628.0263pt x 616.4631pt>
+<Img/planofase1.png, id=619, 628.0263pt x 616.4631pt>
 File: Img/planofase1.png Graphic file (type png)
 <use Img/planofase1.png>
 Package pdftex.def Info: Img/planofase1.png  used on input line 197.
@@ -960,18 +967,18 @@ Underfull \hbox (badness 10000) in paragraph at lines 201--203
 
  []
 
-[27]
+[31]
 Underfull \hbox (badness 10000) in paragraph at lines 228--229
 
  []
 
-[28 <./Img/planofase1.png>]
-<Img/plano_fase.png, id=530, 722.7pt x 722.7pt>
+[32 <./Img/planofase1.png>]
+<Img/plano_fase.png, id=643, 722.7pt x 722.7pt>
 File: Img/plano_fase.png Graphic file (type png)
 <use Img/plano_fase.png>
 Package pdftex.def Info: Img/plano_fase.png  used on input line 237.
 (pdftex.def)             Requested size: 355.65944pt x 355.65892pt.
- [29 <./Img/plano_fase.png>]
+ [33 <./Img/plano_fase.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 252--257
 
  []
@@ -991,7 +998,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 276--289
 
  []
 
-<Img/rminrmax.png, id=551, 628.0263pt x 616.4631pt>
+<Img/rminrmax.png, id=664, 628.0263pt x 616.4631pt>
 File: Img/rminrmax.png Graphic file (type png)
 <use Img/rminrmax.png>
 Package pdftex.def Info: Img/rminrmax.png  used on input line 292.
@@ -999,46 +1006,221 @@ Package pdftex.def Info: Img/rminrmax.png  used on input line 292.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[30]
+[34]
 Underfull \hbox (badness 10000) in paragraph at lines 302--304
 
  []
 
-[31 <./Img/rminrmax.png>] [32] [33]
-Underfull \hbox (badness 10000) in paragraph at lines 388--396
+[35 <./Img/rminrmax.png>] [36]
+Underfull \hbox (badness 10000) in paragraph at lines 387--395
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 388--396
+Underfull \hbox (badness 10000) in paragraph at lines 387--395
 
  []
 
 
-LaTeX Warning: Reference `eq:van_der_pol_sistema' on page 34 undefined on input line 422.
+LaTeX Warning: Reference `eq:van_der_pol_sistema' on page 37 undefined on input line 421.
 
-[34] [35] [36] [37] [38] [39]
-Underfull \hbox (badness 10000) in paragraph at lines 695--698
+[37] [38] [39] [40] [41]) (./capitulo4.tex [42]
+Cap\'{\i }tulo 4.
+[43
+
+] [44] [45]) (./capitulo5.tex [46]
+Cap\'{\i }tulo 5.
+
+Underfull \hbox (badness 10000) in paragraph at lines 15--16
 
  []
 
-) [40]
-LaTeX Font Info:    Trying to load font information for U+lasy on input line 23.
+
+Underfull \hbox (badness 10000) in paragraph at lines 17--18
+
+ []
+
+[47
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 37--39
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 40--41
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 44--46
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 49--50
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 59--60
+
+ []
+
+[48] [49]
+Underfull \hbox (badness 10000) in paragraph at lines 171--175
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 176--182
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 183--190
+
+ []
+
+[50]
+<Img/fl.png, id=882, 614.295pt x 616.4631pt>
+File: Img/fl.png Graphic file (type png)
+<use Img/fl.png>
+Package pdftex.def Info: Img/fl.png  used on input line 235.
+(pdftex.def)             Requested size: 284.52756pt x 285.533pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<Img/d.png, id=883, 617.9085pt x 171.2799pt>
+File: Img/d.png Graphic file (type png)
+<use Img/d.png>
+Package pdftex.def Info: Img/d.png  used on input line 244.
+(pdftex.def)             Requested size: 369.88582pt x 102.52827pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[51] [52 <./Img/fl.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 292--294
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 311--319
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 311--319
+
+ []
+
+[53 <./Img/d.png>]
+
+LaTeX Warning: Reference `eq: dxpolar' on page 54 undefined on input line 326.
+
+
+LaTeX Warning: Reference `eq: dypolar' on page 54 undefined on input line 326.
+
+[54]
+<Img/graficavanderpol.png, id=932, 1467.8037pt x 506.6127pt>
+File: Img/graficavanderpol.png Graphic file (type png)
+<use Img/graficavanderpol.png>
+Package pdftex.def Info: Img/graficavanderpol.png  used on input line 357.
+(pdftex.def)             Requested size: 398.33858pt x 137.48297pt.
+<Img/vanderpol.png, id=937, 397.485pt x 395.67825pt>
+File: Img/vanderpol.png Graphic file (type png)
+<use Img/vanderpol.png>
+Package pdftex.def Info: Img/vanderpol.png  used on input line 368.
+(pdftex.def)             Requested size: 312.9803pt x 311.56807pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[55 <./Img/graficavanderpol.png>] [56 <./Img/vanderpol.png>]
+<Img/graficarayleigh.png, id=955, 613.5723pt x 618.6312pt>
+File: Img/graficarayleigh.png Graphic file (type png)
+<use Img/graficarayleigh.png>
+Package pdftex.def Info: Img/graficarayleigh.png  used on input line 415.
+(pdftex.def)             Requested size: 256.0748pt x 258.18085pt.
+<Img/planorayleigh.png, id=956, 422.17725pt x 416.757pt>
+File: Img/planorayleigh.png Graphic file (type png)
+<use Img/planorayleigh.png>
+Package pdftex.def Info: Img/planorayleigh.png  used on input line 420.
+(pdftex.def)             Requested size: 312.9803pt x 308.97403pt.
+) (./formulas.tex
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[57] [58 <./Img/graficarayleigh.png>] [59 <./Img/planorayleigh.png>]
+Cap\'{\i }tulo 6.
+
+Underfull \hbox (badness 10000) in paragraph at lines 12--13
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--15
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 20--21
+
+ []
+
+
+Overfull \hbox (13.13094pt too wide) detected at line 33
+\OT1/cmr/m/n/12 = [][] [][] [][] \OML/cmm/m/it/12 d^^R \OT1/cmr/m/n/12 + [][] [][] [][] \OML/cmm/m/it/12 d^^R
+ []
+
+
+Overfull \hbox (20.29774pt too wide) detected at line 36
+\OT1/cmr/m/n/12 + [][] [][] [][] \OML/cmm/m/it/12 d^^R \OT1/cmr/m/n/12 + [][] [][] [][] \OML/cmm/m/it/12 d^^R
+ []
+
+[60
+
+]
+Overfull \hbox (39.82666pt too wide) detected at line 62
+\OT1/cmr/m/n/12 = [] [][] [] [] \OML/cmm/m/it/12 d^^^ \OT1/cmr/m/n/12 = [] [][] [][] [][] \OML/cmm/m/it/12 d^^^
+ []
+
+[61]
+Underfull \hbox (badness 10000) in paragraph at lines 132--133
+
+ []
+
+[62]
+Underfull \hbox (badness 10000) in paragraph at lines 144--145
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 156--157
+
+ []
+
+[63])
+LaTeX Font Info:    Trying to load font information for U+lasy on input line 26.
  (/usr/share/texlive/texmf-dist/tex/latex/base/ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 )
-Overfull \hbox (2.19643pt too wide) in paragraph at lines 24--24
+Overfull \hbox (2.19643pt too wide) in paragraph at lines 27--27
 \OT1/cmr/m/it/12 burgh, and Du-blin Phi-lo-sophi-cal Ma-ga-zi-ne and Jour-nal of Scien-ce \OT1/cmr/m/n/12 2.11 (1926),
  []
 
-[41
+[64
 
 ]
-Overfull \hbox (19.77464pt too wide) in paragraph at lines 24--24
+Overfull \hbox (19.77464pt too wide) in paragraph at lines 27--27
 \OT1/cmr/m/n/12 tie-lle[]. En: \OT1/cmr/m/it/12 Jour-nal de math^^Sema-ti-ques pu-res et ap-pli-qu^^Sees \OT1/cmr/m/n/12 7 (1881), p^^Sags. 375[]422. 
  []
 
-[42] (build/main.aux
+[65] (build/main.aux
 LaTeX Info: Redefining \sptext on input line 12.
 LaTeX Info: Redefining \. on input line 12.
 LaTeX Info: Redefining \% on input line 12.
@@ -1055,24 +1237,24 @@ LaTeX Warning: There were undefined references.
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 15F9A69136F482D93CB36FE7F7017891;4414.
+(rerunfilecheck)             Checksum: 42F9159C17D3E1A207199F5D87B4D0BA;8196.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 21884 strings out of 474222
- 373225 string characters out of 5748732
- 1937975 words of memory out of 5000000
- 43617 multiletter control sequences out of 15000+600000
+ 22129 strings out of 474222
+ 377304 string characters out of 5748732
+ 1940975 words of memory out of 5000000
+ 43776 multiletter control sequences out of 15000+600000
  569909 words of font info for 80 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 80i,10n,84p,963b,1978s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 80i,10n,84p,963b,2333s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/latxfont/lasy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on build/main.pdf (43 pages, 1402519 bytes).
+Output written on build/main.pdf (66 pages, 3018285 bytes).
 PDF statistics:
- 870 PDF objects out of 1000 (max. 8388607)
- 680 compressed objects within 7 object streams
- 272 named destinations out of 1000 (max. 500000)
- 212 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1177 PDF objects out of 1200 (max. 8388607)
+ 902 compressed objects within 10 object streams
+ 349 named destinations out of 1000 (max. 500000)
+ 405 words of extra memory for PDF output out of 10000 (max. 10000000)
 

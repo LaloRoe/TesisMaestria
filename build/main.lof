@@ -1,11 +1,27 @@
 \babel@toc {spanish}{}\relax 
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {1.1}{\ignorespaces Plano fase del Oscilador de Van der Pol}}{7}{figure.1.1}%
-\contentsline {figure}{\numberline {1.2}{\ignorespaces Plano fase de la ecuación de Rayleigh}}{8}{figure.1.2}%
-\contentsline {figure}{\numberline {1.3}{\ignorespaces Plano fase del Modelo de Fitz Hugh-Nagumo}}{9}{figure.1.3}%
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Plano fase del Oscilador de Van der Pol}}{8}{figure.1.1}%
+\contentsline {figure}{\numberline {1.2}{\ignorespaces Plano fase de la ecuación de Rayleigh}}{9}{figure.1.2}%
+\contentsline {figure}{\numberline {1.3}{\ignorespaces Plano fase del Modelo de Fitz Hugh-Nagumo}}{10}{figure.1.3}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Nodo estable}}{14}{figure.2.1}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Punto silla}}{15}{figure.2.2}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Espiral estable}}{16}{figure.2.3}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Nodo estrella estable}}{17}{figure.2.4}%
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Nodo degenerado inestable}}{18}{figure.2.5}%
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Centro}}{20}{figure.2.6}%
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Equilibrio no aislado}}{21}{figure.2.7}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Plano fase de \eqref {eq: drsis1}.}}{29}{figure.3.1}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Plano fase del sistema $\eqref {eq: sis1}$.}}{32}{figure.3.2}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Plano fase del sistema $\eqref {eq: sis1}$.}}{33}{figure.3.3}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Plano fase del sistema con perturbación.}}{35}{figure.3.4}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Plano fase de \eqref {eq: drsis1}.}}{25}{figure.3.1}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Plano fase del sistema $\eqref {eq: sis1}$.}}{28}{figure.3.2}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Plano fase del sistema $\eqref {eq: sis1}$.}}{29}{figure.3.3}%
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Plano fase del sistema con perturbación.}}{31}{figure.3.4}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Función vs función promediada.}}{52}{figure.5.1}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Diferencia de la Función con la función promediada.}}{53}{figure.5.2}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Plano fase de $\eqref {eq: drvander}$.}}{55}{figure.5.3}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Plano fase. Dibujado en https://aeb019.hosted.uark.edu/pplane.html}}{56}{figure.5.4}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Plano fase.Dibujado en https://aeb019.hosted.uark.edu/pplane.html}}{58}{figure.5.5}%
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Plano fase.Dibujado en https://aeb019.hosted.uark.edu/pplane.html}}{59}{figure.5.6}%
+\addvspace {10\p@ }

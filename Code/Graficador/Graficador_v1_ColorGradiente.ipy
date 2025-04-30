@@ -261,7 +261,7 @@ def onclick(event):
             z_rk_lineal=bde.runge_kutta(f1_linealizado,f2_linealizado,y0,0.1,pasos_rk,parametros)
             x_rk_lineal=z_rk_lineal[0,:]
             y_rk_lineal=z_rk_lineal[1,:]
-            plt.plot(x_rk_lineal, y_rk_lineal, color='green')
+            plt.plot(x_rk_lineal, y_rk_lineal, color='red')
         
         fig.canvas.draw()  # Actualizar la gráfica inmediatamente
 

@@ -1,0 +1,158 @@
+% capitulo2.tex
+\chapter{Formulas}
+
+\section{Integral de coseno y seno}
+
+Vamos a resolver la siguiente integral, que nos va a ser muy útil para el desarrollo de este trabajo:
+
+\begin{equation}\label{eq:integral_cos_sen}
+    \int_{0}^{2\pi}\cos^m\theta\sin^n\theta d\theta
+\end{equation}
+
+Vamos a comenzar analizando la integral $\eqref{eq:integral_cos_sen}$ para $m,n\in\mathbb{Z}^+$, números pares.\\
+
+Sean $n=2p$ y $m=2q$ con $p,q\in\mathbb{Z}^+$ enteros positivos.\\
+
+\begin{equation}\label{eq:integral_cos_sen_cv}
+	=\int_{0}^{2\pi}\cos^{2q}\theta\sin^{2p}\theta d\theta=\int_{0}^{2\pi}\left(\frac{1+\cos(2\theta)}{2}\right)^q\left(\frac{1-\cos(2\theta)}{2}\right)^p d\theta
+\end{equation}
+
+Hagamos un cambio de variable $\tau=\cos(2\theta)$, entonces $d\tau=-2\sin(2\theta)d\theta$ y $d\theta=-\frac{du}{2\sin(2\theta)}$. Notemos que $\tau^2=\cos^2 2\theta=1-\sin^2 2\theta$, entonces en $0\leq\theta\leq2\pi$\\
+
+\begin{equation}\label{eq:sin_cos_2theta}
+    \sin(2\theta)=\left\{\begin{array}{ll}
+        \sqrt{1-\tau^2} & \text{si } \theta\in[0,\pi/2] \text{ o } \theta\in[\pi,3\pi/2]\\
+        -\sqrt{1-\tau^2} & \text{si } \theta\in[\pi/2,\pi] \text{ o } \theta\in[3\pi/2,2\pi]
+    \end{array}\right.
+\end{equation}
+
+Entonces la integral $\eqref{eq:integral_cos_sen_cv}$ se puede reescribir como:
+
+\[
+    =\int_{0}^{\pi/2}\left(\frac{1+\cos(2\theta)}{2}\right)^q\left(\frac{1-\cos(2\theta)}{2}\right)^p d\theta + \int_{\pi/2}^{\pi}\left(\frac{1+\cos(2\theta)}{2}\right)^q\left(\frac{1-\cos(2\theta)}{2}\right)^p d\theta
+\]
+\[
+    + \int_{\pi}^{3\pi/2}\left(\frac{1+\cos(2\theta)}{2}\right)^q\left(\frac{1-\cos(2\theta)}{2}\right)^p d\theta + \int_{3\pi/2}^{2\pi}\left(\frac{1+\cos(2\theta)}{2}\right)^q\left(\frac{1-\cos(2\theta)}{2}\right)^p d\theta
+\]
+
+Hacemos el cambio de variable y considerando $\eqref{eq:sin_cos_2theta}$
+
+\[
+    =\int_{1}^{-1}\left(\frac{1+\tau}{2}\right)^q\left(\frac{1-\tau}{2}\right)^p\frac{-d\tau}{2\sqrt{1-\tau^2}}+\int_{-1}^{1}\left(\frac{1+\tau}{2}\right)^q\left(\frac{1-\tau}{2}\right)^p\frac{d\tau}{2\sqrt{1-\tau^2}}
+\]
+
+\[
+    +\int_{1}^{-1}\left(\frac{1+\tau}{2}\right)^q\left(\frac{1-\tau}{2}\right)^p\frac{-d\tau}{2\sqrt{1-\tau^2}}+\int_{-1}^{1}\left(\frac{1+\tau}{2}\right)^q\left(\frac{1-\tau}{2}\right)^p\frac{d\tau}{2\sqrt{1-\tau^2}}
+\]
+
+\[
+    =4\int_{-1}^{1}\left(\frac{1+\tau}{2}\right)^q\left(\frac{1-\tau}{2}\right)^p\frac{d\tau}{2\sqrt{1-\tau^2}} = \frac{1}{2^{q+p-1}}\int_{-1}^{1}\left(1+\tau\right)^q\left(1-\tau\right)^p\frac{d\tau}{\sqrt{1-\tau^2}}
+\]
+
+Hacemos de nuevo un cambio de variable $\tau=\cos\phi$, entonces $d\tau=-\sin\phi d\phi$. Como $-1\leq\tau\leq1$, entonces $\phi\in[0,\pi]$. En este dominio se tiene:
+
+\[
+\sqrt{1-\tau^2}=\sqrt{1-\cos^2\phi}=\sqrt{\sin^2\phi}=\left|\sin\phi\right|=\sin\phi
+\]
+
+Entonces se puede reescribir la integral como:
+
+\[
+    = \frac{1}{2^{q+p-1}}\int_{\pi}^{0}\frac{\left(1+\cos\phi\right)^q\left(1-\cos\phi\right)^p}{\sin\phi}\left(-\sin\phi\right)d\phi = \frac{1}{2^{q+p-1}}\int_{0}^{\pi}\left(1+\cos\phi\right)^q\left(1-\cos\phi\right)^p d\phi
+\]
+
+Recordemos que
+
+\begin{equation}\label{eq: cos_phi}
+    1+\cos\phi=2\cos^2\left(\frac{\phi}{2}\right)
+\end{equation}
+
+\begin{equation}\label{eq: cos_phi}
+    1-\cos\phi=2\sin^2\left(\frac{\phi}{2}\right)
+\end{equation}
+
+Sustituimos las identidades \eqref{eq: cos_phi} y \eqref{eq: cos_phi} en la integral:
+
+\[
+    = \frac{1}{2^{q+p-1}}\int_{0}^{\pi}\left(2\cos^2\left(\frac{\phi}{2}\right)\right)^q\left(2\sin^2\left(\frac{\phi}{2}\right)\right)^p d\phi
+\]
+
+Desarrollando las potencias y simplificando, se tiene:
+
+\[
+=2\int_{0}^{\pi}\cos^{2q}\left(\frac{\phi}{2}\right)\sin^{2p}\left(\frac{\phi}{2}\right) d\phi
+\]
+
+Hacemos un cambio de variable $u=\frac{\phi}{2}$, entonces $du=\frac{d\phi}{2}$ y $d\phi=2du$.
+
+Sustituimos en la integral:
+
+\[
+    =2\int_{0}^{\pi}\cos^{2q}\left(u\right)\sin^{2p}\left(u\right) 2du = 4\int_{0}^{\pi}\cos^{2q}\left(u\right)\sin^{2p}\left(u\right) du
+\]
+
+Sea $2a=2q+1$ y $2b=2p+1$, con $a,b\in\mathbb{Z}^+$ enteros positivos. Entonces la integral se puede reescribir como:
+
+\[
+    =4\int_{0}^{\pi/2}\cos^{2a-1}\left(u\right)\sin^{2b-1}\left(u\right) du = 4(\frac{1}{2}B(a,b))
+\]
+
+Donde $B(a,b)$ es la función beta.
+
+\[
+    =2B(q+\frac{1}{2},p+\frac{1}{2})=\frac{2\Gamma(q+\frac{1}{2})\Gamma(p+\frac{1}{2})}{\Gamma(q+p+1)}
+\]
+
+Donde $\Gamma(x)$ es la función gamma. Aplicando propiedades de la función gamma, se tiene:
+
+\[
+=\frac{2\frac{(2q)!}{2^{2q}q!}\sqrt{\pi}\frac{(2p)!}{2^{2p}p!}\sqrt{\pi}}{(q+p)!}=\frac{2\pi}{2^{2q+2p}}\frac{(2q)!(2p)!}{q!p!(q+p)!}
+\]
+Por lo tanto si $m,n$ son números enteros positivos pares, entonces:
+
+\begin{equation}\label{eq: integral_cos_sen_pares}
+    \int_{0}^{2\pi}\cos^m\theta\sin^n\theta d\theta = \frac{2\pi}{2^{m+n}}\frac{(m!)(n!)}{(\frac{m}{2})!(\frac{n}{2})!(\frac{m+n}{2})!}
+\end{equation}
+
+Ahora vamos a analizar la integral $\eqref{eq:integral_cos_sen}$ cuando al menos uno de los enteros $m$ o $n$ es impar.
+
+
+\section{Coordenadas polares}
+
+Consideremos las variables $(x,y)\in\mathbb{R}^2$, las cuales están parametrizadas en términos del tiempo $t$, es decir, $x=x(t)$ y $y=y(t)$ con parámetro $t\geq0$. Definimos el cambio de coordenadas cartesianas $(x,y)$
+a coordenadas polares $(r,\theta)$ mediante las relaciones:
+\begin{equation}\label{eq: xpolar}
+	x=r\cos(\theta)
+\end{equation}
+
+\begin{equation}\label{eq: ypolar}
+	y=r\sin(\theta)
+\end{equation}
+
+donde $r=r(t)$ y $\theta=\theta(t)$ también están parametrizadas en términos de $t$.\\
+
+Estas ecuaciones nos llevan a las siguientes identidades:
+
+\begin{equation}\label{eq: r2}
+	r^2=x^2+y^2\\
+\end{equation}
+
+\begin{equation}\label{eq: theta}
+	\theta=\arctan{\left(\frac{y}{x}\right)}
+\end{equation}
+
+en este caso restringimos $\theta\in\left[-\frac{\pi}{2},\frac{\pi}{2}\right]$ ya que en ese intervalo la función $\tan\left(\theta\right)$ es invertible y continua.\\
+
+Derivamos las ecuaciones \eqref{eq: r2} y \eqref{eq: theta} respecto a $t$, obtenemos las relaciones dinámicas en coordenadas polares:
+
+\begin{equation}\label{eq: drcart}
+	rr'=xx'+yy'
+\end{equation}
+
+\begin{equation}\label{eq: dthetacart}
+	r^2\theta'=xy'-yx'
+\end{equation}
+
+Estas relaciones nos van a permitir simplificar sistemas de ecuaciones diferenciales en coordenadas cartesianas a coordenadas polares, además nos permiten estudiar la evolución radial y angular de las trayectorias en el plano de fases, lo cual es clave para analizar ciclos límite \cite{perko2001differential}.\\
+
+\newpage

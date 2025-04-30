@@ -1,214 +1,217 @@
-% capitulo2.tex
-\chapter{Preliminares}
+\chapter{Conceptos Fundamentales}
 
-\section{Coordenadas polares}
+\section{Puntos de Equilibrio}
 
-Consideremos las variables $(x,y)\in\mathbb{R}^2$, las cuales están parametrizadas en términos del tiempo $t$, es decir, $x=x(t)$ y $y=y(t)$ con parámetro $t\geq0$. Definimos el cambio de coordenadas cartesianas $(x,y)$
-a coordenadas polares $(r,\theta)$ mediante las relaciones:
-\begin{equation}\label{eq: xpolar}
-	x=r\cos(\theta)
-\end{equation}
+En el estudio de sistemas dinámicos, los \textbf{puntos de equilibrio} desempeñan un papel fundamental como estados en los que las variables del sistema permanecen constantes. Formalmente, para un sistema lineal en el plano de la forma 
+\[
+\frac{d\mathbf{x}}{dt} = A\mathbf{x}, \quad \text{donde } \mathbf{x} = \begin{bmatrix} x \\ y \end{bmatrix} \text{ y } A \text{ es una matriz } 2 \times 2,
+\]
+un punto $\mathbf{x}_0$ es un punto de equilibrio si satisface $A\mathbf{x}_0 = 0$. Estos puntos representan estados estacionarios del sistema, y su clasificación nos permite entender el comportamiento global del sistema dinámico.
 
-\begin{equation}\label{eq: ypolar}
-	y=r\sin(\theta)
-\end{equation}
+En esta sección, exploraremos los diferentes tipos de puntos de equilibrio que pueden surgir en sistemas lineales, enfocándonos en su clasificación según los valores propios (eigenvalores) de la matriz $A$. Además, analizaremos sus implicaciones geométricas y dinámicas, proporcionando ejemplos concretos para ilustrar cada caso.
 
-donde $r=r(t)$ y $\theta=\theta(t)$ también están parametrizadas en términos de $t$.\\
+\subsection{Puntos de Equilibrio Robustos a Perturbaciones}
 
-Estas ecuaciones nos llevan a las siguientes identidades:
+Los puntos de equilibrio robustos son aquellos cuyo comportamiento cualitativo permanece inalterado bajo pequeñas perturbaciones en el sistema. Esta robustez los hace particularmente interesantes desde el punto de vista de la estabilidad y la predictibilidad.
 
-\begin{equation}\label{eq: r2}
-	r^2=x^2+y^2\\
-\end{equation}
+\subsubsection{Nodos}
 
-\begin{equation}\label{eq: theta}
-	\theta=\arctan{(\frac{y}{x})}
-\end{equation}
+\begin{definition}
+Un \textbf{nodo} ocurre cuando los eigenvalores $\lambda_1$ y $\lambda_2$ de la matriz $A$ son reales y tienen el mismo signo. Si ambos son negativos, el nodo es estable; si ambos son positivos, es inestable.
+\end{definition}
 
-en este caso restringimos $\theta\in\left[-\frac{\pi}{2},\frac{\pi}{2}\right]$ ya que en ese intervalo la función $\tan\left(\theta\right)$ es invertible y continua.\\
+En un nodo, las trayectorias convergen o divergen hacia el origen dependiendo del signo de los eigenvalores. Las soluciones tienden a alinearse con la dirección asociada al eigenvalor de mayor magnitud, conocida como la "dirección más rápida". Esta propiedad refleja cómo el sistema prioriza ciertas direcciones en su evolución temporal.
 
-Derivamos las ecuaciones \eqref{eq: r2} y \eqref{eq: theta} respecto a $t$, obtenemos las relaciones dinámicas en coordenadas polares:
+\begin{example}
+Consideremos el sistema:
+\[
+\frac{d}{dt} \begin{bmatrix} x \\ y \end{bmatrix} = \begin{bmatrix} -2 & 0 \\ 0 & -1 \end{bmatrix} \begin{bmatrix} x \\ y \end{bmatrix}.
+\]
+Los eigenvalores son $\lambda_1 = -2$ y $\lambda_2 = -1$, ambos negativos. Este es un \textbf{nodo estable}. Geométricamente, todas las trayectorias convergen hacia el origen, siendo la dirección del eje $x$ la más rápida debido al mayor valor absoluto de $\lambda_1$.
+\end{example}
 
-\begin{equation}\label{eq: drcart}
-	rr'=xx'+yy'
-\end{equation}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{Img/Nodo.png}
+    \caption{Nodo estable}
+    \label{fig:nodo}
+\end{figure}
 
-\begin{equation}\label{eq: dthetacart}
-	r^2\theta'=xy'-yx'
-\end{equation}
+El término "nodo" sugiere un punto central al que todas las trayectorias convergen o desde el cual divergen, similar a cómo los nodos en una red conectan múltiples caminos. Esta analogía resulta útil para visualizar el comportamiento de estos sistemas.
 
-Estas relaciones nos van a permitir simplificar sistemas de ecuaciones diferenciales en coordenadas cartesianas a coordenadas polares, además nos permiten estudiar la evolución radial y angular de las trayectorias en el plano de fases, lo cual es clave para analizar ciclos límite \cite{perko2001differential}.\\
+\subsubsection{Punto Silla}
+
+\begin{definition}
+Un \textbf{punto silla} ocurre cuando los eigenvalores $\lambda_1$ y $\lambda_2$ son reales y tienen signos opuestos ($\lambda_1 > 0$ y $\lambda_2 < 0$).
+\end{definition}
+
+El nombre "punto silla" proviene de la analogía con una silla de montar, donde hay direcciones estables (las patas de la silla) y direcciones inestables (el respaldo). Las trayectorias se acercan inicialmente siguiendo la dirección del eigenvalor negativo y luego divergen siguiendo la dirección del eigenvalor positivo.
+
+\begin{example}
+Considere el sistema:
+\[
+\frac{d}{dt} \begin{bmatrix} x \\ y \end{bmatrix} = \begin{bmatrix} 1 & 0 \\ 0 & -1 \end{bmatrix} \begin{bmatrix} x \\ y \end{bmatrix}.
+\]
+Los eigenvalores son $\lambda_1 = 1$ y $\lambda_2 = -1$. Este es un \textbf{punto silla}. Las trayectorias se comportan como líneas hiperbólicas que convergen hacia el origen en una dirección y divergen en otra.
+\end{example}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{Img/PuntoSilla.png}
+    \caption{Punto silla}
+    \label{fig:punto_silla}
+\end{figure}
+
+El punto silla es único entre los puntos de equilibrio robustos porque no es ni completamente estable ni completamente inestable. Este comportamiento dual lo convierte en un objeto de estudio fascinante en sistemas dinámicos.
+
+\subsubsection{Espirales}
+
+\begin{definition}
+Un \textbf{espiral} ocurre cuando los eigenvalores $\lambda_1$ y $\lambda_2$ son complejos conjugados con parte real distinta de cero. Si la parte real es negativa, el espiral es estable; si es positiva, es inestable.
+\end{definition}
+
+En un espiral, las trayectorias giran alrededor del origen mientras convergen o divergen. La frecuencia de rotación está determinada por la parte imaginaria de los eigenvalores, mientras que la parte real dicta la estabilidad o inestabilidad del sistema.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{Img/Espirales.png}
+    \caption{Espiral estable}
+    \label{fig:espiral}
+\end{figure}
+
+\begin{example}
+Considere el sistema:
+\[
+\frac{d}{dt} \begin{bmatrix} x \\ y \end{bmatrix} = \begin{bmatrix} -1 & 1 \\ -1 & -1 \end{bmatrix} \begin{bmatrix} x \\ y \end{bmatrix}.
+\]
+Los eigenvalores son $\lambda_{1,2} = -1 \pm i$. Este es un \textbf{espiral estable}. Las trayectorias forman espirales que convergen hacia el origen.
+\end{example}
+
+La belleza de los espirales radica en su naturaleza dual: combinan rotación y convergencia/divergencia en un solo movimiento. Esto los hace especialmente útiles para modelar fenómenos oscilatorios amortiguados, como un péndulo con fricción.
+
+\subsection{Puntos de Equilibrio Frágiles}
+
+Los puntos de equilibrio frágiles son aquellos cuyo comportamiento puede cambiar drásticamente bajo pequeñas perturbaciones. Estos casos son menos comunes pero igualmente importantes para comprender la estructura de los sistemas dinámicos.
+
+\subsubsection{Nodo Estrella}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{Img/NodoEstrella.png}
+    \caption{Nodo estrella estable}
+    \label{fig:nodo_estrella}
+\end{figure}
+
+\begin{definition}
+Un \textbf{nodo estrella} ocurre cuando los eigenvalores $\lambda_1$ y $\lambda_2$ son iguales y distintos de cero. En este caso, todo $\mathbb{R}^2$ es espacio propio.
+\end{definition}
+
+En un nodo estrella, las trayectorias convergen o divergen radialmente desde el origen. Es estable si $\lambda < 0$ e inestable si $\lambda > 0$.
+
+\begin{example}
+Considere el sistema:
+\[
+\frac{d}{dt} \begin{bmatrix} x \\ y \end{bmatrix} = \begin{bmatrix} -1 & 0 \\ 0 & -1 \end{bmatrix} \begin{bmatrix} x \\ y \end{bmatrix}.
+\]
+Este es un \textbf{nodo estrella estable}. Todas las trayectorias convergen radialmente hacia el origen.
+\end{example}
+
+\subsubsection{Nodo Degenerado}
+
+\begin{definition}
+Un \textbf{nodo degenerado} ocurre cuando solo existe un vector propio asociado a un único eigenvalor.
+\end{definition}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{Img/NodoDegenerado.png}
+    \caption{Nodo degenerado inestable}
+    \label{fig:nodo_degenerado}
+\end{figure}
+
+En un nodo degenerado, las trayectorias convergen o divergen tangencialmente al único vector propio. Es estable si el eigenvalor es negativo e inestable si es positivo.
+
+\begin{example}
+Considere el sistema:
+\[
+\frac{d}{dt} \begin{bmatrix} x \\ y \end{bmatrix} = \begin{bmatrix} 1 & 1 \\ 0 & 1 \end{bmatrix} \begin{bmatrix} x \\ y \end{bmatrix}.
+\]
+Este es un \textbf{nodo degenerado inestable}.
+\end{example}
+
+El nodo degenerado es un ejemplo de cómo la falta de vectores propios suficientes puede complicar el análisis del sistema. Este caso requiere técnicas adicionales, como la forma canónica de Jordan, para una descripción completa.
+
+\subsection{Equilibrios No Hiperbólicos}
+
+Los equilibrios no hiperbólicos son aquellos en los que al menos un eigenvalor tiene parte real igual a cero. Estos puntos son críticos porque su comportamiento puede ser altamente sensible a perturbaciones.
+
+\subsubsection{Centros}
+
+\begin{definition}
+Un \textbf{centro} ocurre cuando los eigenvalores son puramente imaginarios ($\lambda_{1,2} = \pm i\beta$).
+\end{definition}
+
+En un centro, las trayectorias forman órbitas cerradas alrededor del origen, sin converger ni divergir. Este comportamiento es típico de sistemas conservativos, como un péndulo ideal sin fricción.
+
+\begin{example}
+Considere el sistema:
+\[
+\frac{d}{dt} \begin{bmatrix} x \\ y \end{bmatrix} = \begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix} \begin{bmatrix} x \\ y \end{bmatrix}.
+\]
+Este es un \textbf{centro}. Las trayectorias forman círculos concéntricos alrededor del origen.
+\end{example}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{Img/Centros.png}
+    \caption{Centro}
+    \label{fig:centro}
+\end{figure}
 
 \newpage
 
-\section{Teoría de perturbaciones}
-
-Definimos un \textbf{problema perturbado} como una ecuación 
-
-\begin{equation}\label{eq: problemaPerturbado}
-	P^\epsilon\left(x\right)=0
-\end{equation}
-
-que incluye un parámetro pequeño $\epsilon$ con $0<\epsilon<1$, el cual que representa la perturbación.\\
-
-El objetivo es encontrar soluciones aproximadas $x=x\left(\epsilon\right)$ en función de este parámetro y estudiar su comportamiento cuando $\epsilon\to0$ \cite{hinch1991perturbation}.\\
-
-Para estudiar el comportamiento asintótico de las soluciones vamos a introducir el concepto de función de orden.
-
-\begin{definition}[Función de orden]
-	Se dice que una función $\delta=\delta\left(\epsilon\right)$ es de orden si cumple las siguientes condiciones:
-	\begin{enumerate}
-		\item Es continua en una vecindad de $\epsilon=0$.
-		\item Tiene signo definido en esa vecindad (es decir, $\delta(\epsilon)>0$ o $\delta(\epsilon)<0$ para $0<\epsilon<\epsilon_0$ con $\epsilon_0>0$).
-		\item Existe el límite:
-		$$\displaystyle\lim_{\epsilon\to0}\delta\left(\epsilon\right)$$
-	\end{enumerate}
-\end{definition}
+\subsubsection{No Aislados}
 
 \begin{definition}
-	Sean $\delta_1\left(\epsilon\right)$ y $\delta_2\left(\epsilon\right)$ funciones de orden. Decimos que: 
-	\begin{enumerate}
-		\item $\delta_1\left(\epsilon\right)=O\left(\delta_2\left(\epsilon\right)\right)$ si existe $k\in\mathbb{R}^+$ y un $\epsilon_0>0$ tales que:
-		\begin{equation}\label{eq: Big-O}
-			|\delta_1\left(\epsilon\right)|\leq k|\delta_2\left(\epsilon\right)|
-		\end{equation}
-		para todo $0<\epsilon<\epsilon_0$.\\
+Un \textbf{equilibrio no aislado} ocurre cuando un eigenvalor es cero y el otro es distinto de cero.
+\end{definition}
 
-		Esta definición describe una cota superior en el crecimiento de la función $\delta_1\left(\epsilon\right)$ en términos de $\delta_2\left(\epsilon\right)$ cuando $\epsilon\to0$. Es decir, $\delta_2(\epsilon)$ actúa como una cota superior para $\delta_1(\epsilon)$ \cite{bender2013advanced}.\\
-		\item $\delta_1\left(\epsilon\right)=o(\delta_2\left(\epsilon\right))$ si:
-		\begin{equation}\label{eq: small-o}
-		\displaystyle\lim_{\epsilon\to0}\frac{\delta_1\left(\epsilon\right)}{\delta_2\left(\epsilon\right)}=0
-		\end{equation}
-		Esta definición indica que $\delta_1\left(\epsilon\right)$ es asintóticamente insignificante en comparación con $\delta_2\left(\epsilon\right)$ cuando $\epsilon\to0$; es decir, $\delta_2(\epsilon)$ crece (o decrece) más rápido que $\delta_1(\epsilon)$ \cite{bender2013advanced}.\\
-	\end{enumerate}
-\end{definition} 
-
-Consideremos las funciones $\delta_1\left(\epsilon\right)=\ln\left(1+\epsilon\right)$ y $\delta_2\left(\epsilon\right)=\epsilon$.\\
-
-La serie de Taylor de $\ln\left(1+\epsilon\right)$ alrededor de $\epsilon=0$ es:
-
-$$\ln\left(1+\epsilon\right)=\epsilon-\frac{\epsilon^2}{2}+\frac{\epsilon^3}{3}-\dots$$
-
-evaluamos el límite:
-
-$$\displaystyle\lim_{\epsilon\to0}\frac{\delta_1\left(\epsilon\right)}{\delta_2\left(\epsilon\right)}=\lim_{\epsilon\to0}\frac{\epsilon-\frac{\epsilon^2}{2}+\frac{\epsilon^3}{3}-\dots}{\epsilon}=\lim_{\epsilon\to0}\left(1-\frac{\epsilon}{2}+\frac{\epsilon^2}{3}-\dots\right)=1.$$
-
-El límite es distinto de cero, por lo que $\ln\left(1+\epsilon\right)$ no es $o\left(\epsilon\right)$. Sin embargo, dado que el límite es finito y positivo, concluimos que $\ln\left(1+\epsilon\right)=O\left(\epsilon\right)$ \cite{bender2013advanced}.\\
-
-Veamos algunos ejemplos más para comprender mejor estas definiciones.
+En este caso, las trayectorias pueden colapsar en una línea de equilibrios, lo que refleja la presencia de un subespacio invariante.
 
 \begin{example}
-    
-    Sea \(\delta_1(\epsilon) = \sin(\epsilon)\) y \(\delta_2(\epsilon) = \epsilon\).
-
-    Sabemos que para \(\epsilon \to 0\):
-    
-    \[
-    \sin(\epsilon) = \epsilon - \frac{\epsilon^3}{6} + \frac{\epsilon^5}{120} - \dots
-    \]
-    
-    Calculamos el límite:
-    
-    \[
-    \lim_{\epsilon \to 0} \frac{\sin(\epsilon)}{\epsilon} = \lim_{\epsilon \to 0} \left(1 - \frac{\epsilon^2}{6} + \frac{\epsilon^4}{120} - \dots \right) = 1.
-    \]
-    
-    El límite es finito y positivo, por lo que \(\sin(\epsilon) = O\left( \epsilon \right)\).
-    
+Considere el sistema:
+\[
+\frac{d}{dt} \begin{bmatrix} x \\ y \end{bmatrix} = \begin{bmatrix} 0 & 0 \\ 0 & -1 \end{bmatrix} \begin{bmatrix} x \\ y \end{bmatrix}.
+\]
+Este es un \textbf{equilibrio no aislado}. Las trayectorias convergen hacia el eje $x$, que actúa como una línea de equilibrios.
 \end{example}
 
-\begin{example}
-    Sea \(\delta_1(\epsilon) = e^\epsilon - 1\) y \(\delta_2(\epsilon) = \epsilon\).
+La clasificación de puntos de equilibrio no solo nos permite entender el comportamiento local de un sistema dinámico, sino también predecir su evolución global. Cada tipo de equilibrio tiene su propia "personalidad", y su estudio revela la riqueza y complejidad de los sistemas dinámicos lineales.
 
-La serie de Taylor de \(e^\epsilon\) es:
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{Img/NoAislados.png}
+    \caption{Equilibrio no aislado}
+    \label{fig:no_aislado}
+\end{figure}
 
-\[
-e^\epsilon = 1 + \epsilon + \frac{\epsilon^2}{2} + \frac{\epsilon^3}{6} + \dots
-\]
-
-Entonces:
-
-\[
-e^\epsilon - 1 = \epsilon + \frac{\epsilon^2}{2} + \frac{\epsilon^3}{6} + \dots
-\]
-
-Calculamos el límite:
-
-\[
-\lim_{\epsilon \to 0} \frac{e^\epsilon - 1}{\epsilon} = \lim_{\epsilon \to 0} \left(1 + \frac{\epsilon}{2} + \frac{\epsilon^2}{6} + \dots \right) = 1.
-\]
-
-Por lo tanto, \(e^\epsilon - 1 = O\left( \epsilon \right)\).
-
-\end{example}
-
-\begin{example}
-    Sea \(\delta_1(\epsilon) = \epsilon^2\) y \(\delta_2(\epsilon) = \epsilon\).
-
-Calculamos el límite:
-
-\[
-\lim_{\epsilon \to 0} \frac{\epsilon^2}{\epsilon} = \lim_{\epsilon \to 0} \epsilon = 0.
-\]
-
-Entonces, \(\epsilon^2 = o\left( \epsilon \right)\), lo que significa que \(\epsilon^2\) es insignificante en comparación con \(\epsilon\) cuando \(\epsilon \to 0\) \cite{bender2013advanced}.
-
-\end{example}
-
-\begin{example}
-    Sea \(\delta_1(\epsilon) = \epsilon \ln(\epsilon)\) y \(\delta_2(\epsilon) = \epsilon\).
-
-Para \(\epsilon \to 0^+\), \(\ln(\epsilon) \to -\infty\), por lo que \(\epsilon \ln(\epsilon) \to 0^-\).
-
-Calculamos el límite:
-
-\[
-\lim_{\epsilon \to 0^+} \frac{\epsilon \ln(\epsilon)}{\epsilon} = \lim_{\epsilon \to 0^+} \ln(\epsilon) = -\infty.
-\]
-
-Aunque el límite es infinito negativo, observamos que \(\epsilon \ln(\epsilon)\) tiende a cero más lentamente que \(\epsilon\). Por lo tanto, \(\epsilon \ln(\epsilon) = o(1)\), pero no es \(o\left( \epsilon \right)\) ni \(O\left( \epsilon \right)\) \cite{bender2013advanced}.
-
-\end{example}
-
-\begin{example}
-    Sea \(\delta_1(\epsilon) = e^{-1/\epsilon}\) y \(\delta_2(\epsilon) = \epsilon^n\) para cualquier \(n > 0\).
-
-Cuando \(\epsilon \to 0^+\):
-
-\[
-e^{-1/\epsilon} \to e^{-\infty} = 0,
-\]
-
-y
-
-\[
-\lim_{\epsilon \to 0^+} \frac{e^{-1/\epsilon}}{\epsilon^n} = 0,
-\]
-
-ya que \(e^{-1/\epsilon}\) decrece más rápidamente que cualquier potencia de \(\epsilon\). Por lo tanto, \(e^{-1/\epsilon} = o\left( \epsilon^n \right)\) \cite{bender2013advanced}.
-
-\end{example}
-
-\begin{example}
-    Sea \(\delta_1(\epsilon) = \epsilon^n\) y \(\delta_2(\epsilon) = e^{-1/\epsilon}\) para cualquier \(n > 0\).
-
-Calculamos:
-
-\[
-\lim_{\epsilon \to 0^+} \frac{\epsilon^n}{e^{-1/\epsilon}} = \lim_{\epsilon \to 0^+} \epsilon^n e^{1/\epsilon} = \infty,
-\]
-
-ya que \(e^{1/\epsilon}\) crece más rápido que cualquier potencia negativa de \(\epsilon\). Por lo tanto, \(\delta_2(\epsilon) = o\left( \delta_1(\epsilon) \right)\) \cite{bender2013advanced}.
-
-\end{example}
 
 \section{Teoría de la Linealización de Sistemas de Ecuaciones Diferenciales}
 
-El análisis de sistemas de ecuaciones diferenciales no lineales puede ser complejo debido a su naturaleza intrínseca. Sin embargo, bajo ciertas condiciones, es posible aproximar el comportamiento del sistema cerca de puntos de equilibrio mediante su linealización. Este método simplifica el estudio de la estabilidad local y la dinámica del sistema \cite{perko2001differential}.
+En la sección anterior, exploramos los diferentes tipos de puntos de equilibrio en sistemas lineales y su clasificación según los eigenvalores de la matriz asociada. Aprendimos cómo los nodos, puntos silla, espirales y centros describen comportamientos locales únicos, cada uno con su propia "personalidad". Sin embargo, muchos fenómenos del mundo real están modelados por sistemas no lineales, cuya complejidad puede dificultar un análisis directo. En esta sección, profundizaremos en un método clave para estudiar estos sistemas: la \textbf{linealización}.
 
-\subsection{Conceptos Fundamentales}
+La idea central detrás de la linealización es aprovechar las herramientas desarrolladas para sistemas lineales y aplicarlas a sistemas no lineales cerca de puntos de equilibrio. Como vimos anteriormente, los puntos de equilibrio son estados donde el sistema "se detiene", y su estabilidad determina si el sistema regresa al equilibrio o se aleja tras pequeñas perturbaciones. La linealización nos permite aproximar el comportamiento local de un sistema no lineal mediante un sistema lineal asociado, simplificando significativamente el análisis.
 
-\subsubsection{Sistemas de Ecuaciones Diferenciales No Lineales}
+\subsection{De Lo Lineal a Lo No Lineal: Una Transición Natural}
+
+Recordemos que, en sistemas lineales, el comportamiento global está completamente determinado por los eigenvalores de la matriz del sistema. Por ejemplo:
+- Un \textbf{nodo estable} indica que todas las trayectorias convergen al origen.
+- Un \textbf{punto silla} revela direcciones estables e inestables.
+- Un \textbf{centro} describe órbitas cerradas sin convergencia ni divergencia.
+
+Sin embargo, en sistemas no lineales, estas propiedades pueden variar dependiendo de la región del espacio fase que estemos analizando. Aquí es donde entra la linealización: al enfocarnos en un entorno pequeño alrededor de un punto de equilibrio, podemos aproximar el sistema no lineal por uno lineal que capture su comportamiento local.
+
+\subsection{El Proceso de Linealización: ¿Cómo Funciona?}
 
 Consideremos un sistema autónomo de ecuaciones diferenciales ordinarias (EDO) en $\mathbb{R}^n$:
 
@@ -216,105 +219,50 @@ Consideremos un sistema autónomo de ecuaciones diferenciales ordinarias (EDO) e
     \dot{\mathbf{x}} = \mathbf{f}(\mathbf{x}),
 \end{equation}
 
-donde $\mathbf{x} \in \mathbb{R}^n$ es el vector de estado y $\mathbf{f}: \mathbb{R}^n \to \mathbb{R}^n$ es una función vectorial continua y al menos diferenciable una vez en un entorno del punto de equilibrio.
-
-\subsubsection{Puntos de Equilibrio}
-
-Un punto $\mathbf{x}_0 \in \mathbb{R}^n$ es un \textbf{punto de equilibrio} del sistema \eqref{eq:sistema_no_lineal} si satisface:
+donde $\mathbf{x} \in \mathbb{R}^n$ representa el vector de estado, y $\mathbf{f}: \mathbb{R}^n \to \mathbb{R}^n$ es una función vectorial continua y diferenciable al menos una vez en un entorno del punto de equilibrio. Recordemos, como se discutió en la sección anterior, que un \textbf{punto de equilibrio} $\mathbf{x}_0$ satisface:
 
 \begin{equation}
     \mathbf{f}(\mathbf{x}_0) = \mathbf{0}.
 \end{equation}
 
-En otras palabras, si el sistema se encuentra en $\mathbf{x}_0$, permanecerá allí para todo tiempo $t$.
-
-\subsection{Linealización del Sistema}
-
-La idea principal de la linealización es aproximar el sistema no lineal \eqref{eq:sistema_no_lineal} cerca de un punto de equilibrio $\mathbf{x}_0$ mediante su sistema lineal asociado. Esto se logra utilizando la \textbf{expansión en serie de Taylor} de $\mathbf{f}(\mathbf{x})$ alrededor de $\mathbf{x}_0$.
-
-\subsubsection{Expansión en Serie de Taylor}
-
-La expansión de $\mathbf{f}(\mathbf{x})$ en torno a $\mathbf{x}_0$ es:
+Para analizar el comportamiento del sistema cerca de $\mathbf{x}_0$, utilizamos la \textbf{expansión en serie de Taylor} de $\mathbf{f}(\mathbf{x})$ alrededor de $\mathbf{x}_0$. Esta aproximación descompone $\mathbf{f}(\mathbf{x})$ en términos lineales y residuales:
 
 \begin{equation}
     \mathbf{f}(\mathbf{x}) = \mathbf{f}(\mathbf{x}_0) + D\mathbf{f}(\mathbf{x}_0)(\mathbf{x} - \mathbf{x}_0) + \mathbf{R}(\mathbf{x}),
 \end{equation}
 
 donde:
+- $D\mathbf{f}(\mathbf{x}_0)$ es la \textbf{matriz Jacobiana} evaluada en $\mathbf{x}_0$, cuyos elementos son $\left[ D\mathbf{f}(\mathbf{x}_0) \right]_{ij} = \dfrac{\partial f_i}{\partial x_j} \bigg|_{\mathbf{x}_0}$,
+- $\mathbf{R}(\mathbf{x})$ es el término de residuo que contiene las partes de orden superior.
 
-\begin{itemize}
-    \item $D\mathbf{f}(\mathbf{x}_0)$ es la \textbf{matriz Jacobiana} evaluada en $\mathbf{x}_0$, cuyos elementos son $\left[ D\mathbf{f}(\mathbf{x}_0) \right]_{ij} = \dfrac{\partial f_i}{\partial x_j} \bigg|_{\mathbf{x}_0}$.
-    \item $\mathbf{R}(\mathbf{x})$ es el término de residuo que contiene las partes de orden superior.
-\end{itemize}
-
-Dado que $\mathbf{f}(\mathbf{x}_0) = \mathbf{0}$, la aproximación lineal del sistema cerca de $\mathbf{x}_0$ es:
+Como $\mathbf{f}(\mathbf{x}_0) = \mathbf{0}$, la aproximación lineal del sistema cerca de $\mathbf{x}_0$ es:
 
 \begin{equation}\label{eq:sistema_linealizado}
     \dot{\mathbf{x}} = D\mathbf{f}(\mathbf{x}_0)(\mathbf{x} - \mathbf{x}_0).
 \end{equation}
 
-\subsection{Análisis de Estabilidad mediante Linealización}
+Esta ecuación describe cómo el sistema evoluciona cerca del punto de equilibrio. Es como si estuviéramos mirando el sistema a través de una lupa centrada en $\mathbf{x}_0$, ignorando los términos de orden superior que son despreciables en un entorno suficientemente pequeño.
 
-La linealización permite estudiar la estabilidad local del punto de equilibrio $\mathbf{x}_0$ analizando el sistema linealizado \eqref{eq:sistema_linealizado}. La solución general de este sistema lineal se puede expresar en términos de exponentes y vectores propios de la matriz Jacobiana $D\mathbf{f}(\mathbf{x}_0)$.
+\subsection{Eigenvalores y Estabilidad}
 
-\subsubsection{Solución del Sistema Linealizado}
+Al igual que en sistemas lineales, la matriz Jacobiana $D\mathbf{f}(\mathbf{x}_0)$ juega un papel crucial en la linealización. Sus eigenvalores determinan la estabilidad local del punto de equilibrio $\mathbf{x}_0$:
+- Si todos los eigenvalores tienen parte real negativa ($\text{Re}(\lambda_i) < 0$), el punto de equilibrio es \textbf{asintóticamente estable}. Las trayectorias cercanas convergen al equilibrio, similar a un nodo estable.
+- Si alguno de los eigenvalores tiene parte real positiva ($\text{Re}(\lambda_i) > 0$), el punto de equilibrio es \textbf{inestable}. Las trayectorias cercanas se alejan del equilibrio, como en un punto silla o un nodo inestable.
+- Si todos los eigenvalores tienen parte real no positiva y al menos uno con parte real cero, el análisis lineal no es concluyente, y debemos recurrir a métodos más avanzados.
 
-Sea $\mathbf{A} = D\mathbf{f}(\mathbf{x}_0)$. El sistema linealizado es:
+Estos resultados refuerzan lo que aprendimos en la sección anterior sobre la importancia de los eigenvalores en la clasificación de puntos de equilibrio. La diferencia clave aquí es que estamos aplicando estas ideas a sistemas no lineales, donde la linealización solo proporciona información local.
 
-\begin{equation}
-    \dot{\mathbf{z}} = \mathbf{A} \mathbf{z},
-\end{equation}
+\subsection{Profundizando en la Interpretación Geométrica}
 
-donde $\mathbf{z} = \mathbf{x} - \mathbf{x}_0$.
+La matriz Jacobiana $D\mathbf{f}(\mathbf{x}_0)$ actúa como una "brújula" que nos indica la dirección y magnitud del cambio en cada variable del sistema cerca del punto de equilibrio. Por ejemplo:
+- Si los eigenvalores tienen parte real negativa, el sistema tiende a regresar al equilibrio, como un resorte que se comprime y luego vuelve a su posición original.
+- Si los eigenvalores tienen parte real positiva, el sistema se aleja del equilibrio, como una bola rodando cuesta abajo.
 
-La solución general es:
+Este comportamiento es análogo a lo que observamos en sistemas lineales, pero ahora lo estamos aplicando a sistemas no lineales en un entorno local.
 
-\begin{equation}
-    \mathbf{z}(t) = e^{\mathbf{A} t} \mathbf{z}_0,
-\end{equation}
+\subsection{Ejemplo Práctico: Modelo de Depredador-Presa}
 
-donde $\mathbf{z}_0 = \mathbf{z}(0)$ es la condición inicial.
-
-\subsubsection{Análisis de los Autovalores}
-
-La estabilidad del punto de equilibrio está determinada por los autovalores $\lambda_i$ de la matriz $\mathbf{A}$:
-
-\begin{itemize}
-    \item Si todos los autovalores tienen parte real negativa ($\text{Re}(\lambda_i) < 0$), el punto de equilibrio es \textbf{asintóticamente estable}.
-    \item Si alguno de los autovalores tiene parte real positiva ($\text{Re}(\lambda_i) > 0$), el punto de equilibrio es \textbf{inestable}.
-    \item Si todos los autovalores tienen parte real no positiva y al menos uno con parte real cero, se requiere un análisis más detallado (no se puede concluir estabilidad sólo con la linealización).
-\end{itemize}
-
-\subsection{Teoremas que Justifican el Método}
-
-\subsubsection{Teorema de Hartman-Grobman}
-
-El \textbf{teorema de Hartman-Grobman} establece que, cerca de un punto de equilibrio hiperbólico, el sistema no lineal es topológicamente equivalente a su sistema linealizado.
-
-\begin{theorem}[Hartman-Grobman]
-Sea $\mathbf{x}_0$ un punto de equilibrio hiperbólico del sistema \eqref{eq:sistema_no_lineal}, es decir, la matriz Jacobiana $\mathbf{A} = D\mathbf{f}(\mathbf{x}_0)$ no tiene autovalores con parte real cero. Entonces, existe un entorno $U$ de $\mathbf{x}_0$ tal que el flujo del sistema no lineal en $U$ es topológicamente equivalente al flujo del sistema linealizado en $U$ \cite{hartman1960lemma}.
-\end{theorem}
-
-Este teorema justifica el uso de la linealización para analizar la estabilidad local alrededor de puntos de equilibrio hiperbólicos.
-
-\subsubsection{Puntos de Equilibrio Hiperbólicos}
-
-Un punto de equilibrio $\mathbf{x}_0$ es \textbf{hiperbólico} si ninguno de los autovalores de $\mathbf{A} = D\mathbf{f}(\mathbf{x}_0)$ tiene parte real cero.
-
-\subsubsection{Limitaciones del Método}
-
-La linealización no es concluyente en los siguientes casos:
-
-\begin{itemize}
-    \item Si la matriz Jacobiana tiene autovalores con parte real cero (punto de equilibrio no hiperbólico).
-    \item Si se desea conocer el comportamiento global del sistema (la linealización sólo proporciona información local).
-\end{itemize}
-
-En tales casos, es necesario utilizar métodos más avanzados, como la teoría de sistemas dinámicos no lineales, funciones de Lyapunov o métodos numéricos.
-
-\subsection{Ejemplo de Aplicación}
-
-Consideremos el sistema:
+Para ilustrar el proceso de linealización, consideremos nuevamente el modelo de depredador-presa discutido en la sección anterior:
 
 \begin{equation}\label{eq:ejemplo_sistema}
     \begin{cases}
@@ -323,25 +271,15 @@ Consideremos el sistema:
     \end{cases}
 \end{equation}
 
-donde $\alpha > 0$ es un parámetro.
+donde $x$ representa la población de presas, $y$ la población de depredadores, y $\alpha > 0$ es un parámetro que controla la tasa de crecimiento de los depredadores.
 
 \subsubsection{Puntos de Equilibrio}
 
-Encontramos los puntos de equilibrio resolviendo:
-
-\begin{equation}
-    \begin{cases}
-        x (1 - x) - x y = 0, \\
-        y (-\alpha + x) = 0.
-    \end{cases}
-\end{equation}
-
-Las soluciones son:
-
+Recordemos que los puntos de equilibrio son:
 \begin{itemize}
-    \item $E_1 = (0, 0)$.
-    \item $E_2 = (1, 0)$.
-    \item $E_3 = (\alpha, 0)$ si $0 < \alpha < 1$.
+    \item $E_1 = (0, 0)$: Extinción de ambas especies.
+    \item $E_2 = (1, 0)$: Las presas alcanzan su capacidad máxima sin depredadores.
+    \item $E_3 = (\alpha, 0)$ si $0 < \alpha < 1$: Coexistencia de presas y depredadores.
 \end{itemize}
 
 \subsubsection{Linealización en $E_2 = (1, 0)$}
@@ -350,11 +288,6 @@ Calculamos la matriz Jacobiana:
 
 \begin{equation}
     \mathbf{A} = D\mathbf{f}(x, y) =
-    \begin{pmatrix}
-        \dfrac{\partial \dot{x}}{\partial x} & \dfrac{\partial \dot{x}}{\partial y} \\
-        \dfrac{\partial \dot{y}}{\partial x} & \dfrac{\partial \dot{y}}{\partial y}
-    \end{pmatrix}
-    =
     \begin{pmatrix}
         1 - 2x - y & -x \\
         y & -\alpha + x
@@ -371,40 +304,25 @@ Evaluamos en $E_2 = (1, 0)$:
     \end{pmatrix}.
 \end{equation}
 
-Los autovalores son las soluciones de:
+Los eigenvalores son las soluciones de:
 
 \begin{equation}
     \det(\mathbf{A} - \lambda \mathbf{I}) = 0.
 \end{equation}
 
-Calculamos:
-
-\begin{equation}
-    \left| \begin{array}{cc}
-        -1 - \lambda & -1 \\
-        0 & 1 - \alpha - \lambda
-    \end{array} \right| = (-1 - \lambda)(1 - \alpha - \lambda) - (0)(-1) = 0.
-\end{equation}
-
-Resolviendo para $\lambda$:
-
-\begin{equation}
-    (-1 - \lambda)(1 - \alpha - \lambda) = 0.
-\end{equation}
-
-Obtenemos los autovalores:
+Resolviendo, obtenemos:
 
 \begin{equation}
     \lambda_1 = -1, \quad \lambda_2 = 1 - \alpha.
 \end{equation}
 
 La estabilidad del punto de equilibrio $E_2$ depende del valor de $\alpha$:
+- Si $\alpha < 1$, entonces $\lambda_2 > 0$, y el punto es un \textbf{punto silla} (inestable). Las perturbaciones pueden llevar al sistema hacia otros estados.
+- Si $\alpha > 1$, entonces $\lambda_2 < 0$, y el punto es un \textbf{nodo estable}. El sistema tiende a regresar al equilibrio.
 
-\begin{itemize}
-    \item Si $\alpha < 1$, entonces $\lambda_2 > 0$ y el punto es un \textbf{silla de montar} (inestable).
-    \item Si $\alpha > 1$, entonces $\lambda_2 < 0$ y el punto es un \textbf{nodo estable}.
-\end{itemize}
+Este análisis refuerza lo que aprendimos en la sección anterior sobre la importancia de los puntos silla y nodos en la dinámica de sistemas.
 
-\subsection{Conclusión}
+La linealización es una herramienta poderosa que conecta los conceptos de puntos de equilibrio y estabilidad de sistemas lineales con el análisis de sistemas no lineales. Al aproximar el comportamiento local de un sistema no lineal mediante su linealización, podemos aplicar las mismas herramientas y técnicas que usamos en la sección anterior, como la clasificación de puntos de equilibrio basada en eigenvalores.
 
-La linealización es una herramienta poderosa para analizar la estabilidad local de sistemas de ecuaciones diferenciales no lineales cerca de puntos de equilibrio hiperbólicos. El teorema de Hartman-Grobman proporciona el fundamento teórico para este método, asegurando que, bajo las condiciones adecuadas, el comportamiento cualitativo del sistema no lineal es capturado por su linealización.
+Este enfoque no solo simplifica el análisis, sino que también brinda intuiciones valiosas sobre cómo interactúan las variables en sistemas complejos. Desde modelos ecológicos hasta sistemas mecánicos, la linealización sigue siendo una piedra angular en el estudio de sistemas dinámicos, permitiéndonos comprender tanto el comportamiento local como sus implicaciones globales.
+

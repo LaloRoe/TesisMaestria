@@ -408,29 +408,29 @@
       \field{title}{Introduction to Applied Nonlinear Dynamical Systems and Chaos}
       \field{year}{2003}
     \endentry
-    \entry{strogatz2018nonlinear}{book}{}
+    \entry{hinch1991perturbation}{book}{}
       \name{author}{1}{}{%
-        {{hash=b0115f77df78376c68429033349375fc}{%
-           family={Strogatz},
-           familyi={S\bibinitperiod},
-           given={Steven\bibnamedelima H.},
-           giveni={S\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+        {{hash=f65b2c54f2dd74ac4bcad61a8487f511}{%
+           family={Hinch},
+           familyi={H\bibinitperiod},
+           given={E.\bibnamedelimi J.},
+           giveni={E\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
       }
       \list{publisher}{1}{%
-        {CRC Press}%
+        {Cambridge University Press}%
       }
-      \strng{namehash}{b0115f77df78376c68429033349375fc}
-      \strng{fullhash}{b0115f77df78376c68429033349375fc}
-      \strng{bibnamehash}{b0115f77df78376c68429033349375fc}
-      \strng{authorbibnamehash}{b0115f77df78376c68429033349375fc}
-      \strng{authornamehash}{b0115f77df78376c68429033349375fc}
-      \strng{authorfullhash}{b0115f77df78376c68429033349375fc}
+      \strng{namehash}{f65b2c54f2dd74ac4bcad61a8487f511}
+      \strng{fullhash}{f65b2c54f2dd74ac4bcad61a8487f511}
+      \strng{bibnamehash}{f65b2c54f2dd74ac4bcad61a8487f511}
+      \strng{authorbibnamehash}{f65b2c54f2dd74ac4bcad61a8487f511}
+      \strng{authornamehash}{f65b2c54f2dd74ac4bcad61a8487f511}
+      \strng{authorfullhash}{f65b2c54f2dd74ac4bcad61a8487f511}
       \field{sortinit}{1}
       \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{title}{Nonlinear Dynamics and Chaos: With Applications to Physics, Biology, Chemistry, and Engineering}
-      \field{year}{2018}
+      \field{title}{Perturbation Methods}
+      \field{year}{1991}
     \endentry
     \entry{bender2013advanced}{book}{}
       \name{author}{2}{}{%
@@ -454,36 +454,62 @@
       \strng{authorbibnamehash}{880da90bb8a3c7ef13ef4b742d6bc503}
       \strng{authornamehash}{880da90bb8a3c7ef13ef4b742d6bc503}
       \strng{authorfullhash}{880da90bb8a3c7ef13ef4b742d6bc503}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Advanced Mathematical Methods for Scientists and Engineers I: Asymptotic Methods and Perturbation Theory}
       \field{year}{2013}
     \endentry
-    \entry{hinch1991perturbation}{book}{}
+    \entry{hartman1960lemma}{article}{}
       \name{author}{1}{}{%
-        {{hash=f65b2c54f2dd74ac4bcad61a8487f511}{%
-           family={Hinch},
+        {{hash=0cb9ea41ed712b95ddae79d0c069518b}{%
+           family={Hartman},
            familyi={H\bibinitperiod},
-           given={E.\bibnamedelimi J.},
-           giveni={E\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+           given={Philip},
+           giveni={P\bibinitperiod}}}%
       }
-      \list{publisher}{1}{%
-        {Cambridge University Press}%
-      }
-      \strng{namehash}{f65b2c54f2dd74ac4bcad61a8487f511}
-      \strng{fullhash}{f65b2c54f2dd74ac4bcad61a8487f511}
-      \strng{bibnamehash}{f65b2c54f2dd74ac4bcad61a8487f511}
-      \strng{authorbibnamehash}{f65b2c54f2dd74ac4bcad61a8487f511}
-      \strng{authornamehash}{f65b2c54f2dd74ac4bcad61a8487f511}
-      \strng{authorfullhash}{f65b2c54f2dd74ac4bcad61a8487f511}
+      \strng{namehash}{0cb9ea41ed712b95ddae79d0c069518b}
+      \strng{fullhash}{0cb9ea41ed712b95ddae79d0c069518b}
+      \strng{bibnamehash}{0cb9ea41ed712b95ddae79d0c069518b}
+      \strng{authorbibnamehash}{0cb9ea41ed712b95ddae79d0c069518b}
+      \strng{authornamehash}{0cb9ea41ed712b95ddae79d0c069518b}
+      \strng{authorfullhash}{0cb9ea41ed712b95ddae79d0c069518b}
       \field{sortinit}{2}
       \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{title}{Perturbation Methods}
-      \field{year}{1991}
+      \field{journaltitle}{Proceedings of the American Mathematical Society}
+      \field{number}{4}
+      \field{title}{A lemma in the theory of structural stability of differential equations}
+      \field{volume}{11}
+      \field{year}{1960}
+      \field{pages}{610\bibrangedash 620}
+      \range{pages}{11}
+    \endentry
+    \entry{strogatz2018nonlinear}{book}{}
+      \name{author}{1}{}{%
+        {{hash=b0115f77df78376c68429033349375fc}{%
+           family={Strogatz},
+           familyi={S\bibinitperiod},
+           given={Steven\bibnamedelima H.},
+           giveni={S\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {CRC Press}%
+      }
+      \strng{namehash}{b0115f77df78376c68429033349375fc}
+      \strng{fullhash}{b0115f77df78376c68429033349375fc}
+      \strng{bibnamehash}{b0115f77df78376c68429033349375fc}
+      \strng{authorbibnamehash}{b0115f77df78376c68429033349375fc}
+      \strng{authornamehash}{b0115f77df78376c68429033349375fc}
+      \strng{authorfullhash}{b0115f77df78376c68429033349375fc}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Nonlinear Dynamics and Chaos: With Applications to Physics, Biology, Chemistry, and Engineering}
+      \field{year}{2018}
     \endentry
     \entry{hirsch2012differential}{book}{}
       \name{author}{3}{}{%
@@ -512,8 +538,8 @@
       \strng{authorbibnamehash}{285050669278e1f7721cc11eb510eab7}
       \strng{authornamehash}{285050669278e1f7721cc11eb510eab7}
       \strng{authorfullhash}{285050669278e1f7721cc11eb510eab7}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Differential Equations, Dynamical Systems, and an Introduction to Chaos}
@@ -536,8 +562,8 @@
       \strng{authorbibnamehash}{92d7efabd161dd52a00501a33ccb997d}
       \strng{authornamehash}{92d7efabd161dd52a00501a33ccb997d}
       \strng{authorfullhash}{92d7efabd161dd52a00501a33ccb997d}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Ordinary Differential Equations}
@@ -557,8 +583,8 @@
       \strng{authorbibnamehash}{ec9aac8108836d6b8e69d7ce94ebc275}
       \strng{authornamehash}{ec9aac8108836d6b8e69d7ce94ebc275}
       \strng{authorfullhash}{ec9aac8108836d6b8e69d7ce94ebc275}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Journal de mathématiques pures et appliquées}
@@ -582,8 +608,8 @@
       \strng{authorbibnamehash}{7ee971e48aa128cf0fac6175fa8decc2}
       \strng{authornamehash}{7ee971e48aa128cf0fac6175fa8decc2}
       \strng{authorfullhash}{7ee971e48aa128cf0fac6175fa8decc2}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Acta Mathematica}
@@ -610,8 +636,8 @@
       \strng{authorbibnamehash}{a4a604a22e629b4e571acca894bf543f}
       \strng{authornamehash}{a4a604a22e629b4e571acca894bf543f}
       \strng{authorfullhash}{a4a604a22e629b4e571acca894bf543f}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Elements of Applied Bifurcation Theory}
@@ -634,8 +660,8 @@
       \strng{authorbibnamehash}{42b5f3020b18772b0bf79d095463a630}
       \strng{authornamehash}{42b5f3020b18772b0bf79d095463a630}
       \strng{authorfullhash}{42b5f3020b18772b0bf79d095463a630}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Stability of Motion}
@@ -663,12 +689,61 @@
       \strng{authorbibnamehash}{407afdb31283656cd830a70f9f676614}
       \strng{authornamehash}{407afdb31283656cd830a70f9f676614}
       \strng{authorfullhash}{407afdb31283656cd830a70f9f676614}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Stability by Liapunov's Direct Method with Applications}
       \field{year}{1961}
+    \endentry
+    \entry{lienard1928oscillations}{article}{}
+      \name{author}{1}{}{%
+        {{hash=ef5dac4f003308c14aacf53ef01ddc45}{%
+           family={Liénard},
+           familyi={L\bibinitperiod},
+           given={Alfred},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{ef5dac4f003308c14aacf53ef01ddc45}
+      \strng{fullhash}{ef5dac4f003308c14aacf53ef01ddc45}
+      \strng{bibnamehash}{ef5dac4f003308c14aacf53ef01ddc45}
+      \strng{authorbibnamehash}{ef5dac4f003308c14aacf53ef01ddc45}
+      \strng{authornamehash}{ef5dac4f003308c14aacf53ef01ddc45}
+      \strng{authorfullhash}{ef5dac4f003308c14aacf53ef01ddc45}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Revue générale de l'électricité}
+      \field{title}{Étude des oscillations entretenues}
+      \field{volume}{23}
+      \field{year}{1928}
+      \field{pages}{901\bibrangedash 912}
+      \range{pages}{12}
+    \endentry
+    \entry{hale1980ordinary}{book}{}
+      \name{author}{1}{}{%
+        {{hash=4e254cacb018b75cd6e5e99ab680b473}{%
+           family={Hale},
+           familyi={H\bibinitperiod},
+           given={Jack\bibnamedelima K.},
+           giveni={J\bibinitperiod\bibinitdelim K\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Krieger Publishing Company}%
+      }
+      \strng{namehash}{4e254cacb018b75cd6e5e99ab680b473}
+      \strng{fullhash}{4e254cacb018b75cd6e5e99ab680b473}
+      \strng{bibnamehash}{4e254cacb018b75cd6e5e99ab680b473}
+      \strng{authorbibnamehash}{4e254cacb018b75cd6e5e99ab680b473}
+      \strng{authornamehash}{4e254cacb018b75cd6e5e99ab680b473}
+      \strng{authorfullhash}{4e254cacb018b75cd6e5e99ab680b473}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Ordinary Differential Equations}
+      \field{year}{1980}
     \endentry
   \enddatalist
 \endrefsection
