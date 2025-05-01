@@ -288,7 +288,7 @@ este comportamiento asintótico no necesariamente ocurre siempre, un ejemplo es 
 	p.t. $t=o(\frac{1}{\epsilon})$
 \end{lemma}
 
-\begin{theorem}
+\begin{theorem}\label{teorema: promedio}
 	Consideremos $x'=\epsilon f(t,x)$, $x(t_0)=x_0$ y $y'=f^0(y)$, $y(t_0)=x_0$,
 	donde $x_0,x,y\in D\subseteq\mathbb{R}^n$ y $\epsilon\in[0,\epsilon_0]$.\\
 
@@ -303,7 +303,80 @@ este comportamiento asintótico no necesariamente ocurre siempre, un ejemplo es 
 	para todo $t=o(\frac{1}{\epsilon})$ con $\delta=\delta(\epsilon)$ función de orden.
 \end{theorem}
 
-\section{Oscilador de Van der Pol}
+\section{Teoría del Promedio aplicado al 16 Problema de Hilbert}
+
+Consideremos el sistema de ecuaciones en el plano polinomial de grado $n$ \eqref{eq: 16Hilbert}. Podemos reescribir el sistema como:
+
+\begin{equation}\label{eq: 16Hilbertprom}
+	y'= -x + \epsilon P(x,y)
+	x'=y + \epsilon Q(x,y)
+\end{equation}
+
+Donde $P(x,y)$ y $Q(x,y)$ son polinomios de grado $2n$ de la forma:
+
+\begin{equation}\label{eq: 16Hilbertprompol}
+	\begin{matrix}
+		P(x,y) = \sum_{i=0}^{n} \sum_{j=0}^{n} a_{i,j} x^i y^j \\
+		Q(x,y) = \sum_{i=0}^{n} \sum_{j=0}^{n} b_{i,j} x^i y^j
+	\end{matrix}
+\end{equation}
+
+Para poder aplicar el teorema \ref{teorema: promedio} debemos convertir el sistema \eqref{eq: 16Hilbertprom} a coordenadas polares.
+
+Sustituimos \eqref{eq: 16Hilbertprom}, \eqref{eq: xpolar} y \eqref{eq: ypolar} en \eqref{es: drcart} y \eqref{eq: dthetacart}, obtenemos lo siguiente:
+
+\[
+ rr'=\epsilon r\cos(\theta)\sum_{i=0}^{n}\sum_{j=0}^{n}b_{i,j}r^{i+j}\cos(\theta)^i\sin(\theta)^j + \epsilon r\sin(\theta)\sum_{i=0}^{n}\sum_{j=0}^{n}a_{i,j}r^{i+j}\cos(\theta)^i\sin(\theta)^j
+\]
+\begin{equation}\label{eq: rpolhilbert}
+ r'=\epsilon\sum_{i=0}^{n}\sum_{j=0}^{n}r^{i+j}(b_{i,j}\cos(\theta)^{i+1}\sin(\theta)^j+a_{i,j}\cos(\theta)^i\sin(\theta)^{j+1})
+\end{equation}
+
+Para $\theta$ tenemos:
+
+\begin{equation}\label{eq: thetapolhilbert}
+	r\theta'=\epsilon\sum_{i=0}^{n}\sum_{j=0}^{n}r^{i+j}(a_{i,j}\cos(\theta)^{i+1}\sin(\theta)^j-b_{i,j}\cos(\theta)^{i}\sin(\theta)^{j+1})+r
+\end{equation}
+
+Promediamos \eqref{eq: rpolhilbert}:
+
+\[
+\bar{r}'=\frac{1}{2\pi}\int_{0}^{2\pi}r'd\theta
+\]
+
+\[
+\bar{r}'=\frac{1}{2\pi}\int_{0}^{2\pi}\epsilon\sum_{i=0}^{n}\sum_{j=0}^{n}r^{i+j}(b_{i,j}\cos(\theta)^{i+1}\sin(\theta)^j+a_{i,j}\cos(\theta)^i\sin(\theta)^{j+1})d\theta
+\]
+
+\[
+\bar{r}'=\frac{\epsilon}{2\pi}\sum_{i=0}^{n}\sum_{j=0}^{n}r^{i+j}\left(b_{i,j}\int_{0}^{2\pi}\cos(\theta)^{i+1}\sin(\theta)^j d\theta+a_{i,j}\int_{0}^{2\pi}\cos(\theta)^i\sin(\theta)^{j+1} d\theta\right)
+\]
+
+por la ecuación \eqref{eq: integral_cos_sen_general_impar} tenemos:
+
+\[
+\bar{r}'=\frac{\epsilon}{2\pi}\sum_{i \text{ impar}}^{n}\sum_{j \text{ par}}^{n}r^{i+j}b_{i,j}\int_{0}^{2\pi}\cos(\theta)^{i+1}\sin(\theta)^j d\theta+\frac{\epsilon}{2\pi}\sum_{i \text{ par}}^{n}\sum_{j \text{ impar}}^{n}r^{i+j}a_{i,j}\int_{0}^{2\pi}\cos(\theta)^i\sin(\theta)^{j+1} d\theta
+\]
+
+Por la ecuación \eqref{eq: integral_cos_sen_general_pares} tenemos:
+
+\begin{equation}\label{r_promedio}
+	r'=\epsilon\sum_{i \text{ par}}^{n}\sum_{j \text{ par}}^{n}r^{i+j}\frac{b_{i,j}}{2^{i+j+1}}\frac{\left(i+1\right)!\left(j\right)!}{\left(\frac{i+1}{2}\right)!\left(\frac{j}{2}\right)!\left(\frac{i+j+1}{2}\right)!}+\epsilon\sum_{i \text{ impar}}^{n}\sum_{j \text{ impar}}^{n}r^{i+j}\frac{a_{i,j}}{2^{i+j+1}}\frac{\left(i!\right)\left(j+1\right)!}{\left(\frac{i}{2}\right)!\left(\frac{j+1}{2}\right)!\left(\frac{i+j+1}{2}\right)!}
+\end{equation}
+
+Notemos que al promediar solo se consideran del sistema \eqref{eq: 16Hilbertprompol}:
+\begin{itemize}
+	\item Para $x'$ los coeficientes $b_{i,j}$ con $i$ impar y $j$ par.
+	\item Para $y'$ los coeficientes $a_{i,j}$ con $i$ par y $j$ impar.
+\end{itemize}
+
+
+
+
+
+
+	
+\section{Ecuación de Van der Pol}
 La ecuación del oscilador de Van der Pol describe el comportamiento de ciertos sistemas oscilantes no lineales.
 Su fundamento físico se basa en el concepto de amortiguamiento no lineal y autodemostración de oscilaciones.
 \begin{equation}\label{eq: VP}
