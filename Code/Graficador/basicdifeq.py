@@ -230,7 +230,7 @@ def graficar_polinomio(coeficientes, rango=(0, 2), raices=None, puntos=500, titu
 ###############################################################################
 # Función para guardar la gráfica cuando se presiona una tecla
 def on_key_press(event):
-    if event.key == 'g':  # Guardar si se presiona 's'
+    if event.key == 's':  # Guardar si se presiona 's'
         filename = "plano_fase.png"
         plt.savefig(filename, dpi=300)
         print(f"Gráfica guardada como {filename}")

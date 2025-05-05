@@ -372,7 +372,7 @@ Notemos que al promediar solo se consideran del sistema \eqref{eq: 16Hilbertprom
 	\item Para $y'$ los coeficientes $a_{i,j}$ con $i$ par y $j$ impar.
 \end{itemize}
 
-Vamos a promediar ahora para \eqref{eq: thetapolhilbert}, nos interesa que $\bar{\theta}'=\textbf{constante}$ para tener dinámica angular constante:
+Vamos a promediar ahora para \eqref{eq: thetapolhilbert}, nos interesa que $\bar{\theta}'=\textbf{constante}$ para tener una dinámica angular constante:
 
 \[
 \bar{\theta}'=\frac{1}{2\pi}\int_{0}^{2\pi}\theta'd\theta
@@ -401,7 +401,7 @@ Justo si en el sistema \eqref{eq: 16Hilbertprom} las funciones $P(x,y)$ y $Q(x,y
 	\end{matrix}
 \end{equation}
 
-Entonces tenemos la dinámica angular constante con $\bar{\theta}'=2\pi$.
+Entonces tenemos la dinámica angular constante con $\bar{\theta}'=2\pi$.\\
 
 Analicemos el caso simplificado correspondiente al sistema \eqref{eq: 16Hilbertprom} cuando $Q(x,y)=0$, el sistema luce de la forma:
 
@@ -418,7 +418,7 @@ con
 P(x,y) = \sum_{i \text{ par}}^{n} \sum_{j \text{ impar}}^{m} a_{i,j} x^i y^j
 \]
 
-Entonces el sistema polar promedio simplificado es:
+Por simplicidad podemos suponer que $n$ par y $m$ impar, entonces el sistema polar promedio simplificado es:
 
 \begin{equation}\label{eq: r_promedio_simplificado}
 	\begin{matrix}
@@ -426,6 +426,10 @@ Entonces el sistema polar promedio simplificado es:
 		\bar{\theta}'=2\pi
 	\end{matrix}
 \end{equation}
+
+Podemos intuir que el número de ciclos límite del sistema \eqref{eq: 16HilbertPromPolSimplificado} depende del número de ciclos límite del sistema promedio \eqref{eq: r_promedio_simplificado}. Más aún, podemos afirmar que si el sistema promedio tiene $k$ ciclos límite, entonces el sistema \eqref{eq: 16HilbertPromPolSimplificado} tiene exactamente $k$ ciclos límite.
+
+La parte derecha de \eqref{eq: r_promedio_simplificado} es un polinomio de grado $n+m$ que es impar, entonces el sistema tiene como punto de equilibrio a $r=0$ y a lo más $\frac{n+m-1}{2}$ puntos de equilibrio reales positivos, lo que implica que tiene a lo más $\frac{n+m-1}{2}$ ciclos límite.
 
 Algunos ejemplos relevantes de la forma \eqref{eq: 16HilbertPromPolSimplificado} son:
 
@@ -446,9 +450,7 @@ Algunos ejemplos relevantes de la forma \eqref{eq: 16HilbertPromPolSimplificado}
 	\]
 \end{itemize}
 
-Vamos a analizar cada uno de estos casos por separado, después veremos sus generalidades.
-
-\subsection{Ecuación de Van der Pol}
+\section{Ecuación de Van der Pol}
 La ecuación del oscilador de Van der Pol describe el comportamiento de ciertos sistemas oscilantes no lineales.
 \begin{equation}\label{eq: VP}
 	x''+x+\epsilon x'(x^2-1)=0
@@ -467,33 +469,39 @@ disminuye la velocidad del oscilador.\\
 	\end{matrix}
 \end{equation}
 Es de la forma \eqref{eq: 16HilbertPromPolSimplificado} con $P(x,y)=y(1-x^2)$, es decir cuando $n=2$ y $m=1$.
-Por \eqref{eq: r_promedio_simplificado} tenemos:
+Por \eqref{eq: r_promedio_simplificado} obtenemos el sistema promedio:
 \begin{equation}\label{eq: drvander}
 	\begin{matrix}
 		\bar{r}'=\frac{\epsilon}{8}r(4-r^2) \\
 		\bar{\theta}'=2\pi
 	\end{matrix}
 \end{equation}
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=14cm]{graficavanderpol.png}
-	\caption{Plano fase de $\eqref{eq: drvander}$.}
-\end{figure}
+
 Las soluciones de equilibrio son $r=0$ y $r=2$.
 \begin{enumerate}
 	\item Si $0<r<2$, entonces $r'>0$, por lo que $0$ es un punto fuente o repulsivo.
 	\item Si $r>2$, entonces $r'<0$, entonces $r=2$ es sumidero o atractor.
 \end{enumerate}
 
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=11cm]{vanderpol.png}
-	\caption{Plano fase. Dibujado en https://aeb019.hosted.uark.edu/pplane.html}
-\end{figure}
-
 Esto quiere decir que entre dos circunferencias de radios $0<r_{\min}<2$ y $2<r_{\max}$ existe al menos una curva cerrada a la cual las curvas convergen.
 
-\subsection{Ecuación de Rayleigh}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=10cm]{graficavanderpol.png}
+	\caption{Grafico del polinomio promedio de $\eqref{eq: drvander}$.}
+\end{figure}
+
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=12cm]{vanderpol.png}
+	\caption{Plano fase de $\eqref{eq: drvander}$.}
+\end{figure}
+
+
+\newpage
+
+\section{Ecuación de Rayleigh}
 La ecuación de Rayleigh con amortiguamiento no lineal, se utiliza
 para estudiar oscilaciones no lineales en sistemas mecánicos y se encuentra en
 diversos campos como la mecánica estructural y la dinámica de sistemas físicos.
@@ -517,8 +525,71 @@ Es de la forma \eqref{eq: 16HilbertPromPolSimplificado} con $P(x,y)=\epsilon(1-y
 Entonces tenemos el sistema
 $$\bar{r}'=\frac{\epsilon r}{8}(4-3r^2)$$
 $$\bar{\theta}'=2\pi t$$
-Las soluciones de equilibrio son $r=0$ y $r=\frac{2}{3}\sqrt{3}$
+Las soluciones de equilibrio son $r=0$ y $r=\frac{2}{3}\sqrt{3}\approx 1.1547$
 
-\subsection{Generalidades}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=10cm]{poli_reyleigh.png}
+	\caption{Grafico del polinomio promedio de $\eqref{eq: drvander}$.}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=12cm]{rayleigh.png}
+	\caption{Plano fase de $\eqref{eq: drvander}$.}
+\end{figure}
+
+\newpage
+
+\section{Generalidades}
+
+La Ecuación de Van der Pol corresponde al sistema \eqref{eq: 16HilbertPromPolSimplificado} cuando $n=2$ y $m=1$. Entonces su sistema promedio \eqref{eq: r_promedio_simplificado} toma la forma:
+
+\begin{equation}\label{eq: n_2_m_1}
+	\bar{r}'=\frac{\epsilon}{8}r\left(a_{2,1}r^2+4a_{0,1}\right)
+\end{equation}
+
+Como ya mencionamos antes, $r=0$ es un punto de equilibrio. Al ser un polinomio de grado 3 con variables de grado impar, entonces tiene puede tener un punto de equilibrio real positivo. 
+
+\begin{equation}\label{eq: n_2_m_1_equilibrio_positivo}
+	r=2\sqrt{-\frac{a_{0,1}}{a_{2,1}}}
+\end{equation}
+
+La condición para que esto ocurra es que:
+
+\begin{equation}\label{eq: n_2_m_1_equilibrio_positivo_condicion}
+	a_{2,1}a_{0,1}<0
+\end{equation}
+
+Es decir, $a_{2,1}$ y $a_{0,1}$ deben tener signos opuestos. En la ecuación de Van der Pol, $a_{2,1}=-1$ y $a_{0,1}=1$, por lo que cumple la condición \eqref{eq: n_2_m_1_equilibrio_positivo_condicion}.\\
+
+Por otro lado, la ecuación de Rayleigh corresponde al sistema \eqref{eq: 16HilbertPromPolSimplificado} cuando $n=0$ y $m=3$. Entonces su sistema promedio \eqref{eq: r_promedio_simplificado} toma la forma:
+
+\begin{equation}\label{eq: n_0_m_3}
+	\bar{r}'=\frac{\epsilon r}{8}\left(3a_{0,3}r^2+4a_{2,3}\right)
+\end{equation}
+
+De igual manera, $r=0$ es un punto de equilibrio. Al ser un polinomio de grado 3 con variables de grado impar, entonces tiene puede tener un punto de equilibrio real positivo. 
+
+\begin{equation}\label{eq: n_0_m_3_equilibrio_positivo}
+	r=2\sqrt{-\frac{a_{2,3}}{3a_{0,3}}}
+\end{equation}
+
+La condición para que esto ocurra es que:
+
+\begin{equation}\label{eq: n_0_m_3_equilibrio_positivo_condicion}
+	a_{2,3}a_{0,3}<0
+\end{equation}
+
+Es decir, $a_{2,3}$ y $a_{0,3}$ deben tener signos opuestos. En la ecuación de Rayleigh, $a_{2,3}=1$ y $a_{0,3}=-1$, por lo que cumple la condición \eqref{eq: n_0_m_3_equilibrio_positivo_condicion}.\\
+
+Vamos ahora a analizar cuando $n=2$ y $m=3$.
+
+
+
+
+
+
+
 
 
