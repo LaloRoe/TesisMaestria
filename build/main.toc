@@ -1,0 +1,57 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {chapter}{\numberline {1}Introducción}{4}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Problema 16 de Hilbert}{4}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Resultados relevantes sobre la existencia de ciclos límite}{5}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Problemas clásicos de ciclos límite}{7}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Aplicaciones modernas de los ciclos límite}{11}{section.1.4}%
+\contentsline {chapter}{\numberline {2}Conceptos Fundamentales}{13}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Puntos de Equilibrio}{13}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Puntos de Equilibrio Robustos a Perturbaciones}{13}{subsection.2.1.1}%
+\contentsline {subsubsection}{Nodos}{13}{section*.3}%
+\contentsline {subsubsection}{Punto Silla}{15}{section*.4}%
+\contentsline {subsubsection}{Espirales}{16}{section*.5}%
+\contentsline {subsection}{\numberline {2.1.2}Puntos de Equilibrio Frágiles}{17}{subsection.2.1.2}%
+\contentsline {subsubsection}{Nodo Estrella}{17}{section*.6}%
+\contentsline {subsubsection}{Nodo Degenerado}{18}{section*.7}%
+\contentsline {subsection}{\numberline {2.1.3}Equilibrios No Hiperbólicos}{19}{subsection.2.1.3}%
+\contentsline {subsubsection}{Centros}{19}{section*.8}%
+\contentsline {subsubsection}{No Aislados}{20}{section*.9}%
+\contentsline {section}{\numberline {2.2}Teoría de la Linealización de Sistemas de Ecuaciones Diferenciales}{21}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}De Lo Lineal a Lo No Lineal: Una Transición Natural}{22}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}El Proceso de Linealización: ¿Cómo Funciona?}{22}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}Eigenvalores y Estabilidad}{23}{subsection.2.2.3}%
+\contentsline {subsection}{\numberline {2.2.4}Profundizando en la Interpretación Geométrica}{23}{subsection.2.2.4}%
+\contentsline {subsection}{\numberline {2.2.5}Ejemplo. Modelo de Depredador-Presa}{24}{subsection.2.2.5}%
+\contentsline {subsubsection}{Puntos de Equilibrio}{24}{section*.10}%
+\contentsline {subsubsection}{Linealización en $E_2 = (1, 0)$}{24}{section*.11}%
+\contentsline {section}{\numberline {2.3}El Teorema de Liapunov y su Aplicación en la Determinación de Regiones de Estabilidad}{26}{section.2.3}%
+\contentsline {subsubsection}{Construcción de una Función de Liapunov}{27}{section*.12}%
+\contentsline {subsubsection}{Análisis de Estabilidad}{27}{section*.13}%
+\contentsline {subsection}{\numberline {2.3.1}Relación con el Teorema de Poincaré-Bendixson}{29}{subsection.2.3.1}%
+\contentsline {chapter}{\numberline {3}Teoría de ciclos límite}{30}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Sistemas dinámicos}{30}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Conjuntos límite}{32}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Teorema de Poincaré-Bendixson}{40}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Ejemplo 1. Oscilador de Van der Pol}{41}{section.3.4}%
+\contentsline {subsubsection}{Construcción de una Región Acotada Invariante}{43}{section*.17}%
+\contentsline {section}{\numberline {3.5}Ejemplo 2. Ecuación de Rayleigh}{44}{section.3.5}%
+\contentsline {subsubsection}{Matriz Jacobiana y Valores Propios}{44}{section*.18}%
+\contentsline {subsubsection}{Construcción de una Región Acotada Invariante}{45}{section*.20}%
+\contentsline {chapter}{\numberline {4}Sistemas Liénard}{47}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Definición y Formulación General}{47}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Teorema de Liénard}{48}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Interpretación del Teorema de Liénard}{48}{subsection.4.2.1}%
+\contentsline {section}{\numberline {4.3}Aplicación: Oscilador de Van der Pol}{48}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Resultados Relevantes y Extensiones}{49}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Ejemplo Adicional: Oscilador de Rayleigh}{50}{section.4.5}%
+\contentsline {section}{\numberline {4.6}Conclusión}{50}{section.4.6}%
+\contentsline {chapter}{\numberline {5}Teoría de Promediación}{51}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Teoría de perturbaciones}{51}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Teoría de promediación}{54}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Teoría del Promedio aplicado al 16 Problema de Hilbert}{57}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Ecuación de Van der Pol}{60}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Ecuación de Rayleigh}{61}{subsection.5.3.2}%
+\contentsline {subsection}{\numberline {5.3.3}Generalidades}{61}{subsection.5.3.3}%
+\contentsline {chapter}{\numberline {6}Formulas}{63}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Integral de coseno y seno}{63}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Coordenadas polares}{65}{section.6.2}%

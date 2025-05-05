@@ -308,16 +308,18 @@ este comportamiento asintótico no necesariamente ocurre siempre, un ejemplo es 
 Consideremos el sistema de ecuaciones en el plano polinomial de grado $n$ \eqref{eq: 16Hilbert}. Podemos reescribir el sistema como:
 
 \begin{equation}\label{eq: 16Hilbertprom}
-	y'= -x + \epsilon P(x,y)
-	x'=y + \epsilon Q(x,y)
+	\begin{matrix}
+		x'=y + \epsilon Q(x,y) \\
+		y'= -x + \epsilon P(x,y)
+	\end{matrix}
 \end{equation}
 
 Donde $P(x,y)$ y $Q(x,y)$ son polinomios de grado $2n$ de la forma:
 
 \begin{equation}\label{eq: 16Hilbertprompol}
 	\begin{matrix}
-		P(x,y) = \sum_{i=0}^{n} \sum_{j=0}^{n} a_{i,j} x^i y^j \\
-		Q(x,y) = \sum_{i=0}^{n} \sum_{j=0}^{n} b_{i,j} x^i y^j
+		P(x,y) = \sum_{i=0}^{n} \sum_{j=0}^{m} a_{i,j} x^i y^j \\
+		Q(x,y) = \sum_{i=0}^{n} \sum_{j=0}^{m} b_{i,j} x^i y^j
 	\end{matrix}
 \end{equation}
 
@@ -326,16 +328,16 @@ Para poder aplicar el teorema \ref{teorema: promedio} debemos convertir el siste
 Sustituimos \eqref{eq: 16Hilbertprom}, \eqref{eq: xpolar} y \eqref{eq: ypolar} en \eqref{es: drcart} y \eqref{eq: dthetacart}, obtenemos lo siguiente:
 
 \[
- rr'=\epsilon r\cos(\theta)\sum_{i=0}^{n}\sum_{j=0}^{n}b_{i,j}r^{i+j}\cos(\theta)^i\sin(\theta)^j + \epsilon r\sin(\theta)\sum_{i=0}^{n}\sum_{j=0}^{n}a_{i,j}r^{i+j}\cos(\theta)^i\sin(\theta)^j
+ rr'=\epsilon r\cos(\theta)\sum_{i=0}^{n}\sum_{j=0}^{m}b_{i,j}r^{i+j}\cos(\theta)^i\sin(\theta)^j + \epsilon r\sin(\theta)\sum_{i=0}^{n}\sum_{j=0}^{m}a_{i,j}r^{i+j}\cos(\theta)^i\sin(\theta)^j
 \]
 \begin{equation}\label{eq: rpolhilbert}
- r'=\epsilon\sum_{i=0}^{n}\sum_{j=0}^{n}r^{i+j}(b_{i,j}\cos(\theta)^{i+1}\sin(\theta)^j+a_{i,j}\cos(\theta)^i\sin(\theta)^{j+1})
+ r'=\epsilon\sum_{i=0}^{n}\sum_{j=0}^{m}r^{i+j}(b_{i,j}\cos(\theta)^{i+1}\sin(\theta)^j+a_{i,j}\cos(\theta)^i\sin(\theta)^{j+1})
 \end{equation}
 
 Para $\theta$ tenemos:
 
 \begin{equation}\label{eq: thetapolhilbert}
-	r\theta'=\epsilon\sum_{i=0}^{n}\sum_{j=0}^{n}r^{i+j}(a_{i,j}\cos(\theta)^{i+1}\sin(\theta)^j-b_{i,j}\cos(\theta)^{i}\sin(\theta)^{j+1})+r
+	r\theta'=\epsilon\sum_{i=0}^{n}\sum_{j=0}^{m}r^{i+j}(a_{i,j}\cos(\theta)^{i+1}\sin(\theta)^j-b_{i,j}\cos(\theta)^{i}\sin(\theta)^{j+1})+r
 \end{equation}
 
 Promediamos \eqref{eq: rpolhilbert}:
@@ -345,23 +347,23 @@ Promediamos \eqref{eq: rpolhilbert}:
 \]
 
 \[
-\bar{r}'=\frac{1}{2\pi}\int_{0}^{2\pi}\epsilon\sum_{i=0}^{n}\sum_{j=0}^{n}r^{i+j}(b_{i,j}\cos(\theta)^{i+1}\sin(\theta)^j+a_{i,j}\cos(\theta)^i\sin(\theta)^{j+1})d\theta
+\bar{r}'=\frac{1}{2\pi}\int_{0}^{2\pi}\epsilon\sum_{i=0}^{n}\sum_{j=0}^{m}r^{i+j}(b_{i,j}\cos(\theta)^{i+1}\sin(\theta)^j+a_{i,j}\cos(\theta)^i\sin(\theta)^{j+1})d\theta
 \]
 
 \[
-\bar{r}'=\frac{\epsilon}{2\pi}\sum_{i=0}^{n}\sum_{j=0}^{n}r^{i+j}\left(b_{i,j}\int_{0}^{2\pi}\cos(\theta)^{i+1}\sin(\theta)^j d\theta+a_{i,j}\int_{0}^{2\pi}\cos(\theta)^i\sin(\theta)^{j+1} d\theta\right)
+\bar{r}'=\frac{\epsilon}{2\pi}\sum_{i=0}^{n}\sum_{j=0}^{m}r^{i+j}\left(b_{i,j}\int_{0}^{2\pi}\cos(\theta)^{i+1}\sin(\theta)^j d\theta+a_{i,j}\int_{0}^{2\pi}\cos(\theta)^i\sin(\theta)^{j+1} d\theta\right)
 \]
 
 por la ecuación \eqref{eq: integral_cos_sen_general_impar} tenemos:
 
 \[
-\bar{r}'=\frac{\epsilon}{2\pi}\sum_{i \text{ impar}}^{n}\sum_{j \text{ par}}^{n}r^{i+j}b_{i,j}\int_{0}^{2\pi}\cos(\theta)^{i+1}\sin(\theta)^j d\theta+\frac{\epsilon}{2\pi}\sum_{i \text{ par}}^{n}\sum_{j \text{ impar}}^{n}r^{i+j}a_{i,j}\int_{0}^{2\pi}\cos(\theta)^i\sin(\theta)^{j+1} d\theta
+\bar{r}'=\frac{\epsilon}{2\pi}\sum_{i \text{ impar}}^{n}\sum_{j \text{ par}}^{m}r^{i+j}b_{i,j}\int_{0}^{2\pi}\cos(\theta)^{i+1}\sin(\theta)^j d\theta+\frac{\epsilon}{2\pi}\sum_{i \text{ par}}^{n}\sum_{j \text{ impar}}^{m}r^{i+j}a_{i,j}\int_{0}^{2\pi}\cos(\theta)^i\sin(\theta)^{j+1} d\theta
 \]
 
 Por la ecuación \eqref{eq: integral_cos_sen_general_pares} tenemos:
 
 \begin{equation}\label{r_promedio}
-	r'=\epsilon\sum_{i \text{ par}}^{n}\sum_{j \text{ par}}^{n}r^{i+j}\frac{b_{i,j}}{2^{i+j+1}}\frac{\left(i+1\right)!\left(j\right)!}{\left(\frac{i+1}{2}\right)!\left(\frac{j}{2}\right)!\left(\frac{i+j+1}{2}\right)!}+\epsilon\sum_{i \text{ impar}}^{n}\sum_{j \text{ impar}}^{n}r^{i+j}\frac{a_{i,j}}{2^{i+j+1}}\frac{\left(i!\right)\left(j+1\right)!}{\left(\frac{i}{2}\right)!\left(\frac{j+1}{2}\right)!\left(\frac{i+j+1}{2}\right)!}
+	\bar{r}'=\epsilon\sum_{i \text{ par}}^{n}\sum_{j \text{ par}}^{m}r^{i+j}\frac{b_{i,j}}{2^{i+j+1}}\frac{\left(i+1\right)!\left(j\right)!}{\left(\frac{i+1}{2}\right)!\left(\frac{j}{2}\right)!\left(\frac{i+j+1}{2}\right)!}+\epsilon\sum_{i \text{ impar}}^{n}\sum_{j \text{ impar}}^{m}r^{i+j}\frac{a_{i,j}}{2^{i+j+1}}\frac{\left(i!\right)\left(j+1\right)!}{\left(\frac{i}{2}\right)!\left(\frac{j+1}{2}\right)!\left(\frac{i+j+1}{2}\right)!}
 \end{equation}
 
 Notemos que al promediar solo se consideran del sistema \eqref{eq: 16Hilbertprompol}:
@@ -370,15 +372,84 @@ Notemos que al promediar solo se consideran del sistema \eqref{eq: 16Hilbertprom
 	\item Para $y'$ los coeficientes $a_{i,j}$ con $i$ par y $j$ impar.
 \end{itemize}
 
+Vamos a promediar ahora para \eqref{eq: thetapolhilbert}, nos interesa que $\bar{\theta}'=\textbf{constante}$ para tener dinámica angular constante:
 
+\[
+\bar{\theta}'=\frac{1}{2\pi}\int_{0}^{2\pi}\theta'd\theta
+\]
 
+\[
+\bar{\theta}'=\frac{1}{2\pi}\int_{0}^{2\pi}\epsilon\sum_{i=0}^{n}\sum_{j=0}^{m}r^{i+j}(a_{i,j}\cos(\theta)^{i+1}\sin(\theta)^j-b_{i,j}\cos(\theta)^{i}\sin(\theta)^{j+1})+r
+\]
 
+\[
+\bar{\theta}'=\frac{\epsilon}{2\pi}\sum_{i=0}^{n}\sum_{j=0}^{m}r^{i+j}\left(a_{i,j}\int_{0}^{2\pi}\cos(\theta)^{i+1}\sin(\theta)^j d\theta-b_{i,j}\int_{0}^{2\pi}\cos(\theta)^{i}\sin(\theta)^{j+1} d\theta\right)
+\]
 
+Por la ecuación \eqref{eq: integral_cos_sen_general_impar} tenemos:
 
-	
-\section{Ecuación de Van der Pol}
+\[
+\bar{\theta}'=\frac{\epsilon}{2\pi}\sum_{i \text{ impar}}^{n}\sum_{j \text{ par}}^{m}r^{i+j}a_{i,j}\int_{0}^{2\pi}\cos(\theta)^{i+1}\sin(\theta)^j d\theta-\frac{\epsilon}{2\pi}\sum_{i \text{ par}}^{n}\sum_{j \text{ impar}}^{m}r^{i+j}b_{i,j}\int_{0}^{2\pi}\cos(\theta)^{i}\sin(\theta)^{j+1} d\theta
+\]
+
+Justo si en el sistema \eqref{eq: 16Hilbertprom} las funciones $P(x,y)$ y $Q(x,y)$ son de la forma:
+
+\begin{equation}\label{eq: 16HilbertPromPol}
+	\begin{matrix}
+		P(x,y) = \sum_{i \text{ par}}^{n} \sum_{j \text{ impar}}^{m} a_{i,j} x^i y^j \\
+		Q(x,y) = \sum_{i \text{ impar}}^{n} \sum_{j \text{ par}}^{m} b_{i,j} x^i y^j
+	\end{matrix}
+\end{equation}
+
+Entonces tenemos la dinámica angular constante con $\bar{\theta}'=2\pi$.
+
+Analicemos el caso simplificado correspondiente al sistema \eqref{eq: 16Hilbertprom} cuando $Q(x,y)=0$, el sistema luce de la forma:
+
+\begin{equation}\label{eq: 16HilbertPromPolSimplificado}
+	\begin{matrix}
+		x'=y  \\
+		y'= -x + \epsilon P(x,y)
+	\end{matrix}
+\end{equation}
+
+con 
+
+\[
+P(x,y) = \sum_{i \text{ par}}^{n} \sum_{j \text{ impar}}^{m} a_{i,j} x^i y^j
+\]
+
+Entonces el sistema polar promedio simplificado es:
+
+\begin{equation}\label{eq: r_promedio_simplificado}
+	\begin{matrix}
+		\bar{r}'=\epsilon\sum_{i \text{ par}}^{n}\sum_{j \text{ impar}}^{m}r^{i+j}\frac{a_{i,j}}{2^{i+j+1}}\frac{\left(i!\right)\left(j+1\right)!}{\left(\frac{i}{2}\right)!\left(\frac{j+1}{2}\right)!\left(\frac{i+j+1}{2}\right)!} \\
+		\bar{\theta}'=2\pi
+	\end{matrix}
+\end{equation}
+
+Algunos ejemplos relevantes de la forma \eqref{eq: 16HilbertPromPolSimplificado} son:
+
+\begin{itemize}
+	\item \textbf{El oscilador de Van der Pol}:
+	\[
+		\begin{matrix}
+			x'=y \\
+			y'=-x+\epsilon y(1-x^2)
+		\end{matrix}
+		\]
+	\item \textbf{El oscilador de Rayleigh}:
+	\[
+		\begin{matrix}
+			x'=y \\
+			y'=-x+\epsilon(1-y^2)y
+		\end{matrix}
+	\]
+\end{itemize}
+
+Vamos a analizar cada uno de estos casos por separado, después veremos sus generalidades.
+
+\subsection{Ecuación de Van der Pol}
 La ecuación del oscilador de Van der Pol describe el comportamiento de ciertos sistemas oscilantes no lineales.
-Su fundamento físico se basa en el concepto de amortiguamiento no lineal y autodemostración de oscilaciones.
 \begin{equation}\label{eq: VP}
 	x''+x+\epsilon x'(x^2-1)=0
 \end{equation}
@@ -391,39 +462,17 @@ disminuye la velocidad del oscilador.\\
 \\Extendemos a un sistema de ecuaciones.
 \begin{equation}\label{eq: VPsis}
 	\begin{matrix}
-		y'=-x-\epsilon y(x^2-1) \\
+		y'=-x+\epsilon y(1-x^2) \\
 		x'=y
 	\end{matrix}
 \end{equation}
-Haremos el cambio de coordenadas a polares.
-Sustituimos en $\eqref{eq: dxpolar}$ y $\eqref{eq: dypolar}$ en $\eqref{eq: VPsis}$
-$$r\cos(\theta)\theta'+r'\sin(\theta)=-r\cos(\theta)-\epsilon r\sin(\theta)(r^2\cos^2(\theta)-1)$$
-$$-r\sin(\theta)\theta'+r'\cos(\theta)=r\sin(theta)$$
-entonces
-\begin{equation}\label{eq: VPdr}
-	r'=-\epsilon r\sin^2(\theta)(r^2\cos^2(\theta)-1)
-\end{equation}
-\begin{equation}\label{eq: VPdtheta}
-	\theta'=-1-\epsilon r\sin(\theta)\cos(\theta)(r^2\cos(\theta^2)-1)
-\end{equation}
-Definimos para $\eqref{eq: VPdr}$ el promedio
-\begin{equation}\label{eq: drbar}
-	\bar{r}'=\bar{f}(\bar{r},\epsilon)
-\end{equation}
-donde
-$$\bar{f}(\bar{r},\epsilon)=\frac{1}{2\pi}\int\limits_0^{2\pi}r'd\theta$$
-Calculamos esta integral
-$$\bar{f}(\bar{r},\epsilon)=\frac{1}{2\pi}\int\limits_0^{2\pi}-\epsilon r\sin^2(\theta)(r^2\cos^2(\theta)-1)d\theta$$
-$$=\frac{1}{2\pi}[-\epsilon r^3\int\limits_0^{2\pi}\sin^2(\theta)\cos^2(\theta)d\theta+\epsilon r\int\limits_0^{2\pi}\sin^2(\theta)d\theta]$$
-$$=\frac{1}{2\pi}[-\epsilon r^3[\frac{1}{32}(4\theta-\sin(4\theta))]_0^{2\pi}+\epsilon r[\frac{1}{2}(\theta-\sin(\theta)\cos(\theta))]_0^{2\pi}]$$
-$$=\frac{1}{2\pi}[\frac{-\epsilon r^3}{32}(8\pi)+\frac{\epsilon r}{2}(2\pi)]=\frac{1}{2\pi}[\frac{-\epsilon r^3}{4}\pi+\epsilon r\pi].$$
-Entonces
-$$\bar{f}(\bar{r},\epsilon)=\frac{\epsilon r}{2}-\frac{\epsilon r^3}{8}$$
-Promediamos $\theta$
-$$\bar{\theta}=2\pi t$$
-Vamos a analizar $\eqref{eq: drbar}$
+Es de la forma \eqref{eq: 16HilbertPromPolSimplificado} con $P(x,y)=y(1-x^2)$, es decir cuando $n=2$ y $m=1$.
+Por \eqref{eq: r_promedio_simplificado} tenemos:
 \begin{equation}\label{eq: drvander}
-	\bar{r}'=\frac{\epsilon}{8}r(4-r^2)
+	\begin{matrix}
+		\bar{r}'=\frac{\epsilon}{8}r(4-r^2) \\
+		\bar{\theta}'=2\pi
+	\end{matrix}
 \end{equation}
 \begin{figure}[h]
 	\centering
@@ -444,7 +493,7 @@ Las soluciones de equilibrio son $r=0$ y $r=2$.
 
 Esto quiere decir que entre dos circunferencias de radios $0<r_{\min}<2$ y $2<r_{\max}$ existe al menos una curva cerrada a la cual las curvas convergen.
 
-\section{Ecuación de Rayleigh}
+\subsection{Ecuación de Rayleigh}
 La ecuación de Rayleigh con amortiguamiento no lineal, se utiliza
 para estudiar oscilaciones no lineales en sistemas mecánicos y se encuentra en
 diversos campos como la mecánica estructural y la dinámica de sistemas físicos.
@@ -460,36 +509,16 @@ Extendemos a un sistema de ecuaciones.
 
 \begin{equation}\label{eq: Rayleigh}
 	\begin{matrix}
-		y'=-\epsilon(y^2-1)y-x \\
-		x'=y
+		x'=y \\
+		y'=-x+\epsilon(1-y^2)y \\
 	\end{matrix}
 \end{equation}
-Haremos el cambio de coordenadas a polares.
-$$r\cos(\theta)\theta'+r'\sin(\theta)=-\epsilon (r^2\sin^2(\theta)-1)r\sin(\theta)-\omega^2r\cos(\theta) $$
-$$-r\sin(\theta)\theta'+r'\cos(\theta)=r\sin(\theta)$$
-Obtenemos la ecuación.
-\begin{equation}\label{eq: Rayleighpolar}
-	r'=\epsilon(1-r^2\sin^2(\theta))r\sin^2(\theta)+r\sin(\theta)\cos(\theta)(1-\omega^2)
-\end{equation}
-Definimos para $\eqref{eq: Rayleighpolar}$ el promedio
-$$\bar{r}=\bar{f}(\bar{r},\epsilon)=\frac{1}{2\pi}\int\limits_0^{2\pi}r'd\theta$$
-Calculamos esta integral
-$$\bar{f}(\bar{r},\epsilon)=\frac{1}{2\pi}\int\limits_0^{2\pi}[\epsilon(1-r^2\sin^2(\theta))r\sin^2(\theta)+r\sin(\theta)\cos(\theta)(1-\omega^2)]d\theta$$
-$$=\frac{1}{2\pi}\epsilon r\int\limits_0^{2\pi}\sin^2(\theta)d\theta-\frac{1}{2\pi}\epsilon r^3\int\limits_0^{2\pi}\sin^4(\theta)d\theta+\frac{1}{2\pi}r(1-\omega^2)\int\limits_0^{2\pi}\cos(\theta)\sin(\theta)d\theta$$
-$$=\frac{1}{2\pi}\epsilon r[\frac{1}{2}(\theta-\sin(\theta)\cos(\theta))]\Big|_2^{2\pi}-\frac{1}{2\pi}\epsilon r^3[\frac{1}{32}(-8\sin(2\theta)+\sin(4\theta)+12\theta)]\Big|_0^{2\pi}+$$
-$$\frac{1}{2\pi}r(1-\omega^2)[\cos^2(\theta)]\Big|_0^{2\pi}]=\frac{1}{2\pi}\epsilon r\pi-\frac{1}{2\pi}\epsilon r^3\frac{3}{4}\pi$$
-$$=\frac{\epsilon r}{8}(4-3r^2)$$
+Es de la forma \eqref{eq: 16HilbertPromPolSimplificado} con $P(x,y)=\epsilon(1-y^2)y$, es decir cuando $n=0$ y $m=3$.
 Entonces tenemos el sistema
 $$\bar{r}'=\frac{\epsilon r}{8}(4-3r^2)$$
 $$\bar{\theta}'=2\pi t$$
 Las soluciones de equilibrio son $r=0$ y $r=\frac{2}{3}\sqrt{3}$
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=9cm]{graficarayleigh.png}
-	\caption{Plano fase.Dibujado en https://aeb019.hosted.uark.edu/pplane.html}
-\end{figure}
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=11cm]{planorayleigh.png}
-	\caption{Plano fase.Dibujado en https://aeb019.hosted.uark.edu/pplane.html}
-\end{figure}
+
+\subsection{Generalidades}
+
+
