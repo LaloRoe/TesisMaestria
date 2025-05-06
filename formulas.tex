@@ -114,7 +114,40 @@ Por lo tanto si $m,n$ son números enteros positivos pares, entonces:
     \int_{0}^{2\pi}\cos^m\theta\sin^n\theta d\theta = \frac{2\pi}{2^{m+n}}\frac{(m!)(n!)}{(\frac{m}{2})!(\frac{n}{2})!(\frac{m+n}{2})!}
 \end{equation}
 
-Ahora vamos a analizar la integral $\eqref{eq:integral_cos_sen}$ cuando al menos uno de los enteros $m$ o $n$ es impar.
+Ahora vamos a analizar la integral $\eqref{eq:integral_cos_sen}$ cuando al menos uno de los enteros $m$ o $n$ es impar.\\
+
+Sea $n=2p+1$ y $m=2q$ con $p,q\in\mathbb{Z}^+$ enteros positivos.\\
+
+\begin{equation}\label{eq:integral_cos_sen_impar_1}
+    \int_{0}^{2\pi}\cos^m\theta\sin^n\theta d\theta=\int_{0}^{2\pi}\cos^{2q}\theta\sin^{2p+1}\theta d\theta
+\end{equation}
+
+Hagamos el cambio de variable $\theta=2\pi-\varphi$, sustituimos en \eqref{eq:integral_cos_sen_impar_1} y aplicamos la propiedad de linealidad de la integral:
+
+\[
+    =\int_{2\pi}^{0}\cos^{2q}(2\pi-\varphi)\sin^{2p+1}(2\pi-\varphi)(-d\varphi)=\int_{0}^{2\pi}\cos^{2q}(-\varphi)\sin^{2p+1}(-\varphi) d\varphi
+\]
+
+\[
+    =\int_{0}^{2\pi}\cos^{2q}\varphi(-\sin\varphi)^{2p+1} d\varphi=-\int_{0}^{2\pi}\cos^{2q}\varphi\sin^{2p+1}\varphi d\varphi
+\]
+
+Entonces 
+\[ 
+    \int_{0}^{2\pi}\cos^m\theta\sin^n\theta d\theta=-\int_{0}^{2\pi}\cos^{m}\varphi\sin^{n}\varphi d\varphi
+\]
+
+Por lo tanto, para $m$ par y $n$ impar:
+
+\begin{equation}\label{eq: integral_cos_sen_general_impar}
+    \int_{0}^{2\pi}\cos^m\theta\sin^n\theta d\theta=0
+\end{equation}
+
+Análogamente podemos demostrar que, para $m$ impar y $n$ par:
+
+\begin{equation}\label{eq: integral_cos_sen_general_impar_2}
+    \int_{0}^{2\pi}\cos^m\theta\sin^n\theta d\theta=0
+\end{equation}
 
 Por lo tanto:
 

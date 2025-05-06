@@ -8,12 +8,13 @@ import sympy as sp
 import basicdifeq as bde
 import math
 
-plt.ioff()  # Desactiva el modo interactivo de matplotlib
+plt.ion()  # Activa el modo interactivo de matplotlib
 
 ################################################################################
 # VARIABLES
 pasos_rk = 5000
 parametros = {}
+tamaño_paso = 0.01
 
 ###############################################################################
 # SISTEMA DE ECUACIONES DIFERENCIALES PREDEFINIDOS
@@ -25,37 +26,63 @@ sistemas_predefinidos = {
 }
 ###############################################################################
 # OBTENER LA EXPRESIÓN DE LA ECUACIÓN DIFERENCIAL
-
-seleccionar_sistema = input("> Elije una opción:\n \n 1. Seleccionar un sistema predefinido \n 2. Ingresar un sistema manualmente \n 3. Sistema perturbado \n = ").lower()
+# MENU PRINCIPAL
+print("> Elije una opción:\n \n 1. Seleccionar un sistema predefinido \n 2. Ingresar un sistema manualmente \n 3. Sistema perturbado ")
+seleccionar_sistema = input("= ").lower()
+# Manejo de errores
+while seleccionar_sistema not in ["1", "2", "3"]:
+    print("⚠️  Error: Por favor, ingrese una opción válida.")
+    seleccionar_sistema = input("= ").lower()
+# Configuración de un sistema predefinido
 if seleccionar_sistema == "1":
     print("\n> Selecciona un sistema:\n")
+
     for key, value in sistemas_predefinidos.items():
         print(f" {key}. {value[0]}")
-    sistema = int(input(" = ")) # Opción seleccionada 
+    while True:
+        try:
+            # Pedir al usuario que ingrese un valor
+            sistema = int(input(" = "))  # Intentar convertir la entrada a un entero
+            if sistema in [1, 2, 3, 4]:  # Verificar que esté en el rango permitido
+                break
+            else:
+                print("⚠️  Error: Por favor, ingrese un número entre 1 y 4.")
+        except ValueError:
+            # Capturar el error si la entrada no es un número
+            print("⚠️  Error: Por favor, ingrese un número.")
     print(f"\nEl sistema {sistemas_predefinidos[sistema][0]} se expresa como:\n")
     print(f"dx/dt = {sistemas_predefinidos[sistema][1]}")
     print(f"dy/dt = {sistemas_predefinidos[sistema][2]}")
     print("\n> Ingresa el valor del parámetro:\n")
-    
-    for i in sistemas_predefinidos[sistema][3]: # Parámetros del sistema
-        exec(f"{i}=float(input('{i} = '))")
+    # Asignación de valores a los parámetros con manejo de errores
+    #parametros = {}  # Diccionario para almacenar los parámetros
+    for i in sistemas_predefinidos[sistema][3]:
+        # Pedir al usuario que ingrese el valor
+        exec(f"{i}=bde.obtener_numero_valido('{i} = ')")
         parametros[i] = eval(i)
-    #print(">Sistema seleccionado:")
+        #valor = bde.obtener_numero_valido(f"{i} = ")
+        #parametros[i] = valor  # Guardar el valor en el diccionario
+    # Asignación de las expresiones de las ecuaciones diferenciales
     f1_original = sistemas_predefinidos[sistema][1]
     f2_original = sistemas_predefinidos[sistema][2]
     nombre = sistemas_predefinidos[sistema][0]
+# Configuración de un sistema manual
 elif seleccionar_sistema == "2":
-    f1_original = input("dx/dt = ")
-    f2_original = input("dy/dt = ")
+    print("\n> Ingresa las expresiones de las ecuaciones diferenciales:\n")
+    # Solicitar las expresiones con manejo de errores
+    f1_original = bde.obtener_expresion_polinomial_valida("dx/dt = ")
+    f2_original = bde.obtener_expresion_polinomial_valida("dy/dt = ")
     nombre = input("Ingresar el nombre del sistema = ")
+# Configuración de un sistema perturbado
 elif seleccionar_sistema == "3":
     print("\nEl sistema se expresa como:\n")
     print("dx/dt = y + epsilon*Q(x,y)	")
     print("dy/dt = -x + epsilon*P(x,y)")
     print("\n> Ingresa el valor del parámetro epsilon y los polinomios P(x,y) y Q(x,y) y el nombre del sistema:\n")
-    epsilon = float(input("epsilon = "))
-    P_original   = input("P(x,y) = ")
-    Q_original = input("Q(x,y) = ")
+    # Asignación de valores a los parámetros con manejo de errores
+    epsilon = bde.obtener_numero_valido("epsilon = ")
+    P_original   = bde.obtener_expresion_polinomial_valida("P(x,y) = ")
+    Q_original = bde.obtener_expresion_polinomial_valida("Q(x,y) = ")
     P=bde.polinomio_a_matriz(P_original)
     Q=bde.polinomio_a_matriz(Q_original)
     if Q_original == "0":
@@ -75,13 +102,15 @@ elif seleccionar_sistema == "3":
     print(f"dy/dt = {f2_original}")
     print(f"\nAverage differential equation system:\n\n r' = {R_poly}\ntheta' = {theta_poly}\n")
     print("\n> Selecciona una opción:\n")
+    promediar, ciclo_limite = "n", "n"
     promediacion = input(" 1. Graficar el plano fase del sistema promediado\n 2. Graficar solo el/los ciclo/s límite/s del sistema promediado\n = ")
+    while promediacion not in ["1", "2"]:
+        print("⚠️  Error: Por favor, ingrese una opción válida.")
+        promediacion = input(" = ")
     if promediacion == "1":
         promediar = "s"
-        ciclo_limite = "n"
     elif promediacion == "2":
         ciclo_limite = "s"
-        promediar = "n"
     graficar_polinomio = input("¿Desea graficar el polinomio promedio? (s/n): ").lower()
 ###############################################################################
 # CONFIGURACIONES
@@ -133,12 +162,21 @@ if nulclinas == "s":
 ###############################################################################
 # GRAFICAR EL CAMPO VECTORIAL
 print("\n> Límites de la gráfica:\n")
-Lx_inf = float(input("Límite inferior de x: "))
-Lx_sup = float(input("Límite superior de x: "))
-Ly_inf = float(input("Límite inferior de y: "))
-Ly_sup = float(input("Límite superior de y: "))
-
-n = int(input("\n> Número de puntos: "))  # Número de puntos en cada lado de la cuadrícula
+Lx_inf = bde.obtener_numero_valido("Límite inferior de x: ")
+Lx_sup = bde.obtener_numero_valido("Límite superior de x: ")
+# Manejo de errores
+while Lx_inf >= Lx_sup:
+    print("⚠️  Error: El límite inferior de x debe ser menor que el límite superior.")
+    Lx_inf = bde.obtener_numero_valido("Límite inferior de x: ")
+    Lx_sup = bde.obtener_numero_valido("Límite superior de x: ")
+Ly_inf = bde.obtener_numero_valido("Límite inferior de y: ")
+Ly_sup = bde.obtener_numero_valido("Límite superior de y: ")
+# Manejo de errores
+while Ly_inf >= Ly_sup:
+    print("⚠️  Error: El límite inferior de y debe ser menor que el límite superior.")
+    Ly_inf = bde.obtener_numero_valido("Límite inferior de y: ")
+    Ly_sup = bde.obtener_numero_valido("Límite superior de y: ")
+n = bde.obtener_numero_valido("\n> Número de puntos: ",tipo="int")  # Número de puntos en cada lado de la cuadrícula
 x_grid = np.linspace(Lx_inf, Lx_sup, n)  # Crea un vector de n puntos entre -L y L
 y_grid = np.linspace(Ly_inf, Ly_sup, n)  # Crea un vector de n puntos entre -L y L
 X, Y = np.meshgrid(x_grid, y_grid)  # Crea la cuadrícula
@@ -195,17 +233,16 @@ plt.axvline(0, color="gray", linestyle="--", linewidth=0.5)
 # Crear un mapa de colores personalizado
 print("\n> Colores de las trayectorias del sistema original:\n")
 custom_cmap = LinearSegmentedColormap.from_list("naranja_a_morado", ["orange", "blue"])
-print(f"En tiempo positivo: Naranja a morado")
-custom_cmap_neg = LinearSegmentedColormap.from_list("rojo_a_verde", ["yellow", "purple"])
 if tiempo_negativo == "s":
     print(f"En tiempo negativo: Amarillo a morado")
+    custom_cmap_neg = LinearSegmentedColormap.from_list("amarillo_a_morado", ["yellow", "purple"])
 if seleccionar_sistema == "3" and promediar == "s":
     print("\n> Colores de las trayectorias del sistema promedio:\n")
-    custom_cmap_polar = LinearSegmentedColormap.from_list("amarillo_a_azul", ["cyan", "green"])
     print(f"En tiempo positivo: Cyan a verde")
-    custom_cmap_polar_neg = LinearSegmentedColormap.from_list("amarillo_a_azul", ["pink", "red"])
+    custom_cmap_polar = LinearSegmentedColormap.from_list("amarillo_a_azul", ["cyan", "green"])
     if tiempo_negativo == "s":
         print(f"En tiempo negativo: Rosa a rojo")
+        custom_cmap_polar_neg = LinearSegmentedColormap.from_list("rosa_a_rojo", ["pink", "red"])
 if linealizar == "s":
     print("\n> Colores de las trayectorias del sistema linealizado:\n")
     print(f"En tiempo positivo: Verde")
@@ -240,27 +277,43 @@ def onclick(event):
         y0 = [x, y]
         z0_polar.append((r, theta))
         r0 = [r,theta]
-
-        
-        
+  
         # Marcar el punto en la gráfica
         ax.plot(x, y, 'ro')  # Punto rojo
         
         # Plano fase del sistema original
-        z_rk = bde.runge_kutta(f1_original, f2_original, y0, 0.01, pasos_rk, parametros)
+        z_rk = bde.runge_kutta(f1_original, f2_original, y0, tamaño_paso, pasos_rk, parametros)
         x_rk = z_rk[0, :]
         y_rk = z_rk[1, :]
 
+        # Crear un gradiente para la trayectoria original
+        points = np.array([x_rk, y_rk]).T.reshape(-1, 1, 2)
+        segments = np.concatenate([points[:-1], points[1:]], axis=1)
+        norm = plt.Normalize(0, len(x_rk))
+        lc = LineCollection(segments, cmap=custom_cmap, norm=norm)  # Usar el mapa personalizado
+        lc.set_array(np.arange(len(x_rk)))
+        lc.set_linewidth(2)
+        ax.add_collection(lc)
+
         # Plano fase del sistema original con tiempo negativo
         if tiempo_negativo == "s":
-            z_rk_neg = bde.runge_kutta(f1_original, f2_original, y0, -0.01, pasos_rk, parametros)
+            z_rk_neg = bde.runge_kutta(f1_original, f2_original, y0, -tamaño_paso, pasos_rk, parametros)
             x_rk_neg = z_rk_neg[0, :]
             y_rk_neg = z_rk_neg[1, :]
+
+            # Crear un gradiente para la trayectoria original con tiempo negativo
+            points = np.array([x_rk_neg, y_rk_neg]).T.reshape(-1, 1, 2)
+            segments = np.concatenate([points[:-1], points[1:]], axis=1)
+            norm = plt.Normalize(0, len(x_rk_neg))
+            lc = LineCollection(segments, cmap=custom_cmap_neg, norm=norm)  # Usar el mapa personalizado
+            lc.set_array(np.arange(len(x_rk_neg)))
+            lc.set_linewidth(2)
+            ax.add_collection(lc)
 
         
             
         if seleccionar_sistema == "3" and promediar == "s":
-            z_rk_polar = bde.runge_kutta(R_poly, theta_poly, r0, 0.01, pasos_rk,type="polar")
+            z_rk_polar = bde.runge_kutta(R_poly, theta_poly, r0, tamaño_paso, pasos_rk,type="polar")
             r_rk_polar = z_rk_polar[0, :]
             theta_rk_polar = z_rk_polar[1, :]
             x_rk_polar = r_rk_polar * np.cos(theta_rk_polar)
@@ -277,7 +330,7 @@ def onclick(event):
 
             # Plano fase del sistema promedio con tiempo negativo
             if tiempo_negativo == "s":
-                z_rk_polar_negativo = bde.runge_kutta(R_poly, theta_poly, r0, -0.01, pasos_rk,type="polar")
+                z_rk_polar_negativo = bde.runge_kutta(R_poly, theta_poly, r0, -tamaño_paso, pasos_rk,type="polar")
                 r_rk_polar_negativo = z_rk_polar_negativo[0, :]
                 theta_rk_polar_negativo = z_rk_polar_negativo[1, :]
                 x_rk_polar_negativo = r_rk_polar_negativo * np.cos(theta_rk_polar_negativo)
@@ -291,36 +344,17 @@ def onclick(event):
                 lc.set_array(np.arange(len(x_rk_polar_negativo)))
                 lc.set_linewidth(2)
                 ax.add_collection(lc)
-
-        # Crear un gradiente para la trayectoria original
-        points = np.array([x_rk, y_rk]).T.reshape(-1, 1, 2)
-        segments = np.concatenate([points[:-1], points[1:]], axis=1)
-        norm = plt.Normalize(0, len(x_rk))
-        lc = LineCollection(segments, cmap=custom_cmap, norm=norm)  # Usar el mapa personalizado
-        lc.set_array(np.arange(len(x_rk)))
-        lc.set_linewidth(2)
-        ax.add_collection(lc)
-
-        # Crear un gradiente para la trayectoria original con tiempo negativo
-        if tiempo_negativo == "s":
-            points = np.array([x_rk_neg, y_rk_neg]).T.reshape(-1, 1, 2)
-            segments = np.concatenate([points[:-1], points[1:]], axis=1)
-            norm = plt.Normalize(0, len(x_rk_neg))
-            lc = LineCollection(segments, cmap=custom_cmap_neg, norm=norm)  # Usar el mapa personalizado
-            lc.set_array(np.arange(len(x_rk_neg)))
-            lc.set_linewidth(2)
-            ax.add_collection(lc)
-        
+       
         # Plano fase del sistema linealizado
         if linealizar == "s":
-            z_rk_lineal=bde.runge_kutta(f1_linealizado,f2_linealizado,y0,0.01,pasos_rk,parametros)
+            z_rk_lineal=bde.runge_kutta(f1_linealizado,f2_linealizado,y0,tamaño_paso,pasos_rk,parametros)
             x_rk_lineal=z_rk_lineal[0,:]
             y_rk_lineal=z_rk_lineal[1,:]
             plt.plot(x_rk_lineal, y_rk_lineal, color='green')
         
             # Plano fase del sistema linealizado con tiempo negativo
             if tiempo_negativo == "s":
-                z_rk_lineal_negativo=bde.runge_kutta(f1_linealizado,f2_linealizado,y0,-0.01,pasos_rk,parametros)
+                z_rk_lineal_negativo=bde.runge_kutta(f1_linealizado,f2_linealizado,y0,-tamaño_paso,pasos_rk,parametros)
                 x_rk_lineal_negativo=z_rk_lineal_negativo[0,:]
                 y_rk_lineal_negativo=z_rk_lineal_negativo[1,:]
                 plt.plot(x_rk_lineal_negativo, y_rk_lineal_negativo, color='cyan')
@@ -334,22 +368,16 @@ if __name__ == "__main__":
     fig.canvas.mpl_connect('key_press_event', bde.on_key_press)
     
     # Segunda parte: Gráfica del polinomio
-    # Graficar polinomio promedio
-    if graficar_polinomio == "s":
-        # Encontrar y mostrar las raíces del polinomio
-        raices = np.roots(R_coef)
-        # Raices positivas
-        raices_positivas = raices[raices > 0]
-        max = max(raices_positivas)
-        bde.graficar_polinomio(R_coef,(0,1.01*max),raices=raices_positivas)
+    if seleccionar_sistema == "3":
+        if graficar_polinomio == "s":
+            # Encontrar y mostrar las raíces del polinomio
+            raices = np.roots(R_coef)
+            # Raices positivas
+            raices_positivas = raices[raices > 0]
+            max = max(raices_positivas)
+            bde.graficar_polinomio(R_coef,(0,1.01*max),raices=raices_positivas)
     
-    # Mostrar la gráfica de clics
+    # Mostrar la gráfica
     plt.show()
-
-
-# Conectar el evento de clic a la función onclick
-#cid = fig.canvas.mpl_connect('button_press_event', onclick)
-#fig.canvas.mpl_connect('key_press_event', bde.on_key_press)
-
-#plt.show()
+    input("Presiona Enter para cerrar...")
 

@@ -5,6 +5,7 @@ from sympy import symbols, expand, Poly
 import math
 import ast
 import matplotlib.pyplot as plt
+import re
 ###############################################################################
 # Differential equations system
 def f(z,f1,f2,parametros={},type = "cartesian"):
@@ -235,3 +236,41 @@ def on_key_press(event):
         plt.savefig(filename, dpi=300)
         print(f"Gráfica guardada como {filename}")
 ###############################################################################
+def es_expresion_valida(expresion):
+    """
+    Valida si una expresión es un polinomio válido con variables x, y en formato Python.
+    
+    Parámetros:
+    - expresion: str, la expresión ingresada por el usuario.
+    
+    Retorna:
+    - True si la expresión es válida, False en caso contrario.
+    """
+    # Expresión regular para validar un polinomio con variables x, y
+    patron_polinomio = r'^[-+]?\s*(\d+(\.\d*)?|\d*\.\d+|x|y)(\s*[-+*/]\s*([-+]?\s*(\d+(\.\d*)?|\d*\.\d+|x|y|\([^()]+\))(\s*\*\*\s*\d+)?))*$'
+    
+    # Verificar si la expresión coincide con el patrón
+    if re.match(patron_polinomio, expresion):
+        return True
+    return False
+###############################################################################
+# Función para solicitar una expresión válida
+def obtener_expresion_polinomial_valida(mensaje):
+    while True:
+        expresion = input(mensaje)
+        if es_expresion_valida(expresion):
+            return expresion
+        else:
+            print("⚠️  Error: La expresión no es válida. Asegúrate de usar el formato correcto (ejemplo: -x + 0.5*(y - 2*x**2*y**3)).")
+###############################################################################
+# Función para solicitar un número válido
+def obtener_numero_valido(mensaje,tipo="float"):
+    while True:
+        try:
+            if tipo == "float":
+                numero = float(input(mensaje))
+            elif tipo == "int":
+                numero = int(input(mensaje))
+            return numero
+        except ValueError:
+            print("⚠️  Error: Ingresa un número.")

@@ -2364,4 +2364,76 @@
     <bcf:citekey order="1" intorder="1">hilbert1902mathematical</bcf:citekey>
     <bcf:citekey order="2" intorder="1">ilyashenko2002centennial</bcf:citekey>
     <bcf:citekey order="3" intorder="1">perko2001differential</bcf:citekey>
-    <bcf:citekey order="4" intorder="1">dulac1923cycles</b
+    <bcf:citekey order="4" intorder="1">dulac1923cycles</bcf:citekey>
+    <bcf:citekey order="5" intorder="1">ecalle1992correction</bcf:citekey>
+    <bcf:citekey order="5" intorder="2">ilyashenko1991finiteness</bcf:citekey>
+    <bcf:citekey order="6" intorder="1">vanderpol1926forced</bcf:citekey>
+    <bcf:citekey order="7" intorder="1">rayleigh1883theory</bcf:citekey>
+    <bcf:citekey order="8" intorder="1">fitzhugh1961impulses</bcf:citekey>
+    <bcf:citekey order="8" intorder="2">nagumo1962active</bcf:citekey>
+    <bcf:citekey order="9" intorder="1">zhabotinsky1964periodic</bcf:citekey>
+    <bcf:citekey order="10" intorder="1">murray2002mathematical</bcf:citekey>
+    <bcf:citekey order="11" intorder="1">khalil2002nonlinear</bcf:citekey>
+    <bcf:citekey order="12" intorder="1">guckenheimer1983nonlinear</bcf:citekey>
+    <bcf:citekey order="13" intorder="1">wiggins2003introduction</bcf:citekey>
+    <bcf:citekey order="14" intorder="1">perko2001differential</bcf:citekey>
+    <bcf:citekey order="15" intorder="1">perko2001differential</bcf:citekey>
+    <bcf:citekey order="16" intorder="1">perko2001differential</bcf:citekey>
+    <bcf:citekey order="17" intorder="1">strogatz2018nonlinear</bcf:citekey>
+    <bcf:citekey order="18" intorder="1">wiggins2003introduction</bcf:citekey>
+    <bcf:citekey order="19" intorder="1">guckenheimer1983nonlinear</bcf:citekey>
+    <bcf:citekey order="20" intorder="1">bender2013advanced</bcf:citekey>
+    <bcf:citekey order="21" intorder="1">hinch1991perturbation</bcf:citekey>
+    <bcf:citekey order="22" intorder="1">hirsch2012differential</bcf:citekey>
+    <bcf:citekey order="23" intorder="1">hirsch2012differential</bcf:citekey>
+    <bcf:citekey order="24" intorder="1">arnold1992ordinary</bcf:citekey>
+    <bcf:citekey order="25" intorder="1">strogatz2018nonlinear</bcf:citekey>
+    <bcf:citekey order="26" intorder="1">guckenheimer1983nonlinear</bcf:citekey>
+    <bcf:citekey order="27" intorder="1">poincare1881memoire</bcf:citekey>
+    <bcf:citekey order="27" intorder="2">bendixson1901courbes</bcf:citekey>
+    <bcf:citekey order="28" intorder="1">kuznetsov2013elements</bcf:citekey>
+    <bcf:citekey order="29" intorder="1">kuznetsov2013elements</bcf:citekey>
+    <bcf:citekey order="30" intorder="1">vanderpol1926forced</bcf:citekey>
+    <bcf:citekey order="31" intorder="1">strogatz2018nonlinear</bcf:citekey>
+    <bcf:citekey order="32" intorder="1">guckenheimer1983nonlinear</bcf:citekey>
+    <bcf:citekey order="33" intorder="1">wiggins2003introduction</bcf:citekey>
+    <bcf:citekey order="34" intorder="1">hahn1967stability</bcf:citekey>
+    <bcf:citekey order="35" intorder="1">lasalle1961stability</bcf:citekey>
+    <bcf:citekey order="36" intorder="1">rayleigh1883theory</bcf:citekey>
+    <bcf:citekey order="37" intorder="1">strogatz2018nonlinear</bcf:citekey>
+    <bcf:citekey order="38" intorder="1">wiggins2003introduction</bcf:citekey>
+    <bcf:citekey order="39" intorder="1">hahn1967stability</bcf:citekey>
+    <bcf:citekey order="40" intorder="1">lasalle1961stability</bcf:citekey>
+    <bcf:citekey order="41" intorder="1">guckenheimer1983nonlinear</bcf:citekey>
+    <bcf:citekey order="42" intorder="1">hinch1991perturbation</bcf:citekey>
+    <bcf:citekey order="43" intorder="1">bender2013advanced</bcf:citekey>
+    <bcf:citekey order="44" intorder="1">hinch1991perturbation</bcf:citekey>
+    <bcf:citekey order="45" intorder="1">bender2013advanced</bcf:citekey>
+    <bcf:citekey order="46" intorder="1">bender2013advanced</bcf:citekey>
+    <bcf:citekey order="47" intorder="1">bender2013advanced</bcf:citekey>
+    <bcf:citekey order="48" intorder="1">bender2013advanced</bcf:citekey>
+    <bcf:citekey order="49" intorder="1">bender2013advanced</bcf:citekey>
+    <bcf:citekey order="50" intorder="1">bender2013advanced</bcf:citekey>
+    <bcf:citekey order="51" intorder="1">bender2013advanced</bcf:citekey>
+    <bcf:citekey order="52" intorder="1">perko2001differential</bcf:citekey>
+  </bcf:section>
+  <!-- SORTING TEMPLATES -->
+  <bcf:sortingtemplate name="none">
+    <bcf:sort order="1">
+      <bcf:sortitem order="1">citeorder</bcf:sortitem>
+    </bcf:sort>
+    <bcf:sort order="2">
+      <bcf:sortitem order="1">intciteorder</bcf:sortitem>
+    </bcf:sort>
+  </bcf:sortingtemplate>
+  <!-- DATALISTS -->
+  <bcf:datalist section="0"
+                name="none/global//global/global"
+                type="entry"
+                sortingtemplatename="none"
+                sortingnamekeytemplatename="global"
+                labelprefix=""
+                uniquenametemplatename="global"
+                labelalphanametemplatename="global">
+  </bcf:datalist>
+</bcf:controlfile>
