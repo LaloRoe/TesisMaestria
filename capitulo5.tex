@@ -583,7 +583,72 @@ La condición para que esto ocurra es que:
 
 Es decir, $a_{2,3}$ y $a_{0,3}$ deben tener signos opuestos. En la ecuación de Rayleigh, $a_{2,3}=1$ y $a_{0,3}=-1$, por lo que cumple la condición \eqref{eq: n_0_m_3_equilibrio_positivo_condicion}.\\
 
-Vamos ahora a analizar cuando $n=2$ y $m=3$.
+Vamos ahora a analizar cuando $n=2$ y $m=3$. Al sustituir en \eqref{eq: r_promedio_simplificado} obtenemos:
+
+\begin{equation}\label{eq: n_2_m_3}
+	\bar{r}'=\frac{\epsilon r}{16}\left(a_{2,3}r^4+2\left(3a_{0,3}+a_{2,1}\right)r^2+8a_{0,1}\right)
+\end{equation}
+
+Si $a_{2,3}=0$, entonces el sistema \eqref{eq: n_2_m_3} se reduce a:
+
+\begin{equation}\label{eq: n_2_m_3_a_2_3_0}
+	\bar{r}'=\frac{\epsilon r}{16}\left(2\left(3a_{0,3}+a_{2,1}\right)r^2+8a_{0,1}\right)
+\end{equation}
+
+EL cual tiene puntos de equilibrio reales positivos o un solo ciclo límite si:
+
+\begin{equation}\label{eq: n_2_m_3_a_2_3_0_equilibrio_positivo}
+	\left(3a_{0,3}+a_{2,1}\right)a_{0,1}<0
+\end{equation}
+
+Por otro lado, si $a_{2,3}\neq 0$, haciendo $z=r^2$ las raíces del polinomio \eqref{eq: n_2_m_3} son:
+
+\begin{equation}\label{eq: n_2_m_3_raices}
+	z_{1,2}=\frac{-3a_{0,3}-a_{2,1}\pm\sqrt{\left(3a_{0,3}+a_{2,1}\right)^2-8a_{0,1}a_{2,3}}}{2a_{2,3}}
+\end{equation}
+
+entonces el sistema \eqref{eq: n_2_m_3} puede tener dos puntos de equilibrio reales positivos o dos ciclos límite si:
+
+\begin{itemize}
+	\item Si $\left(3a_{0,3}+a_{2,1}\right)^2>8a_{0,1}a_{2,3}$.
+	\item Si $\sqrt{\left(3a_{0,3}+a_{2,1}\right)^2-8a_{0,1}a_{2,3}}>\left(3a_{0,3}+a_{2,1}\right)$, garantiza un ciclo límite.
+	\item Si $-\sqrt{\left(3a_{0,3}+a_{2,1}\right)^2-8a_{0,1}a_{2,3}}>\left(3a_{0,3}+a_{2,1}\right)$, garantiza un segundo punto de equilibrio real positivo o un segundo ciclo límite.
+\end{itemize}
+
+El siguiente sistema satisface las condiciones para tener dos puntos de equilibrio reales positivos:
+
+\begin{equation}\label{eq: n_2_m_3_ejemplo}
+	\begin{matrix}
+		x'=y \\
+		y'=-x+\epsilon\left(y-2y^3+x^2y+2x^2y^3\right)y \\
+	\end{matrix}
+\end{equation}
+
+Su sistema promedio es:
+
+\begin{equation}\label{eq: n_2_m_3_ejemplo_promedio}
+	\bar{r}'=\frac{\epsilon r}{16}\left(2r^4-10r^2+8\right)
+\end{equation}
+
+Tiene dos puntos de equilibrio reales positivos $r=2$ y $r=1$.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=10cm]{r_doble_ciclo_limite.png}
+	\caption{Grafico del polinomio promedio de $\eqref{eq: n_2_m_3_ejemplo_promedio}$.}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=12cm]{doble_ciclo_limite.png}
+	\caption{Plano fase de $\eqref{eq: n_2_m_3_ejemplo_promedio}$.}
+\end{figure}
+
+
+
+
+
+
 
 
 

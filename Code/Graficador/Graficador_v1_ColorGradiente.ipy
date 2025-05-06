@@ -12,10 +12,11 @@ plt.ion()  # Activa el modo interactivo de matplotlib
 
 ################################################################################
 # VARIABLES
-pasos_rk = 5000
-parametros = {}
+pasos_rk = 5000  # Asegúrate de que sea un entero
 tamaño_paso = 0.01
-
+longitud_flecha = 30
+grosor_flecha = 0.009
+parametros = {}
 ###############################################################################
 # SISTEMA DE ECUACIONES DIFERENCIALES PREDEFINIDOS
 sistemas_predefinidos = {
@@ -56,12 +57,11 @@ if seleccionar_sistema == "1":
     print("\n> Ingresa el valor del parámetro:\n")
     # Asignación de valores a los parámetros con manejo de errores
     #parametros = {}  # Diccionario para almacenar los parámetros
+    parametros = {}
     for i in sistemas_predefinidos[sistema][3]:
         # Pedir al usuario que ingrese el valor
         exec(f"{i}=bde.obtener_numero_valido('{i} = ')")
         parametros[i] = eval(i)
-        #valor = bde.obtener_numero_valido(f"{i} = ")
-        #parametros[i] = valor  # Guardar el valor en el diccionario
     # Asignación de las expresiones de las ecuaciones diferenciales
     f1_original = sistemas_predefinidos[sistema][1]
     f2_original = sistemas_predefinidos[sistema][2]
@@ -118,6 +118,24 @@ print("\n> Configuraciones:\n")
 tiempo_negativo = input("¿Desea graficar el tiempo negativo? (s/n): ").lower()
 linealizar = input("¿Desea linealizar el sistema? (s/n): ").lower()
 nulclinas = input("¿Desea calcular las nulclinas? (s/n): ").lower()
+###############################################################################
+# CONFIGURACIONES DE LA GRAFICA
+print("\n> Configuraciones de la gráfica:\n")
+configuraciones_grafica = input(" Deseas editar las configuraciones de la gráfica? (s/n): ").lower()
+if configuraciones_grafica == "s":
+    editar = input(f"\n ¿Quieres editar la Longitud de la flecha? (Valor por defecto = {longitud_flecha}) (s/n):  = ").lower()
+    if editar == "s":
+        longitud_flecha = bde.obtener_numero_valido("Longitud de la flecha: ")
+    editar = input(f"\n ¿Quieres editar el Grosor de la flecha? (Valor por defecto = {grosor_flecha}) (s/n):  = ").lower()
+    if editar == "s":
+        grosor_flecha = bde.obtener_numero_valido("Grosor de la flecha: ")
+    print("\n> Configuraciones Rung-Kutta:")
+    editar = input(f"\n ¿Quieres editar el Número de pasos? (Valor por defecto = {pasos_rk}) (s/n):  = ").lower()
+    if editar == "s":
+        pasos_rk = bde.obtener_numero_valido("Número de pasos: ", tipo="int")
+    editar = input(f"\n ¿Quieres editar el Tamaño de paso? (Valor por defecto = {tamaño_paso}) (s/n):  = ").lower()
+    if editar == "s":
+        tamaño_paso = bde.obtener_numero_valido("Tamaño de paso: ")
 ###############################################################################
 x, y = sp.symbols('x y')
 f1 = eval(f1_original)
@@ -195,7 +213,7 @@ if not np.all(np.isfinite(dX)) or not np.all(np.isfinite(dY)):
 
 # Graficar el campo vectorial
 fig, ax = plt.subplots(figsize=(10, 10))
-q = ax.quiver(X, Y, dX, dY, units='x', pivot='tip', width=0.009, scale=30)
+q = ax.quiver(X, Y, dX, dY, units='x', pivot='middle', width=grosor_flecha, scale=longitud_flecha)
 ax.quiverkey(q, 0.9, 0.9, 1, label='Plano fase', labelpos='E', coordinates='figure')
 ax.set_title(f'{nombre}')
 ax.set_xlabel('x')
